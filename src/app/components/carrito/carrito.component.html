@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="row">
+    <!-- Columna para la lista de productos -->
+    <div class="col s8">
+      <ul *ngIf="carritos != undefined">
+        <li *ngFor="let car of carritos">
+          <div class="card">
+            <div class="card-image">
+              <!-- <img src="img/tasajo.png" alt="Producto 1"> -->
+            </div>
+            <div class="card-content">
+              <span class="card-title">{{car.nombre}}</span>
+              <p><strong>Precio por unidad: ${{car.precio}}</strong></p>
+              <p><strong>Subtotal: ${{car.precio}}</strong></p>
+              <p><strong>Cantidad: {{car.cantidad}} Kg</strong></p>
+              <div class="row">
+                <div class="col s6 center">
+                    <a (click)="modificaCantidad(car.id)">
+                        <button  class="waves-effect btn red lighten-1 white-text" type="submit">
+                            Modificar cantidad
+                            <i class="material-icons right">edit</i>
+                        </button>
+                    </a>
+                </div>
+
+                <div class="col s6 center">
+                    <button (click)="eliminar(car.id)"
+                        class=" waves-effect btn red lighten-1 white-text" type="submit">Eliminar
+                        <i class="material-icons right">delete</i>
+                    </button>
+                </div>
+            </div>
+
+            </div>
+           
+
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- Columna para el total de la compra -->
+    <div class=" container col s4 center">
+      <div class="card">
+        <div class="card-content">
+
+          <h5>Total de la compra</h5>
+          <p><strong>Cantidad: {{totalCarrito}}</strong></p>
+          <div>
+            <a (click)="compraCarrito()">
+              <button class="waves-effect btn-large red lighten-1 white-text">
+                Comprar
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalCantidad" class="modal" *ngIf=" carrito!=undefined">
+  <div class="modal-content">
+      <div class="col s12 m6">
+          <!-- Contenido del div de nuevo -->
+          <div class="card">
+              <div class="card-content">
+                  <div class="container center">
+                      <h2>Selector de cantidad</h2>
+                      <div class="container">
+                        <p><strong>Cantidad disponible: {{cantidadDisponible}} unidades</strong></p>
+                        <div class="seleccion">
+                          <button class="waves-effect btn-small red lighten-1 white-text lef" (click)="decrementar()" 
+                          id="decrementar">
+                            <i class="material-icons prefix">remove</i>
+                          </button>
+                          <input [(ngModel)]="carrito.cantidad" type="number" value="{{carrito.cantidad}}" class="center m2"
+                           min="1" max="{{cantidadDisponible}}"  >
+                          <button class="waves-effect btn-small red lighten-1 white-text" (click)="aumentar()" id="incrementar">
+                            <i class="material-icons prefix">add</i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col s6 center">
+                            <a (click)="modificar()">
+                                <button  class="waves-effect btn-large red lighten-1 white-text " type="submit">
+                                    Registrar
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </a>
+                        </div>
+
+                        <div class="col s6 center">
+                            <button 
+                                class="modal-action modal-close waves-effect btn-large red lighten-1 white-text" type="submit">Cancelar
+                                <i class="material-icons right">cancel</i>
+                            </button>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

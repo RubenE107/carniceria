@@ -1,0 +1,111 @@
+<div class="container center">
+    <div class="row">
+        <div class="col s12 m6 offset-m3">
+            <!-- Contenido del formulario de login -->
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="center-align">Iniciar Sesión</h2>
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row col s12">
+                                <div class=" input-field">
+                                    <i class="material-icons prefix">email</i>
+                                    <input type="email" [(ngModel)]="usuariologin.correo" name="emailLogin"
+                                        id="emailLogin" placeholder="correo" autocomplete="off">
+                                    <label for="emailLogin">correo</label>
+                                </div>
+                                <div class="input-field">
+                                    <i class="material-icons prefix">lock</i>
+                                    <input [(ngModel)]="usuariologin.contrasena" type="password" id="passwordLogin"
+                                        name="passwordLogin" required>
+                                    <label for="passwordLogin">Contraseña</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <a (click)="logueo()">
+                                    <button class="waves-effect btn-large red lighten-1 white-text">LOGIN</button>
+                                </a>
+                                <br>
+                                <br>
+
+                                <div>
+                                    <a (click)="nuevoUsuario()">
+                                        <button class="  waves-effect btn-large red lighten-1 white-text">
+                                            Nuevo Usuario
+                                        </button>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalNuevoUsuario" class="modal">
+    <div class="modal-content">
+        <div class="col s12 m6">
+            <!-- Contenido del div de nuevo -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="container center">
+                        <h2>Registro de Usuario</h2>
+                        <form id="registroForm">
+                            <div class="input-field">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input [(ngModel)]="usuarioNuevo.nombre" type="text" id="nombreNuevo" name="nombreNuevo"
+                                    required>
+                                <label for="nombreNuevo">Nombre</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">email</i>
+                                <input [(ngModel)]="usuarioNuevo.correo" type="email" id="correoNuevo"
+                                    name="correoNuevo" required>
+                                <label for="correoNuevo">Correo Electrónico</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">phone</i>
+                                <input [(ngModel)]="usuarioNuevo.telefono" type="tel" id="telefonoNuevo"
+                                    name="telefonoNuevo" pattern="[0-9]{10}" required>
+                                <label for="telefonoNuevo">Teléfono (10 dígitos)</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">lock</i>
+                                <input [(ngModel)]="usuarioNuevo.contrasena" type="password" id="passwordNuevo"
+                                    name="passwordNuevo" required>
+                                <label for="passwordNuevo">Contraseña</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s6 center">
+                                    <a (click)="guardarNuevoUsuario()">
+                                        <button  class="waves-effect btn-large red lighten-1 white-text modal-close" type="submit">
+                                            Registrar
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                                    </a>
+                                </div>
+
+                                <div class="col s6 center">
+                                    <button 
+                                        class="modal-action modal-close waves-effect btn-large red lighten-1 white-text" type="submit">Cancelar
+                                        <i class="material-icons right">cancel</i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container">
+  <ul *ngIf=" compras != undefined  " >
+    <li *ngFor="let compra of compras"><!-- Lista de productos -->
+      <div class="col s12 m4">
+        <div class="card">
+          <div class="card-image">
+            <!-- <img src="img/tasajo.png" alt="Producto 1"> -->
+          </div>
+          <div class="card-content">
+            <span class="card-title">{{compra.nombre}}</span>
+            <p>Cantidad de producto:{{compra.cantidad}}</p>
+            <p><strong>Precio: ${{compra.monto}}</strong></p>
+            <p><strong>Fecha:{{compra.fecha}}</strong></p>
+            
+          </div>
+          
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

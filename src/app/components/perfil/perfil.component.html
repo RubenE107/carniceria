@@ -1,0 +1,168 @@
+<div class="container">
+
+
+    <div >
+        <h2>Información de Usuario</h2>
+        <div class="input-field" >
+            <i class="material-icons prefix">account_circle</i>
+            <input [(ngModel)]="usuarios[0].nombre" type="text" id="nombre" disabled >
+
+            <label for="nombre" class="active">Nombre</label>
+        </div>
+
+        <div class="input-field">
+            <i class="material-icons prefix">email</i>
+            <input [(ngModel)]="usuarios[0].correo" type="email" id="correo" name="correo" disabled>
+            <label for="correo" class="active">Correo Electrónico</label>
+        </div>
+
+        <div class="input-field">
+            <i class="material-icons prefix">phone</i>
+            <input [(ngModel)]="usuarios[0].telefono" type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" disabled>
+            <label for="telefono" class="active">Teléfono (10 dígitos)</label>
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col s4 center">
+                <a (click)="modificarUsuario(usuarios[0].id)">
+                    <button class="waves-effect btn-large  lighten-1 white-text modal-close" type="submit">
+                        Actualizar datos
+                        <i class="material-icons right">send</i>
+                    </button>
+                </a>
+            </div>
+            <!-- <div class="col s4 center">
+                <a (click)="modificarContra()">
+                    <button class="waves-effect btn-large  lighten-1 white-text modal-close" type="submit">
+                        modificar Contraseña
+                        <i class="material-icons right">edit</i>
+                    </button>
+                </a>
+            </div> -->
+
+            <div class="col s4 center">
+                <button class="modal-action modal-close waves-effect btn-large red  white-text" type="submit" (click)="eliminar()">Eliminar
+                    <i class="material-icons right">delete</i>
+                </button>
+            </div>
+        </div>
+
+</div>
+
+
+<div id="modalContra" class="modal">
+    <div class="modal-content">
+        <div class="col s12 m6">
+            <!-- Contenido del div de nuevo -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="container center">
+                        <h2>Modificar Contraseña </h2>
+                        <form id="contraForm">
+                            <div class="input-field">
+                                <i class="material-icons prefix">key</i>
+                                <input [(ngModel)]="contra1" type="password" required id="contra1">
+                                <label for="contra1">Contraseña actual</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">key</i>
+                                <input [(ngModel)]="contra2" type="password" required id="contra2">
+                                <label for="contra2">Contraseña actual</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">key</i>
+                                <input [(ngModel)]="newContra" type="password" required id="contraNueva">
+                                <label for="contraNueva">Nueva Contraseña</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s6 center">
+                                    <a (click)="cambiaContra()">
+                                        <button class="waves-effect btn-large red lighten-1 white-text modal-close"
+                                            type="submit">
+                                            Registrar
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                                    </a>
+                                </div>
+
+                                <div class="col s6 center">
+                                    <button
+                                        class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
+                                        type="submit">Cancelar
+                                        <i class="material-icons right">cancel</i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalActualiza" class="modal">
+    <div class="modal-content">
+        <div class="col s12 m6">
+            <!-- Contenido del div de nuevo -->
+            <div class="card">
+                <div class="card-content">
+                    <div class="container center">
+                        <h2>Actualizacion de datos</h2>
+                        <form id="registroForm">
+                            <div class="input-field">
+                                <i class="material-icons prefix">account_circle</i>
+                                <input [(ngModel)]="actualizaUsuario.nombre" type="text" id="nombreNuevo" name="nombreNuevo"
+                                    required>
+                                <label for="nombreNuevo" class="active">Nombre</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">email</i>
+                                <input [(ngModel)]="actualizaUsuario.correo" type="email" id="correoNuevo"
+                                    name="correoNuevo" required>
+                                <label for="correoNuevo" class="active">Correo Electrónico</label>
+                            </div>
+
+                            <div class="input-field">
+                                <i class="material-icons prefix">phone</i>
+                                <input [(ngModel)]="actualizaUsuario.telefono" type="tel" id="telefonoNuevo"
+                                    name="telefonoNuevo" pattern="[0-9]{10}" required>
+                                <label for="telefonoNuevo" class="active">Teléfono (10 dígitos)</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s6 center">
+                                    <a (click)="cambiaUsuario()">
+                                        <button  class="waves-effect btn-large red lighten-1 white-text modal-close" type="submit">
+                                            Registrar
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                                    </a>
+                                </div>
+
+                                <div class="col s6 center">
+                                    <button 
+                                        class="modal-action modal-close waves-effect btn-large red lighten-1 white-text" type="submit">Cancelar
+                                        <i class="material-icons right">cancel</i>
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

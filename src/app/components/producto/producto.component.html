@@ -1,0 +1,275 @@
+<div class="row" *ngIf="rol !=1">
+  <div class="col m6 offset-m4">
+    <h5>Agregar producto
+
+      <a class="btn-floating btn-large red lighten-1 white-tex" (click)="nuevoProducto()">
+        <i class="material-icons">add</i>
+      </a>
+
+    </h5>
+  </div>
+</div>
+<div class="row col s12 container">
+  <div class="row col s4">
+
+    <div class="row col s12 card ">
+      <div>
+        <h5 class="center">Filtrar por animal</h5>
+      </div>
+      <div>
+        <select [(ngModel)]="aux" id="rol" name="rol" class="browser-default waves-red s12 " (change)="listAnimal()">
+          <option value="" disabled selected>Escoge un animal</option>
+          <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
+        </select>
+
+      </div>
+    </div>
+    <div class="col s12 card">
+      <div class="row col s12 center">
+        <br>
+        <a (click)="eliminaFiltros()">
+          <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+            Eliminar filtros
+            <i class="material-icons right">delete</i>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="col s6 offset-s1 card ">
+    <div>
+      <h5 class="center">Filtrar por precio</h5>
+    </div>
+    <div>
+      <div class="input-field col s6">
+        <i class="material-icons prefix">money</i>
+        <input [(ngModel)]="preciomin" type="number" id="pmin" name="pmin" required>
+        <label for="pmin" class="active">Precio minimo</label>
+      </div>
+      <div class="input-field col s6">
+        <i class="material-icons prefix">money</i>
+        <input [(ngModel)]="preciomax" type="number" id="pmax" name="pmax" required>
+        <label for="pmax" class="active">Precio maximo</label>
+      </div>
+      <div class="row">
+        <div class="col s12 center">
+          <a (click)="filtraprecio()">
+            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+              Filtrar
+              <i class="material-icons right">search</i>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container ">
+  <div class="row">
+    <ul *ngIf="productos != undefined ">
+      <div class="row col s12">
+        <li *ngFor="let producto of productos">
+          <div class="col s6">
+            <div class="card">
+              <div class="card-image">
+                <img src="images/sample-1.jpg">
+              </div>
+              <div class="card-content">
+                <div class="row ">
+
+                  <span class="card-title">{{producto.nombre}}</span>
+                  <p><strong>Animal de origen: </strong> {{producto.animal}}</p>
+                  <p><strong>Precio por Kg:</strong> ${{producto.precio}}</p>
+                  <p><strong>Cantidad disponible: </strong> {{producto.cantidad}} Kg</p>
+                  <p>{{producto.descripcion}}</p>
+                  <br>
+                  <div class="row ">
+                    <div class="col s12 center">
+                      <a (click)="agregaCarrito(producto.id)">
+                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                          Agregar al carrito
+                          <i class="material-icons right">add</i>
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="row col s12" *ngIf="rol!=1">
+                    <div class="col s6 center">
+                      <a (click)="modificaProducto(producto.id)">
+                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                          Modificar
+                          <i class="material-icons right">edit</i>
+                        </button>
+                      </a>
+                    </div>
+                    <div class="col s6 center">
+                      <a (click)="eliminaProducto(producto.id)">
+                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                          Eliminar
+                          <i class="material-icons right">delete</i>
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </li>
+      </div>
+
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+<div id="modalModificaProducto" class="modal">
+  <div class="modal-content">
+    <div class="container">
+      <h2 class="center">Modificación de Usuario</h2>
+      <form id="modificaForm">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">assignment</i>
+            <input [(ngModel)]="producto.nombre" type="text" id="nombre" name="nombre" required>
+            <label for="nombre" class="active">Nombre</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">pets</i>
+            <input [(ngModel)]="producto.animal" type="text" id="animal" name="animal" required>
+            <label for="animal" class="active">Animal</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">attach_money</i>
+            <input [(ngModel)]="producto.precio" type="number" id="precio" name="precio" required>
+            <label for="precio" class="active">Precio</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">comment</i>
+            <input [(ngModel)]="producto.descripcion" type="text" id="descripcion" name="descripcion"  required>
+            <label for="descripcion" class="active">Descripcion</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">money</i>
+            <input [(ngModel)]="producto.cantidad" type="number" id="cantidad" name="cantidad"  required>
+            <label for="cantidad" class="active">Cantidad disponible</label>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col s6 center">
+            <a (click)="guardaModifica()">
+              <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
+                Modificar
+                <i class="material-icons right">send</i>
+              </button>
+            </a>
+          </div>
+
+          <div class="col s6 center">
+            <button class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
+              type="submit">Cancelar
+              <i class="material-icons right">cancel</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="modalAgregaCarrito" class="modal">
+  <div class="modal-content">
+    <div class="container">
+      <h2 class="center">Cantidad de Producto</h2>
+      <form id="carritoForm">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">money</i>
+            <input [(ngModel)]="cantidad" type="number" id="cantidadCarrito" name="cantidadCarrito" required>
+            <label for="cantidadCarrito" class="active">Cantidad</label>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col s6 center">
+            <a (click)="guardaCarrito(cantidad)">
+              <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
+                Agregar
+                <i class="material-icons right">add</i>
+              </button>
+            </a>
+          </div>
+
+          <div class="col s6 center">
+            <button class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
+              type="submit">Cancelar
+              <i class="material-icons right">cancel</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="modalNuevoProducto" class="modal">
+  <div class="modal-content">
+    <div class="container">
+      <h2 class="center">Nuevo producto</h2>
+      <form id="NuevoForm">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">assignment</i>
+            <input [(ngModel)]="producto.nombre" type="text" id="nombre" name="nombre" required>
+            <label for="nombre" class="active">Nombre</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">pets</i>
+            <input [(ngModel)]="producto.animal" type="text" id="animal" name="animal" required>
+            <label for="animal" class="active">Animal</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">attach_money</i>
+            <input [(ngModel)]="producto.precio" type="number" id="precio" name="precio" required>
+            <label for="precio" class="active">Precio</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">comment</i>
+            <input [(ngModel)]="producto.descripcion" type="text" id="descripcion" name="descripcion"  required>
+            <label for="descripcion" class="active">Descripcion</label>
+          </div>
+          <div class="input-field col s12">
+            <i class="material-icons prefix">money</i>
+            <input [(ngModel)]="producto.cantidad" type="number" id="cantidad" name="cantidad"  required>
+            <label for="cantidad" class="active">Cantidad disponible</label>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col s6 center">
+            <a (click)="guardaNuevoProducto()">
+              <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
+                Crear
+                <i class="material-icons right">send</i>
+              </button>
+            </a>
+          </div>
+
+          <div class="col s6 center">
+            <button class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
+              type="submit">Cancelar
+              <i class="material-icons right">cancel</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

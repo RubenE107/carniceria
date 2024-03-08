@@ -1,0 +1,29 @@
+<header>
+
+    <!-- Barra -->
+    <nav>
+        <div class="nav-wrapper">
+            <a (click)="producto()" class="brand-logo right">Logo</a>
+            <ul id="nav-mobile" class="">
+                <li><a (click)="producto()">Productos<i class="material-icons right">store</i></a></li>
+                <li><a (click)="carrito()">Carrito<i class="material-icons right">shopping_cart</i></a></li>
+                <li><a (click)="compras()">Compras <i class="material-icons right">local_mall</i> </a></li>
+                <li><a (click)="prefil()">Mi perfil<i class="material-icons right">account_circle</i> </a></li>
+                <li *ngIf="aux==3"><a (click)="usuario()">Usuarios<i class="material-icons right">account_box</i></a></li>
+                <li *ngIf="aux==3"><a (click)="venta()">Ventas<i class="material-icons right">attach_money</i></a></li>
+                <li><a (click)="cerrarSesion()" >Cerrar sesion<i class="material-icons right">reply</i> </a></li>
+                <!-- <li>
+                    <div class="input-field col s12">
+                        <select style="display: none;">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                    </div>
+                </li> -->
+
+            </ul>
+        </div>
+    </nav>
+</header>

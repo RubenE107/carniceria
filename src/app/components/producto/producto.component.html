@@ -85,7 +85,7 @@
                   <br>
                   <div class="row ">
                     <div class="col s12 center">
-                      <a (click)="agregaCarrito(producto.id)">
+                      <a (click)="agregaCarrito(producto.id, producto.cantidad)">
                         <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
                           Agregar al carrito
                           <i class="material-icons right">add</i>
@@ -271,5 +271,19 @@
         </div>
       </form>
     </div>
+  </div>
+</div>
+
+<div id="modalError" class="modal">
+  <div class="modal-content">
+    <h4>Error garrafal :(</h4>
+    <p>Esta cantidad no está permitida :(</p>
+  </div>
+  <div class="modal-footer">
+    <a (click)="cerrErr()">
+      <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
+        OK
+      </button>
+    </a>  
   </div>
 </div>

@@ -19,6 +19,7 @@ export class ProductoComponent implements OnInit {
   preciomax!:number
   cantidad = 0
   idCarrito=-1
+  cantDisp = 0
   rol:any = localStorage.getItem('id_rol')
   ngOnInit(): void {
     $(document).ready(function(){
@@ -54,9 +55,10 @@ export class ProductoComponent implements OnInit {
     this.list();
   }
 
-  agregaCarrito(producto_id:any){
+  agregaCarrito(producto_id:any, producto_cant:any){
     this.idCarrito = producto_id
     this.cantidad=1
+    this.cantDisp = producto_cant
     $('#modalAgregaCarrito').modal();
     $("#modalAgregaCarrito").modal("open");
 
@@ -64,6 +66,12 @@ export class ProductoComponent implements OnInit {
   guardaCarrito(id_producto: any){
     let aux1:any = localStorage.getItem('id');
     let aux = parseInt(aux1) 
+    if(this.cantidad > this.cantDisp || this.cantidad<1)
+    {
+      $('#modalError').modal();
+    $("#modalError").modal("open");
+    return;
+    }
     this.carritoService.crear(this.cantidad,this.idCarrito,aux).subscribe((resUsuario:any)=>{
       this.producto = resUsuario;
 
@@ -171,6 +179,10 @@ export class ProductoComponent implements OnInit {
       },
       (err) => console.error(err)
     );
+  }
+  cerrErr()
+  {
+    $('#modalError').modal('close');
   }
 
 }

@@ -115,6 +115,16 @@ export class CarritoComponent implements OnInit {
       });
       return;
     }
+    for(let i=0; i<this.carritos.length; i++)
+    {
+      this.productoService.reducirCantidad(this.carritos[i].id_producto, this.carritos[i].cantidad).subscribe(
+        (resusuarios:any)=>
+        {
+          console.log(resusuarios)
+        }
+      )
+    }
+
     for(let i=0; i<this.carritos.length; i++){
       this.ventaService.crear(
         this.carritos[i].id_producto,

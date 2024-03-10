@@ -47,5 +47,13 @@ filtraprecio(n1: any, n2 : any){
 eliminar(id: any){
   return this.http.delete(`${environment.API_URI}/productos/delete/${id}`);
 }
+reducirCantidad(id:any, cantidad:any)
+{
+  let json={
+    "id":id,
+    "cantidad":cantidad
+  }
+  return this.http.put(`${environment.API_URI}/productos/reducirCant/`,json)
+}
 
 }

@@ -52,6 +52,7 @@ export class VentaService {
   filtraYearMonth(year:any, month:any){
     return this.http.get(`${environment.API_URI}/ventas/filtraYear/${year}/${month}`);
   }
+ 
   
 
 }

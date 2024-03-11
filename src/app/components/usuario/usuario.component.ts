@@ -17,6 +17,8 @@ export class UsuarioComponent implements OnInit{
   busqueda!: string;
   usuarioNuevo = new Usuario();
   roles: Rol[] =[];
+  p=1
+  pageSize = 7
 
   ngOnInit(): void {
     this.rolService.list().subscribe((resRoles:any)=>{

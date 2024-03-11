@@ -34,7 +34,12 @@
         </div>
 
       </tr>
-      <tr *ngFor="let usuario of usuarios">
+      <ng-container *ngFor="let usuario of usuarios|
+        paginate: {
+        itemsPerPage: pageSize,
+        currentPage: p
+        };let i=index">
+      <tr>
 
         <div class="col s2">
           <td>{{ usuario.nombre }}</td>
@@ -64,7 +69,14 @@
           </td>
         </div>
       </tr>
+      </ng-container>
     </table>
+
+    <div class="row center-align">
+      <pagination-controls class="my-pagination" (pageChange)="p = ($event)"
+      previousLabel="Anterior" nextLabel="Siguiente">
+      </pagination-controls>
+      </div> 
   </div>
 
 

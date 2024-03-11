@@ -20,6 +20,8 @@ export class VentaComponent implements OnInit {
   compramax = 500
   Ventatotal = -1
   GananciaTotal = -1
+  p=1
+  pageSize = 5
   constructor(private ventasServices: VentaService, private productoService: ProductoService, private router: Router) {
     if (localStorage.getItem("id_rol") != '3')
       router.navigateByUrl("home/producto")

@@ -1,6 +1,11 @@
 <div class="container">
   <ul *ngIf=" compras != undefined  " >
-    <li *ngFor="let compra of compras"><!-- Lista de productos -->
+    <ng-container *ngFor="let compra of compras|
+    paginate: {
+    itemsPerPage: pageSize,
+    currentPage: p
+    };let i=index">
+    <li ><!-- Lista de productos -->
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image">
@@ -17,5 +22,11 @@
         </div>
       </div>
     </li>
+    </ng-container>
   </ul>
+  <div class="row center-align">
+    <pagination-controls class="my-pagination" (pageChange)="p = ($event)"
+    previousLabel="Anterior" nextLabel="Siguiente">
+    </pagination-controls>
+    </div>
 </div>

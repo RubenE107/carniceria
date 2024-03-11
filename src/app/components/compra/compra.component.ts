@@ -13,6 +13,8 @@ import { VentaService } from 'src/app/services/venta.service';
 export class CompraComponent implements OnInit {
   compras : Compra [] = [];
   compra!: Compra;
+  p = 1;
+  pageSize = 5
   constructor(private ventasServices: VentaService) { 
 
   }

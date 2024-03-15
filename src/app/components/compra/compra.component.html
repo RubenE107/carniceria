@@ -1,5 +1,6 @@
 <div class="container">
   <ul *ngIf=" compras != undefined  " >
+<!-----------Paginación--------------------------------------------------->
     <ng-container *ngFor="let compra of compras|
     paginate: {
     itemsPerPage: pageSize,
@@ -24,6 +25,7 @@
     </li>
     </ng-container>
   </ul>
+<!-----------Paginación--------------------------------------------------->
   <div class="row center-align">
     <pagination-controls class="my-pagination" (pageChange)="p = ($event)"
     previousLabel="Anterior" nextLabel="Siguiente">

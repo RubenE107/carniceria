@@ -170,6 +170,8 @@ export class CarritoComponent implements OnInit {
       });
       return;
     }
+
+    //////Anidar v;;;;;
     this.carrErrr = 0;
     for (let tCarro of this.carritos) {
       this.tCarrAct = tCarro.id;
@@ -180,7 +182,7 @@ export class CarritoComponent implements OnInit {
           if (this.totalPro < tCarro.cantidad) {
             this.carrErrr = 1;
             console.log('Si ocurrió');
-            $('#modalError').modal();
+            $('#modalError').modal();8
             $('#modalError').modal('open');
             return;
           }

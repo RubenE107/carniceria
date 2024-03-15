@@ -20,14 +20,20 @@
                                         name="passwordLogin" required>
                                     <label for="passwordLogin">Contraseña</label>
                                 </div>
-                            </div>
-                            <div class="row">
+                                <div>
                                 <a (click)="logueo()">
                                     <button class="waves-effect btn-large red lighten-1 white-text">LOGIN</button>
                                 </a>
                                 <br>
-                                <br>
-
+                                
+                                </div>
+                                <div>
+                                    <a  (click)="Modalrestablecer()">
+                                            Recuperar Contraseña
+                                    </a>
+                                    <br>
+                                    <br>
+                                </div>
                                 <div>
                                     <a (click)="nuevoUsuario()">
                                         <button class="  waves-effect btn-large red lighten-1 white-text">
@@ -107,9 +113,6 @@
                                     </button>
                                 </div>
                             </div>
-
-
-
                         </form>
                     </div>
                 </div>
@@ -117,3 +120,37 @@
         </div>
     </div>
 </div>
+
+
+
+<div id="modalRestablecerContrasena" class="modal">
+    <div class="modal-content">
+        <div class="row col s12" style="margin-botton: 0px !important;">
+                <h5 class="center">Restablecer Contraseña</h5>
+        </div>
+        <div class="row col s12" style="margin-botton: 0px !important;">
+                <p>Revisa tu correo electronico, revisa el correo no deseado.</p>
+        </div>
+        <div style="border: .5px solid #060707; padding: 10px;">
+            <label class="correo">Correo electronico</label>
+            <input required type="email" [(ngModel)]="usuarioRestablecer.correo" placeholder="correo" value="usuario.correo">
+        </div>
+        <br>
+        <div class="row">
+            <div class="col s6 center">
+                <a (click)="restablecerContrasena()">
+                    <button class="waves-effect btn red lighten-1 white-text modal-close" type="submit">
+                        Enviar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </a>
+            </div>
+            <div class="col s6 center">
+                <button class="modal-action modal-close waves-effect btn red lighten-1 white-text" type="submit">Cancelar
+                    <i class="material-icons right">cancel</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+                        

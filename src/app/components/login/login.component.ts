@@ -12,6 +12,7 @@ declare var $: any;
 export class LoginComponent implements OnInit {
   usuariologin = new Usuario();
   usuarioNuevo = new Usuario();
+  usuarioRestablecer = new Usuario();
   constructor(private usuarioService: UsuarioService, private router: Router) {
     this.usuariologin.correo = "kio@gmail.com";
     this.usuariologin.contrasena = "asdf";
@@ -60,5 +61,14 @@ export class LoginComponent implements OnInit {
     
     $('#modalNuevoUsuario').modal('close');
   }
+  Modalrestablecer() {
+    console.log("cambiando contrasena");
+      $('#modalRestablecerContrasena').modal({dismissible: false});
+      $("#modalRestablecerContrasena").modal("open");
+  }
+  restablecerContrasena() {
+    
+  }
+
 
 }

@@ -74,6 +74,7 @@ export class CarritoComponent implements OnInit {
           console.log('Llegó aquí v;');
           this.list();
           $('#modalError').modal('close');
+          this.list();
           //this.carrErrr = 0
         },
         (err) => console.error(err)
@@ -170,9 +171,72 @@ export class CarritoComponent implements OnInit {
       });
       return;
     }
+    for (let i = 0; i < this.carritos.length; i++) {
+      this.tCarrAct = this.carritos[i].id;
+      this.productoService.getCantidad(this.carritos[i].id_producto).subscribe(
+        (resusuario: any) => {
+          this.totalPro = resusuario.cantidad;
+          console.log('Verificando a: ', this.totalPro);
+          if (this.totalPro < this.carritos[i].cantidad) {
+            this.carrErrr = 1;
+            console.log('Si ocurrió');
+            $('#modalError').modal();
+            $('#modalError').modal('open');
+            return;
+          } else {
+            this.productoService
+              .reducirCantidad(
+                this.carritos[i].id_producto,
+                this.carritos[i].cantidad
+              )
+              .subscribe((resusuarios: any) => {
+                console.log(resusuarios);
+              });
+
+            this.ventaService
+              .crear(
+                this.carritos[i].id_producto,
+                localStorage.getItem('id'),
+                this.carritos[i].cantidad * this.carritos[i].precio,
+                this.carritos[i].cantidad
+              )
+              .subscribe(
+                (resusuario: any) => {
+                  this.carritos = resusuario;
+                  console.log(resusuario);
+                  this.total();
+
+                  //console.log(resusuario);
+                },
+                (err) => console.error(err)
+              );
+            this.carritoService.eliminar(this.carritos[i].id).subscribe(
+              (resusuario: any) => {
+                this.carritos = resusuario;
+                console.log(resusuario);
+                this.carritos = [];
+
+                //console.log(resusuario);
+              },
+              (err) => console.error(err)
+            );
+            Swal.fire({
+              icon: 'success',
+              title: 'Hecho!!',
+              text: 'La compra se ha realizado con éxito!',
+            });
+          }
+        },
+        (err) => console.error(err)
+      );
+      if (this.carrErrr == 1) {
+        break;
+      }
+    }
+    this.list();
 
     //////Anidar v;;;;;
-    this.carrErrr = 0;
+    /*this.carrErrr = 0;
     for (let tCarro of this.carritos) {
       this.tCarrAct = tCarro.id;
       this.productoService.getCantidad(tCarro.id_producto).subscribe(
@@ -248,7 +312,7 @@ export class CarritoComponent implements OnInit {
         (err) => console.error(err)
       );
     }
-    this.list();
+    */
   }
 
   eliminar(id_producto: any) {

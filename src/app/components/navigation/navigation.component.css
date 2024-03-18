@@ -1,0 +1,16 @@
+.nav-wrapper {
+    position: relative;
+}
+
+.logo-img {
+    position: absolute;
+    right: 15px; /* Ajusta este valor según sea necesario */
+    transform: translateY(-5%);
+    width: 70px; /* Modifica el ancho del logo según sea necesario */
+    height: auto; /* Establece la altura automática para mantener la proporción */
+}
+
+.logout {
+    position: absolute;
+    right: 80px; /* ajusta según sea necesario */
+}

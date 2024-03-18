@@ -92,6 +92,7 @@ export class VentaComponent implements OnInit {
   }
 
   listProducto() {
+    this.p = 1
     this.Ventatotal = -1;
     this.ventasServices.VentasProducto(this.aux).subscribe(
       (resusuario: any) => {

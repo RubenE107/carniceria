@@ -17,6 +17,10 @@ export class ProductoComponent implements OnInit {
   aux !: any ;
   preciomin!: number;
   preciomax!:number
+  
+  p=1
+  pageSize = 4
+  
   cantidad = 0
   idCarrito=-1
   cantDisp = 0
@@ -171,6 +175,7 @@ export class ProductoComponent implements OnInit {
     );
   }
   listAnimal(){
+    this.p = 1
     this.productoService.listAnimal(this.aux).subscribe(
       (resusuario: any) => {
         this.productos = resusuario;

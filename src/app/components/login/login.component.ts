@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { CorreoService } from 'src/app/services/correo.service';
 import Swal from 'sweetalert2';
+
 declare var $: any;
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ export class LoginComponent implements OnInit {
   usuariologin = new Usuario();
   usuarioNuevo = new Usuario();
   usuarioRestablecer = new Usuario();
-  constructor(private usuarioService: UsuarioService, private router: Router) {
+  constructor(private correoService: CorreoService, private usuarioService: UsuarioService, private router: Router) {
     this.usuariologin.correo = "kio@gmail.com";
     this.usuariologin.contrasena = "asdf";
   }
@@ -62,13 +64,27 @@ export class LoginComponent implements OnInit {
     $('#modalNuevoUsuario').modal('close');
   }
   Modalrestablecer() {
-    console.log("cambiando contrasena");
       $('#modalRestablecerContrasena').modal({dismissible: false});
       $("#modalRestablecerContrasena").modal("open");
   }
-  restablecerContrasena() {
-    
-  }
+  restablecerContrasena(correo: string) {
+      console.log("cambiando contrasena");
+      console.log(correo);
+      var message: any ={};
+      message = {
+      from: "equipWed@hotmail.com",
+      to: correo,
+      bcc: "",
+      subject: "Probando ando",
+      attachment: [
+      { data: `¡¡Te damos la más cordial bienvenida !!`, alternative: true }
+      ]
+      };
+      console.log(message);
+      this.correoService.enviarCorreo(message).subscribe((resusuario: any) => {},
+      err => console.error(err));
+      console.log("Se envio el correo");
+}
 
 
 }

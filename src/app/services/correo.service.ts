@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
 })
 export class CorreoService {
   constructor(private http: HttpClient) { }
-  enviarCorreoRecuperarContrasenya(body: any) {
+  enviarCorreo(body: any) {
     return this.http.post(
-      `${environment.API_URI_CORREOS}/enviarCorreoRecuperarContrasenya/`,
+      `${environment.API_URI_CORREOS}/enviarCorreoRecuperarContrasenya`,
       body
     );
   }

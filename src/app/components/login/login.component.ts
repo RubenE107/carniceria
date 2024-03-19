@@ -40,6 +40,11 @@ export class LoginComponent implements OnInit {
         
       } else {
         console.log("Error, usuario o contrasena no valida");
+        Swal.fire({
+          title: "Credenciales incorrectas",
+          text: "El correo y/o la contraseña ingresados son incorrectos.\nInténtelo nuevamente.",
+          icon: "error"
+        })
       }
     },
       err => console.error(err)

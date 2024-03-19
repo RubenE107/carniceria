@@ -1,7 +1,7 @@
-<app-navigation></app-navigation>
+<app-navigation *ngIf="aux!=null"></app-navigation>
 
 <main>
     <router-outlet></router-outlet>
 </main>
 
-<app-footer></app-footer>
+<app-footer *ngIf="aux!=null"></app-footer>

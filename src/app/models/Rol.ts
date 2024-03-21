@@ -1,9 +1,12 @@
 export class Rol{
-    id_rol: number;
-    nombre_rol : string;
+    id: number;
+    nombre: string;
+    descripcion: string;
+    
 
     constructor() {
-        this.id_rol = 1,
-        this.nombre_rol = "Administrador"
+        this.id = 0;
+        this.nombre = '';
+        this.descripcion = '';
     }
 }

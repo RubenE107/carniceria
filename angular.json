@@ -1,12 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": "dbc724e8-f4ea-4021-80c7-4d6df52a3123"
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "proyectoCIIT": {
+    "carniceria": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/proyecto-ciit",
+            "outputPath": "dist/carniceria",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -31,11 +28,13 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/materialize-css/dist/css/materialize.css"
+              "./node_modules/materialize-css/dist/css/materialize.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/materialize-css/dist/js/materialize.js"
+              "node_modules/jquery/dist/jquery.js",
+              "./node_modules/materialize-css/dist/js/materialize.js"
+
+
             ]
           },
           "configurations": {
@@ -75,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "proyectoCIIT:build:production"
+              "browserTarget": "carniceria:build:production"
             },
             "development": {
-              "browserTarget": "proyectoCIIT:build:development"
+              "browserTarget": "carniceria:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "proyectoCIIT:build"
+            "browserTarget": "carniceria:build"
           }
         },
         "test": {
@@ -101,13 +100,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/materialize-css/dist/css/materialize.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/materialize-css/dist/js/materialize.js"
+
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "proyectoCIIT"
+  "defaultProject": "carniceria"
 }

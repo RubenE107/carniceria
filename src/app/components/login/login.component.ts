@@ -18,6 +18,15 @@ export class LoginComponent implements OnInit {
   constructor(private correoService: CorreoService, private usuarioService: UsuarioService, private router: Router) {
     this.usuariologin.correo = "kio@gmail.com";
     this.usuariologin.contrasena = "asdf";
+
+    if (localStorage.getItem("id")!=null) {
+      if (Number(localStorage.getItem("id_rol"))===3) {
+        this.router.navigateByUrl("/home/usuario");
+      }
+      else {
+        this.router.navigateByUrl("/home/producto");
+      }
+    }
   }
 
   ngOnInit(): void {

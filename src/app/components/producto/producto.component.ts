@@ -19,7 +19,7 @@ export class ProductoComponent implements OnInit {
   preciomax!:number
   
   p=1
-  pageSize = 4
+  pageSize = 6
   
   cantidad = 0
   idCarrito=-1

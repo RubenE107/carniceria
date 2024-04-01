@@ -74,7 +74,7 @@
             itemsPerPage: pageSize, 
             currentPage: p 
         }; let i = index">
-          <div class="col s6">
+          <div class="col s4">
             <div class="card">
               <div class="card-image">
                 <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"  alt="Imagen{{producto.nombre}}">
@@ -101,7 +101,6 @@
                   <h5 *ngIf="producto.cantidad==0" 
                   class="black-text font-size xlarge center">
                     <p>Agotado</p>
-                    <br>
                   </h5>
 
                   <div class="row col s12" *ngIf="rol!=1">

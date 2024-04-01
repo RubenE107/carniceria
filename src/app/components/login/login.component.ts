@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
   restablecerContrasena(correo: string) {
       console.log("cambiando contrasena");
       console.log(correo);
-      var message: any ={};
+      /*var message: any ={};
       message = {
       from: "equipWed@hotmail.com",
       to: correo,
@@ -85,8 +85,8 @@ export class LoginComponent implements OnInit {
       { data: `¡¡Te damos la más cordial bienvenida !!`, alternative: true }
       ]
       };
-      console.log(message);
-      this.correoService.enviarCorreo(message).subscribe((resusuario: any) => {},
+      console.log(message);*/
+      this.correoService.enviarCorreo({"correo":correo}).subscribe((resusuario: any) => {},
       err => console.error(err));
       console.log("Se envio el correo");
 }

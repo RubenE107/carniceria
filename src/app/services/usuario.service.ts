@@ -53,6 +53,10 @@ eliminarUsuario(id : any){
   return this.http.delete(`${environment.API_URI}/users/delete/${id}`);
 }
 
+actualizarContrasenha(correo:any, contra:any)
+{
+  return this.http.put(`${environment.API_URI}/users/nuevaContra`, {"correo":correo, "contra":contra});
+}
 
 
 }

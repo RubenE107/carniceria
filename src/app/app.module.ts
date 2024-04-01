@@ -16,6 +16,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { VentaComponent } from './components/venta/venta.component';
 import { CompraComponent } from './components/compra/compra.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ReestablecerComponent } from './components/reestablecer/reestablecer.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PerfilComponent,
     VentaComponent,
     CompraComponent,
+    ReestablecerComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { VentaComponent } from './components/venta/venta.component';
 import { CompraComponent } from './components/compra/compra.component';
+import { ReestablecerComponent } from './components/reestablecer/reestablecer.component';
 const routes: Routes = [
 {
   path: "",
@@ -39,6 +40,9 @@ const routes: Routes = [
     },{
       path:'compra',
       component:CompraComponent
+    },{
+      path:'reestablecer/:token',
+      component:ReestablecerComponent
     },
 
   ]

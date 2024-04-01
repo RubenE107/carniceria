@@ -87,8 +87,8 @@
                   <p><strong>Precio por Kg:</strong> ${{producto.precio}}</p>
                   <p><strong>Cantidad disponible: </strong> {{producto.cantidad}} Kg</p>
                   <p>{{producto.descripcion}}</p>
-                  <br>
-                  <div class="row ">
+  	              <div class="row " *ngIf="producto.cantidad>0">
+                    <br>
                     <div class="col s12 center">
                       <a (click)="agregaCarrito(producto.id, producto.cantidad)">
                         <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
@@ -98,6 +98,12 @@
                       </a>
                     </div>
                   </div>
+                  <h5 *ngIf="producto.cantidad==0" 
+                  class="black-text font-size xlarge center">
+                    <p>Agotado</p>
+                    <br>
+                  </h5>
+
                   <div class="row col s12" *ngIf="rol!=1">
                     <div class="col s6 center">
                       <a (click)="modificaProducto(producto.id)">

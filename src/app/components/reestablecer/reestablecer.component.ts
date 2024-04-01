@@ -24,7 +24,7 @@ export class ReestablecerComponent implements OnInit {
           console.log("primeiro: ",resUsuario)
           if(resUsuario == 0)
           {
-            Swal.fire("La contraseña ha cambiado exitosamente, por favor, ahora inicie seción");
+            Swal.fire("Este correo no existe Cree una cuenta");
             this.router.navigateByUrl("");
           }
           this.usuarioC = resUsuario

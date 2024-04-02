@@ -42,7 +42,7 @@ export class ReestablecerComponent implements OnInit {
   {
     if(this.contra!= this.CContra)
     {
-      Swal.fire("Las contraseñas no coinsiden, por favor, reintente!");
+      Swal.fire("Las contraseñas no coinciden, por favor, reintente!");
       return;
     }
     console.log(this.usuarioC)

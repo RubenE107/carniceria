@@ -1,20 +1,5 @@
-<p></p>
-<div class="row col s12 container">
-    <div class="row col s4">
-
-        <div class="row col s12 card ">
-            <div>
-                <h5 class="center">Filtrar por productos</h5>
-            </div>
-            <div>
-                <select [(ngModel)]="aux" id="producto" name="producto" class="browser-default waves-red s12 "
-                    (change)="listProducto()">
-                    <option value="" disabled selected>Escoge un producto</option>
-                    <option *ngFor="let producto of productos" value="{{producto.id}}">{{ producto.nombre }}</option>
-                </select>
-
-            </div>
-        </div>
+<div class="row">
+    <div class="col s3 center">
         <div class="col s12 card">
             <div class="row col s12 center">
                 <br>
@@ -26,97 +11,117 @@
                 </a>
             </div>
         </div>
-    </div>
-    <div class="col s6 offset-s1 card ">
-        <div>
-            <h5 class="center">Filtrar por precio de compra</h5>
+        <div class="row col s12 card ">
+            <div>
+                <h5 class="center">Filtrar por productos</h5>
+            </div>
+            <div class="input-field col s12">
+                <select [(ngModel)]="aux" id="producto" name="producto" class="browser-default "
+                    (change)="listProducto()">
+                    <option value="" disabled selected>Escoge un producto</option>
+                    <option *ngFor="let producto of productos" value="{{producto.id}}">{{ producto.nombre }}</option>
+                </select>
+
+            </div>
         </div>
-        <div>
-            <div class="input-field col s6">
-                <i class="material-icons prefix">money</i>
-                <input [(ngModel)]="compramin" type="number" id="pmin" name="pmin" required>
-                <label for="pmin" class="active">compra minimo</label>
+        <div class="col s12 card ">
+            <div>
+                <h5 class="center">Filtrar por precio de compra</h5>
             </div>
-            <div class="input-field col s6">
-                <i class="material-icons prefix">money</i>
-                <input [(ngModel)]="compramax" type="number" id="pmax" name="pmax" required>
-                <label for="pmax" class="active">compra maximo</label>
-            </div>
-            <div class="row">
-                <div class="col s12 center">
-                    <a (click)="filtraPrecio()">
-                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                            Filtrar
-                            <i class="material-icons right">search</i>
-                        </button>
-                    </a>
+            <div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">money</i>
+                    <input [(ngModel)]="compramin" type="number" id="pmin" name="pmin" required>
+                    <label for="pmin" class="active">compra minimo</label>
+                </div>
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">money</i>
+                    <input [(ngModel)]="compramax" type="number" id="pmax" name="pmax" required>
+                    <label for="pmax" class="active">compra maximo</label>
+                </div>
+                <div class="row">
+                    <div class="col s12 center">
+                        <a (click)="filtraPrecio()">
+                            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                                Filtrar
+                                <i class="material-icons right">search</i>
+                            </button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col s12 card">
+            <div>
+                <h5 class="container">Filtrado por fecha</h5>
+            </div>
+            <div class="input-field col s12 ">
+                <label class="active">Fecha </label>
+                <input [(ngModel)]="venta.fecha" type="text" id="fechaVenta" #fechaD
+                    (change)="actualizarFecha(fechaD.value)" class="datepicker" [value]="venta.fecha">
+            </div>
+            <div class=" row col s12 center">
+                <a (click)="filtrarFechaYear()">
+                    <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                        Filtrar por año
+                        <i class="material-icons right">search</i>
+                    </button>
+                </a>
+            </div>
+            <div class="row col s12 center">
+                <a (click)="filtrarFechaYearMonth()">
+                    <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                        Filtrar por año y mes
+                        <i class="material-icons right">search</i>
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
-</div>
-<div class="container">
-    <div class="row col s12 card">
-        <h5 class="container">Filtrado por fecha</h5>
-        <div class="input-field col s4 ">
-            <label class="active">Fecha </label>
-            <input [(ngModel)]="venta.fecha" type="date" id="fechaVenta" #fechaD
-                (change)="actualizarFecha(fechaD.value)" class="datepicker" [value]="venta.fecha">
+    <div class="col s9 ">
+        <div class="container " *ngIf="Ventatotal!=-1" >
+            <div class="card">
+                <div class="container ">
+                    <h5><strong>Total de veces que se ha comprado el producto:</strong> {{Ventatotal}}</h5>
+                    <h5><strong>El total ganado con este producto es:</strong> {{GananciaTotal}}</h5>
+                </div>
+            </div>
         </div>
-        <div class=" col s4 center">
-            <a (click)="filtrarFechaYear()">
-                <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                    Filtrar por año
-                    <i class="material-icons right">search</i>
-                </button>
-            </a>
-        </div>
-        <div class="col s4 center">
-            <a (click)="filtrarFechaYearMonth()">
-                <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                    Filtrar por año y mes
-                    <i class="material-icons right">search</i>
-                </button>
-            </a>
-        </div>
-    </div>
-    
-</div>
-<div class="container" *ngIf="Ventatotal!=-1">
-    <div class="card">
         <div class="container">
-            <h5><strong>Total de veces que se ha comprado el producto:</strong> {{Ventatotal}}</h5>
-            <h5><strong>El total ganado con este producto es:</strong> {{GananciaTotal}}</h5>
+            <!-----------Paginación--------------------------------------------------->
+            <ul *ngIf="ventas != undefined">
+                <li *ngFor="let venta of ventas | 
+                    paginate: { 
+                        itemsPerPage: pageSize, 
+                        currentPage: p 
+                    }; let i = index">
+
+                    <div class="row">
+                        <div class="card horizontal">
+                            <div class="card-image col s2 center " style="padding: 2%;">
+                                <img src="../../../assets/1_Imagenes/{{venta.nombre}}.jpg" alt="Imagen{{venta.nombre}}">
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title">{{ venta.nombre }}</span>
+                                    <p>Cantidad de producto: {{ venta.cantidad }}</p>
+                                    <p><strong>Precio: ${{ venta.monto }}</strong></p>
+                                    <p><strong>Fecha: {{ venta.fecha }}</strong></p>
+                                
+                                </div>
+                              </div>
+                            
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+            <!-----------Paginación--------------------------------------------------->
+            <div class="row center-align">
+                <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+                    nextLabel="Siguiente">
+                </pagination-controls>
+            </div>
         </div>
     </div>
-</div>
-<div class="container">
-<!-----------Paginación--------------------------------------------------->
-    <ul *ngIf="ventas != undefined">
-        <li *ngFor="let venta of ventas | 
-            paginate: { 
-                itemsPerPage: pageSize, 
-                currentPage: p 
-            }; let i = index">
-            <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <!-- <img src="img/tasajo.png" alt="Producto 1"> -->
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title">{{ venta.nombre }}</span>
-                        <p>Cantidad de producto: {{ venta.cantidad }}</p>
-                        <p><strong>Precio: ${{ venta.monto }}</strong></p>
-                        <p><strong>Fecha: {{ venta.fecha }}</strong></p>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
-<!-----------Paginación--------------------------------------------------->
-    <div class="row center-align">
-        <pagination-controls class="my-pagination" (pageChange)="p = ($event)"
-        previousLabel="Anterior" nextLabel="Siguiente">
-        </pagination-controls>
-        </div>    
 </div>

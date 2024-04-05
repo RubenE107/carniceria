@@ -14,12 +14,12 @@ export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
   producto!: Producto;
   animales: Animal[] = [];
-  aux !: any ;
+  aux = ""
   preciomin!: number;
   preciomax!:number
   
   p=1
-  pageSize = 6
+  pageSize = 8
   
   cantidad = 0
   idCarrito=-1
@@ -139,7 +139,7 @@ export class ProductoComponent implements OnInit {
     this.list()
   }
   reiniciaVariables(){
-    this.aux=undefined;
+    this.aux="";
     this.preciomin=0;
     this.preciomax= 500
     

@@ -1,139 +1,129 @@
-<div class="row" *ngIf="rol !=1">
-  <div class="col m6 offset-m4">
-    <h5>Agregar producto
-
-      <a class="btn-floating btn-large red lighten-1 white-tex" (click)="nuevoProducto()">
-        <i class="material-icons">add</i>
+<div class="row">
+  <div class="col s2 center" id="Filtros">
+    <div class="row center">
+      <br>
+      <a (click)="eliminaFiltros()">
+        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+          Eliminar filtros
+          <i class="material-icons right">delete</i>
+        </button>
       </a>
+    </div>
+    <div class="col s12 card" id="FiltroPrecio">
+      <div>
+        <h5 class="center">Filtrar por precio</h5>
+      </div>
+      <div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">money</i>
+          <input [(ngModel)]="preciomin" type="number" id="pmin" name="pmin" required>
+          <label for="pmin" class="active">Precio minimo</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">money</i>
+          <input [(ngModel)]="preciomax" type="number" id="pmax" name="pmax" required>
+          <label for="pmax" class="active">Precio maximo</label>
+        </div>
+        <div class="row">
+          <div class="col s12 center">
+            <a (click)="filtraprecio()">
+              <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                Filtrar
+                <i class="material-icons right">search</i>
+              </button>
+            </a>
+          </div>
+        </div>
 
-    </h5>
-  </div>
-</div>
-<div class="row col s12 container">
-  <div class="row col s4">
+      </div>
 
-    <div class="row col s12 card ">
+    </div>
+
+    <div class="row col s12 card " id="FiltroAnimal">
       <div>
         <h5 class="center">Filtrar por animal</h5>
       </div>
       <div>
-        <select [(ngModel)]="aux" id="rol" name="rol" class="browser-default waves-red s12 " (change)="listAnimal()">
-          <option value="" disabled selected>Escoge un animal</option>
+        <select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
+         (change)="listAnimal()">
+          <option value="" selected disabled>Escoge un animal</option>
           <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
         </select>
-
-      </div>
-    </div>
-    <div class="col s12 card">
-      <div class="row col s12 center">
-        <br>
-        <a (click)="eliminaFiltros()">
-          <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-            Eliminar filtros
-            <i class="material-icons right">delete</i>
-          </button>
-        </a>
       </div>
     </div>
   </div>
-  <div class="col s6 offset-s1 card ">
-    <div>
-      <h5 class="center">Filtrar por precio</h5>
-    </div>
-    <div>
-      <div class="input-field col s6">
-        <i class="material-icons prefix">money</i>
-        <input [(ngModel)]="preciomin" type="number" id="pmin" name="pmin" required>
-        <label for="pmin" class="active">Precio minimo</label>
-      </div>
-      <div class="input-field col s6">
-        <i class="material-icons prefix">money</i>
-        <input [(ngModel)]="preciomax" type="number" id="pmax" name="pmax" required>
-        <label for="pmax" class="active">Precio maximo</label>
-      </div>
+
+  <div class="col s10 center container">
       <div class="row">
-        <div class="col s12 center">
-          <a (click)="filtraprecio()">
-            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-              Filtrar
-              <i class="material-icons right">search</i>
-            </button>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container ">
-  <div class="row">
-    <ul *ngIf="productos != undefined ">
-      <div class="row col s12">
-        <li *ngFor="let producto of productos | 
-        paginate: { 
-            itemsPerPage: pageSize, 
-            currentPage: p 
-        }; let i = index">
-          <div class="col s4">
-            <div class="card">
-              <div class="card-image">
-                <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"  alt="Imagen{{producto.nombre}}">
-              </div>
-              <div class="card-content">
-                <div class="row ">
-
-                  <span class="card-title">{{producto.nombre}}</span>
-                  <p><strong>Animal de origen: </strong> {{producto.animal}}</p>
-                  <p><strong>Precio por Kg:</strong> ${{producto.precio}}</p>
-                  <p><strong>Cantidad disponible: </strong> {{producto.cantidad}} Kg</p>
-                  <p>{{producto.descripcion}}</p>
-  	              <div class="row " *ngIf="producto.cantidad>0">
-                    <br>
-                    <div class="col s12 center">
-                      <a (click)="agregaCarrito(producto.id, producto.cantidad)">
-                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                          Agregar al carrito
-                          <i class="material-icons right">add</i>
-                        </button>
-                      </a>
-                    </div>
+        <ul *ngIf="productos != undefined ">
+          <div class="row col s12">
+            <li *ngFor="let producto of productos | 
+          paginate: { 
+              itemsPerPage: pageSize, 
+              currentPage: p 
+          }; let i = index">
+              <div class="col s3">
+                <div class="card">
+                  <div class="card-image">
+                    <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg" alt="Imagen{{producto.nombre}}">
                   </div>
-                  <h5 *ngIf="producto.cantidad==0" 
-                  class="black-text font-size xlarge center">
-                    <p>Agotado</p>
-                  </h5>
+                  <div class="card-content">
+                    <div class="row ">
 
-                  <div class="row col s12" *ngIf="rol!=1">
-                    <div class="col s6 center">
-                      <a (click)="modificaProducto(producto.id)">
-                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                          Modificar
-                          <i class="material-icons right">edit</i>
-                        </button>
-                      </a>
-                    </div>
-                    <div class="col s6 center">
-                      <a (click)="eliminaProducto(producto.id)">
-                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                          Eliminar
-                          <i class="material-icons right">delete</i>
-                        </button>
-                      </a>
+                      <span class="card-title">{{producto.nombre}}</span>
+                      <p><strong>Animal de origen: </strong> {{producto.animal}}</p>
+                      <p><strong>Precio por Kg:</strong> ${{producto.precio}}</p>
+                      <p><strong>Cantidad disponible: </strong> {{producto.cantidad}} Kg</p>
+                      <p>{{producto.descripcion}}</p>
+                      <div class="row " *ngIf="producto.cantidad>0">
+                        <br>
+                        <div class="col s12 center">
+                          <a (click)="agregaCarrito(producto.id, producto.cantidad)">
+                            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                              Agregar al carrito
+                              <i class="material-icons right">add</i>
+                            </button>
+                          </a>
+                        </div>
+                      </div>
+                      <h5 *ngIf="producto.cantidad==0" class="black-text font-size xlarge center">
+                        <p>Agotado</p>
+
+                      </h5>
+
+                      <div class="row col s12" *ngIf="rol!=1">
+                        <div class="col s6 center">
+                          <a (click)="modificaProducto(producto.id)">
+                            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                              Modificar
+                              <i class="material-icons right">edit</i>
+                            </button>
+                          </a>
+                        </div>
+                        <div class="col s6 center">
+                          <a (click)="eliminaProducto(producto.id)">
+                            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                              Eliminar
+                              <i class="material-icons right">delete</i>
+                            </button>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </li>
           </div>
-        </li>
+        </ul>
+
+
       </div>
-    </ul>
-    
-    
+      <div class="row center-align">
+        <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+          nextLabel="Siguiente"></pagination-controls>
+      </div>
   </div>
-  <div class="row center-align">
-    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
-  </div>  
 </div>
 
 

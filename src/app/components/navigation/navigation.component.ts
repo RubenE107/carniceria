@@ -38,7 +38,9 @@ export class NavigationComponent implements OnInit {
    prefil(){
     this.router.navigateByUrl('/home/perfil')
    }
-
+   ofertas(){
+      this.router.navigateByUrl('/home/oferta')
+   }
 
    cerrarSesion(){
     Swal.fire({

@@ -15,7 +15,7 @@ export class VentaComponent implements OnInit {
   ventas: Venta[] = []
   venta !: Venta
   productos: Pro[] = []
-  aux = undefined
+  aux = ""
   compramin = 0
   compramax = 500
   Ventatotal = -1
@@ -30,6 +30,9 @@ export class VentaComponent implements OnInit {
   ngOnInit(): void {
     $(document).ready(function () {
       $('select').formSelect();
+    });
+    $(document).ready(function(){
+      $('.datepicker').datepicker();
     });
     this.productoService.getNombresProductos().subscribe(
       (resusuario: any) => {
@@ -133,14 +136,14 @@ export class VentaComponent implements OnInit {
       (resusuario: any) => {
         this.ventas = resusuario;
         //console.log(resusuario);
-        console.log(resusuario);
+        //console.log(resusuario);
 
       },
       (err) => console.error(err)
     );
   }
   reiniciaVariables() {
-    this.aux = undefined
+    this.aux = ""
     this.compramin = 0
     this.compramax = 500
     this.Ventatotal = -1

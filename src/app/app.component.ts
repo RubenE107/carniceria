@@ -12,8 +12,13 @@ export class AppComponent {
   constructor(private router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-        this.aux = localStorage.getItem("id");
-      }
+        //this.aux = localStorage.getItem("id");
+        if (this.router.url == "/login") {
+          this.aux = false;
+        }
+        else {
+          this.aux = true;
+        }      }
     })
   }
 }

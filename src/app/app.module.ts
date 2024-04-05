@@ -17,6 +17,7 @@ import { VentaComponent } from './components/venta/venta.component';
 import { CompraComponent } from './components/compra/compra.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReestablecerComponent } from './components/reestablecer/reestablecer.component';
+import { OfertasComponent } from './components/ofertas/ofertas.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ReestablecerComponent } from './components/reestablecer/reestablecer.co
     VentaComponent,
     CompraComponent,
     ReestablecerComponent,
+    OfertasComponent,
   ],
   imports: [
     BrowserModule,

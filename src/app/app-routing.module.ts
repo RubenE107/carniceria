@@ -9,6 +9,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { VentaComponent } from './components/venta/venta.component';
 import { CompraComponent } from './components/compra/compra.component';
 import { ReestablecerComponent } from './components/reestablecer/reestablecer.component';
+import { OfertasComponent } from './components/ofertas/ofertas.component';
 const routes: Routes = [
 {
   path: "",
@@ -43,7 +44,10 @@ const routes: Routes = [
     },{
       path:'reestablecer/:token',
       component:ReestablecerComponent
-    },
+    },{
+      path:'oferta',
+      component: OfertasComponent
+    }
 
   ]
 }

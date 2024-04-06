@@ -12,13 +12,17 @@ export class AppComponent {
   constructor(private router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
-        //this.aux = localStorage.getItem("id");
-        if (this.router.url == "/login") {
+        let ruta = this.router.url;
+        if (ruta == "/login" ) {
           this.aux = false;
+        }else {
+          
+          if (ruta.indexOf("/home/reestablecer") ==0)
+            this.aux=false;
+          else
+            this.aux = true;
         }
-        else {
-          this.aux = true;
-        }      }
+      }
     })
   }
 }

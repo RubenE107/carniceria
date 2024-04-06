@@ -1,1 +1,99 @@
-<p>ofertas works!</p>
+<div class="row">
+    <div class="container col s3 ">
+        <div class="row " style="padding: 5%;">
+
+            <div class="row col s12 card ">
+                <h5 class="center">Para crear una nueva oferta seleccione el producto</h5>
+                <div>
+                    <h5 class="center" style="font-size: large;">Filtrar por animal</h5>
+                </div>
+                <div><select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
+                        (change)="listAnimal()">
+                        <option value="" selected disabled>Escoge un animal</option>
+                        <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
+                    </select>
+                </div>
+                <div class="row center">
+                    <br>
+                    <a (click)="eliminaFiltros()">
+                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                            Eliminar filtros
+                            <i class="material-icons right">delete</i>
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <ul *ngIf="productos!=undefined">
+                <li *ngFor="let producto of productos| 
+                paginate: { 
+                    itemsPerPage: pageSize, 
+                    currentPage: p 
+                }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
+                    <div class="card horizontal" (click)="AgregaOferta(producto.id)">
+                        <div class="card-image col s4 " style="padding: 2%;">
+                            <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
+                                alt="Imagen{{producto.nombre}}">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span class="card-title">{{producto.nombre}}</span>
+                                <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="row center-align">
+                <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+                    nextLabel="Siguiente"></pagination-controls>
+            </div>
+        </div>
+    </div>
+    <div class="col s9">
+        <div style="padding-left: 5%; padding-top: 2%;
+        padding-left: 5%;">
+            <table class="highlight " *ngIf="ofertas != undefined">
+                <tr id="titulos" class="center-align">
+                    <div class="col s9">
+                        <div class="col s2">
+                            <td>Producto</td>
+                        </div>
+                        <div class="col s2">
+                            <td>Precio original</td>
+                        </div>
+                        <div class="col s2">
+                            <td>Descuento %</td>
+                        </div>
+                        <div class="col s2">
+                            <td>Resultado</td>
+                        </div>
+                        <div class="col s2">
+                            <td>Fecha inicio</td>
+                        </div>
+                        <div class="col s2">
+                            <td>Fecha final</td>
+                        </div>
+                    </div>
+                    <div class="col s3">
+                        <div class="col s6">
+                            <td></td>
+                        </div>
+
+                        <div class="col s6">
+                            <td></td>
+                        </div>
+
+                    </div>
+
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>

@@ -23,7 +23,7 @@ export class ReestablecerComponent implements OnInit {
           console.log("primeiro: ",resUsuario)
           if(resUsuario == 0)
           {
-            Swal.fire("Este correo no existe Cree una cuenta");
+            Swal.fire("Ha ocurrido un error");
             this.router.navigateByUrl("");
           }
           this.usuarioC = resUsuario

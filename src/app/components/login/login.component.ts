@@ -18,10 +18,9 @@ export class LoginComponent implements OnInit {
   constructor(private correoService: CorreoService, private usuarioService: UsuarioService, private router: Router) {
     this.usuariologin.correo = "kio@gmail.com";
     this.usuariologin.contrasena = "asdf";
-
     if (localStorage.getItem("id")!=null) {
       if (Number(localStorage.getItem("id_rol"))===3) {
-        this.router.navigateByUrl("/home/usuario");
+        this.router.navigateByUrl("/home/venta");
       }
       else {
         this.router.navigateByUrl("/home/producto");
@@ -38,7 +37,7 @@ export class LoginComponent implements OnInit {
       if (resusuario.id != -1) {
         if (resusuario.id_rol === 3) {
 
-          this.router.navigateByUrl('home/usuario')
+          this.router.navigateByUrl('home/venta')
         
         
         } else if (resusuario.id_rol === 2) {

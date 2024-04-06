@@ -1,4 +1,3 @@
-import { Producto } from "./Producto";
 
 export class Carrito{
     id: number;
@@ -6,10 +5,8 @@ export class Carrito{
     id_usuario: number;
     nombre : string;
     cantidad: number;
-    producto: Producto;
     precio: number;
     constructor() {
-        this.producto = new Producto();
         this.id = 0;
         this.cantidad = 0;
         this.id_producto = 0;

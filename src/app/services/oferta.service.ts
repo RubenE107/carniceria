@@ -41,5 +41,17 @@ export class OfertaService {
   // duracionOferta(){}
   // ordenarFechasinicio(){}
 
+
+  /////////Para la tabla productoOferta (para no crear otro servicio)
+  listPorProductos(id:any)
+  {
+    return this.http.get(`${environment.API_URI}/productoOferta/listPorProducto/${id}`);
+  }
+
+  anularOferta(id:any)
+  {
+    return this.http.put(`${environment.API_URI}/productoOferta/anularOferta`, {"id":id});
+  }
+  
   
 }

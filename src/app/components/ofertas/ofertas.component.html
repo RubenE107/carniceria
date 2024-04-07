@@ -73,15 +73,15 @@
                         itemsPerPage: pageSize, 
                         currentPage: p 
                     }; let i = index">
-                    <td>{{ModiOferta.nombre}}</td>
-                    <td>{{ModiOferta.precio}}</td>
-                    <td>{{descuento}}</td>
-                    <td>{{ModiOferta.precio*(1-(descuento/100))}}</td>
+                    <td>{{ModiOferta.nombre_producto}}</td>
+                    <td>{{ModiOferta.precio_original}}</td>
+                    <td><input [(ngModel)]="ModiOferta.descuento" id="descuento" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.descuento)"></td>
+                    <td>{{ModiOferta.precio_original*(1-(ModiOferta.descuento/100))}}</td>
                     <td>{{fecha_inicio}}</td>
                     <td>{{fecha_final}}</td>
-                    <td><form   (click)="quitar(ModiOferta.id)"><label>
+                    <td><form   (click)="quitar(ModiOferta.id_producto)"><label>
                         <input type="checkbox"  class="filled-in" checked="checked" checked="checked" />
-                        <span>Deselecionar</span>
+                        <span>Deseleccionar</span>
                       </label></form></td>
                 </tr>
             </table>
@@ -90,10 +90,6 @@
         </div>
         <div class="row center-align" >
             <div class="row">
-                <div class="input-field col s3">
-                    <input id="descuento" type="number" class="validate" [(ngModel)]="descuento" (change)="limitarDescuento()">
-                    <label for="descuento">Descuento %</label>
-                </div>
                 <div class="input-field col s3">
                     <input id="fecha_inicio" type="date" class="validate" [(ngModel)]="fecha_inicio">
                     <label for="fecha_inicio">Fecha inicio</label>

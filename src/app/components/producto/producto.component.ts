@@ -4,6 +4,8 @@ import { Producto } from 'src/app/models/Producto';
 import { Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
 import Swal from 'sweetalert2';
+import { Oferta } from 'src/app/models/Oferta';
+import { OfertaService } from 'src/app/services/oferta.service';
 declare var $:any;
 @Component({
   selector: 'app-producto',
@@ -17,6 +19,7 @@ export class ProductoComponent implements OnInit {
   aux = ""
   preciomin!: number;
   preciomax!:number
+  ofertas:Oferta[] = [];
   
   p=1
   pageSize = 8
@@ -31,7 +34,8 @@ export class ProductoComponent implements OnInit {
     }); 
   }
 
-  constructor(private productoService: ProductoService, private carritoService: CarritoService, private router: Router) {
+  constructor(private productoService: ProductoService, private carritoService: CarritoService,
+    private ofertaService:OfertaService, private router: Router) {
 
     this.producto = new Producto();
     this.reiniciaVariables();
@@ -52,6 +56,7 @@ export class ProductoComponent implements OnInit {
     {
     $('#modalNuevoProducto').modal('close');
       this.list();
+
     },
     err => console.error(err)
     );
@@ -122,6 +127,8 @@ export class ProductoComponent implements OnInit {
         this.productoService.eliminar(id_producto).subscribe(
           (resusuario: any) => {
             this.list()
+            this.VerificaOferta()
+
           },
           (err) => console.error(err)
         );
@@ -137,6 +144,8 @@ export class ProductoComponent implements OnInit {
   eliminaFiltros(){
     this.reiniciaVariables()
     this.list()
+
+
   }
   reiniciaVariables(){
     this.aux="";
@@ -148,8 +157,25 @@ export class ProductoComponent implements OnInit {
     this.productoService.list().subscribe(
       (resusuario: any) => {
         this.productos = resusuario;
+        this.VerificaOferta()
+
         //console.log(resusuario);
         console.log(this.productos);
+      },
+      (err) => console.error(err)
+    );
+  }
+  VerificaOferta(){
+    this.ofertaService.listIdProducto().subscribe(
+      (resOferta: any) => {
+        this.ofertas = resOferta;
+        for(let i=0 ;i<resOferta.length;i++){
+          for(let j =0; j<this.productos.length;j++){
+            if(resOferta[i].id_producto == this.productos[j].id)
+              this.productos[j].oferta=true;
+          }
+        }
+        console.log(resOferta);
       },
       (err) => console.error(err)
     );
@@ -168,6 +194,8 @@ export class ProductoComponent implements OnInit {
     this.productoService.filtraprecio(this.preciomin,this.preciomax).subscribe(
       (resusuario: any) => {
         this.productos = resusuario;
+        this.VerificaOferta()
+
         //console.log(resusuario);
         console.log(resusuario);
       },
@@ -179,6 +207,8 @@ export class ProductoComponent implements OnInit {
     this.productoService.listAnimal(this.aux).subscribe(
       (resusuario: any) => {
         this.productos = resusuario;
+        this.VerificaOferta()
+
         //console.log(resusuario);
         console.log(this.productos);
       },

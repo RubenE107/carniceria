@@ -22,6 +22,7 @@ export class OfertasComponent implements OnInit {
   pageSize = 4;
   qOcupado = false;
   AGRE_VER_oferta = true;
+  nombre = 'prueba';
   //descuento: any;
 
   fecha_inicio = new Date().toISOString().substring(0, 10);
@@ -40,9 +41,38 @@ export class OfertasComponent implements OnInit {
     $(document).ready(function () {
       $('.datepicker').datepicker();
     });
-  }
+    $(document).ready(function () {
+      $('.modal').modal();
+    });
+}
   AplicarOferta() {
-    console.log('aplicar oferta');
+    this.ofertaService.create(this.nombre,this.fecha_inicio, this.fecha_final).subscribe(
+      (resusuario: any) => {
+        console.log(resusuario);
+        // this.ofertas.push(resusuario);
+        // this.fecha_inicio = new Date().toISOString().substring(0, 10);
+        // this.fecha_final = new Date().toISOString().substring(0, 10);
+      },
+      (err) => console.error(err)
+    );
+
+
+
+    Swal.fire({
+      title: '¿Quieres enviar un correo?',
+      text: "Ya se crearon las ofertas\nSe enviará un correo a los clientes",
+      showDenyButton: true,
+      confirmButtonText: `Sí`,
+      denyButtonText: `No`,
+  }).then((result) => {
+      if (result.isConfirmed) {
+          
+      }
+  });
+
+
+
+
   }
   listProductos() {
     this.productoService.list().subscribe(

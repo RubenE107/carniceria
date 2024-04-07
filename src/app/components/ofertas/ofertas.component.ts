@@ -56,7 +56,7 @@ aplicarMismoDE(){
   
 }
   AplicarOferta() {
-    this.ofertaService.create(this.nombre,this.fecha_inicio, this.fecha_final).subscribe(
+    /*this.ofertaService.create(this.nombre,this.fecha_inicio, this.fecha_final).subscribe(
       (resusuario: any) => {
         console.log(resusuario);
         // this.ofertas.push(resusuario);
@@ -64,7 +64,7 @@ aplicarMismoDE(){
         // this.fecha_final = new Date().toISOString().substring(0, 10);
       },
       (err) => console.error(err)
-    );
+    );*/
 
 
 

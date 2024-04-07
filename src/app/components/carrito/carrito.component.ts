@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Carrito } from 'src/app/models/Carrito';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { OfertaService } from 'src/app/services/oferta.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { VentaService } from 'src/app/services/venta.service';
 import Swal from 'sweetalert2';
@@ -24,7 +25,8 @@ export class CarritoComponent implements OnInit {
     private carritoService: CarritoService,
     private productoService: ProductoService,
     private ventaService: VentaService,
-    private router: Router
+    private router: Router,
+    private ofertaService: OfertaService
   ) {
     //console.log(localStorage.getItem('id'))
     let fecha = new Date();
@@ -192,7 +194,16 @@ export class CarritoComponent implements OnInit {
               .subscribe((resusuarios: any) => {
                 console.log(resusuarios);
               });
-
+              this.productoService.getCantidad(this.carritos[i].id_producto).subscribe((resCantidad:any)=>
+              {
+                if(resCantidad == 0)
+                  {
+                    this.ofertaService.anularOferta(this.carritos[i].id_producto).subscribe((resAnular:any)=>
+                    {
+                      console.log("Anulado!!");
+                    },(err)=>console.error(err))
+                  }
+              },(err)=>console.error(err))
             this.ventaService
               .crear(
                 this.carritos[i].id_producto,
@@ -220,6 +231,7 @@ export class CarritoComponent implements OnInit {
               },
               (err) => console.error(err)
             );
+
             Swal.fire({
               icon: 'success',
               title: 'Hecho!!',

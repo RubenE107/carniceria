@@ -55,6 +55,7 @@ export class OfertaService {
     return this.http.get(`${environment.API_URI}/ofertas/ordenarFechasInicio/`);
   }
 
+
   listPorProductos(id:any)
   {
     return this.http.get(`${environment.API_URI}/productoOferta/listPorProducto/${id}`);
@@ -66,4 +67,5 @@ export class OfertaService {
   }
 
   }
+  
   

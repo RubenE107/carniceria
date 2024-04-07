@@ -7,7 +7,34 @@
     </label>
 </div>
 <div class="row" *ngIf="AGRE_VER_oferta">
-    aqui para ver los productos con las ofertas ya asignadas
+    
+    <!--  -->
+    <div class="row">
+        <ul *ngIf="productos!=undefined">
+            <li *ngFor="let producto of productos| 
+            paginate: { 
+                itemsPerPage: pageSize, 
+                currentPage: p 
+            }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
+                <div class="card horizontal" (click)="AgregaOferta(producto.id)">
+                    <div class="card-image col s4 " style="padding: 2%;">
+                        <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
+                            alt="Imagen{{producto.nombre}}">
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <span class="card-title">{{producto.nombre}}</span>
+                            <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </li>
+        </ul>
+    </div>
+    <!--  -->
+
 </div>
 <div class="row" *ngIf="!AGRE_VER_oferta">
     <div class="row">
@@ -87,7 +114,10 @@
                         }; let i = index">
                         <td>{{ModiOferta.nombre_producto}}</td>
                         <td>{{ModiOferta.precio_original}}</td>
-                        <td><input [(ngModel)]="ModiOferta.descuento" id="descuento" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.descuento)"></td>
+                        <td>
+                            <input [(ngModel)]="ModiOferta.descuento" [disabled]="qOcupado" id="descuento1" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.descuento)">
+                            
+                        </td>
                         <td>{{ModiOferta.precio_original*(1-(ModiOferta.descuento/100))}}</td>
                         <td>{{fecha_inicio}}</td>
                         <td>{{fecha_final}}</td>
@@ -117,23 +147,22 @@
 <!-- 
 aplicar el mismom descuento a todos los productos
                      -->
-                  
-                    <div class="input-field col s2">
-                        <input id="descuento" type="text" class="validate" [disabled]="!descuento">
-                        <label for="descuento">Descuento %</label>
+                    <div class="input-field col s2" >
+                        <input id="Descuentogl" type="text" class="validate" (change)="aplicarMismoDE()" [(ngModel)]="descuento" [disabled]="!qOcupado" >
+                        <label for="fecha_inicio" class="active" >Descuento</label>
                     </div>
                     <div class="col s2">
-                    <form (click)="descuento=true">
-                        <p>
+                    <form>
                             <label>
-                                <input type="checkbox" />
-<<<<<<< HEAD
-=======
 
->>>>>>> 20d34107d89a4ae1a56f80f88f5d7ae006a0834d
+
+
+
+                                <input id="descuentoTodos" type="checkbox" (change)="aplicarMismoDE()" name="descuento">
+
+
                                 <span><a style="color: rgb(22, 20, 20);">activa el mismo descuento a todo</a></span>
                             </label>
-                        </p>
                     </form>
                     </div>
                     <a (click)="AplicarOferta()">
@@ -146,7 +175,7 @@ aplicar el mismom descuento a todos los productos
                 </div>
             </div>
         <div>
-            <div class="row center-align" >
+            <div class="row center-align " >
                 <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
                     nextLabel="Siguiente"></pagination-controls>
             </div>

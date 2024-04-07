@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Carrito } from 'src/app/models/Carrito';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { OfertaService } from 'src/app/services/oferta.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { VentaService } from 'src/app/services/venta.service';
 import Swal from 'sweetalert2';
@@ -24,7 +25,8 @@ export class CarritoComponent implements OnInit {
     private carritoService: CarritoService,
     private productoService: ProductoService,
     private ventaService: VentaService,
-    private router: Router
+    private router: Router,
+    private ofertaService: OfertaService
   ) {
     //console.log(localStorage.getItem('id'))
     let fecha = new Date();
@@ -85,7 +87,7 @@ export class CarritoComponent implements OnInit {
     this.carritoService.totalCarrito(localStorage.getItem('id')).subscribe(
       (resusuario: any) => {
         this.totalCarrito = resusuario.precioTotal;
-        this.verificar();
+        //this.verificar();
       },
       (err) => console.error(err)
     );
@@ -162,8 +164,10 @@ export class CarritoComponent implements OnInit {
         }
       );
   }
-  compraCarrito() {
-    if (this.carritos.length < 1) {
+
+  compraCarrito()
+  {
+    if(this.carritos.length < 1){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -171,148 +175,47 @@ export class CarritoComponent implements OnInit {
       });
       return;
     }
-    for (let i = 0; i < this.carritos.length; i++) {
+    for(let i=0; i<this.carritos.length; i++){
+      console.log(this.carritos, "i: ", i)
       this.tCarrAct = this.carritos[i].id;
-      this.productoService.getCantidad(this.carritos[i].id_producto).subscribe(
-        (resusuario: any) => {
-          this.totalPro = resusuario.cantidad;
-          console.log('Verificando a: ', this.totalPro);
-          if (this.totalPro < this.carritos[i].cantidad) {
-            this.carrErrr = 1;
-            console.log('Si ocurrió');
-            $('#modalError').modal();
-            $('#modalError').modal('open');
-            return;
-          } else {
-            this.productoService
-              .reducirCantidad(
-                this.carritos[i].id_producto,
-                this.carritos[i].cantidad
-              )
-              .subscribe((resusuarios: any) => {
-                console.log(resusuarios);
-              });
-
-            this.ventaService
-              .crear(
-                this.carritos[i].id_producto,
-                localStorage.getItem('id'),
-                this.carritos[i].cantidad * this.carritos[i].precio,
-                this.carritos[i].cantidad
-              )
-              .subscribe(
-                (resusuario: any) => {
-                  this.carritos = resusuario;
-                  console.log(resusuario);
-                  this.total();
-
-                  //console.log(resusuario);
-                },
-                (err) => console.error(err)
-              );
-            this.carritoService.eliminar(this.carritos[i].id).subscribe(
-              (resusuario: any) => {
-                this.carritos = resusuario;
-                console.log(resusuario);
-                this.carritos = [];
-
-                //console.log(resusuario);
-              },
-              (err) => console.error(err)
-            );
-            Swal.fire({
-              icon: 'success',
-              title: 'Hecho!!',
-              text: 'La compra se ha realizado con éxito!',
-            });
-          }
-        },
-        (err) => console.error(err)
-      );
-      if (this.carrErrr == 1) {
-        break;
-      }
+      this.productoService.getCantidad(this.carritos[i].id_producto).subscribe((resUsuario:any)=>{
+        console.log("resultado de la cantidad", resUsuario.cantidad, "Ademas: ",this.carritos[i].cantidad)
+        if(resUsuario.cantidad < this.carritos[i].cantidad){
+          console.log("Aqui está entrando a la condicional")
+          $('#modalError').modal();
+          $('#modalError').modal('open');
+          return;
+        }
+        else{
+          this.productoService.reducirCantidad(this.carritos[i].id_producto, this.carritos[i].cantidad).subscribe((resReducir:any)=>{
+            this.productoService.getCantidad(this.carritos[i].id_producto).subscribe((resCantidad:any)=>{
+              console.log("ResCantidad: ", resCantidad)
+              if(resCantidad.cantidad==0){
+                this.ofertaService.anularOferta(this.carritos[i].id_producto).subscribe((resAnular:any)=>
+                {
+                },(err)=>console.error(err))
+              }
+            this.ventaService.crear(this.carritos[i].id_producto,localStorage.getItem('id'),this.carritos[i].cantidad * this.carritos[i].precio,this.carritos[i].cantidad).subscribe((resVenta:any)=>{
+              //this.carritos = resVenta;
+              this.total()
+              this.carritoService.eliminar(this.carritos[i].id).subscribe((resEliminar:any)=>{
+                //this.carritos = resEliminar
+                this.carritos = []
+                this.list();
+              },(err)=>console.error(err))
+            },(err)=>console.error(err))
+            },(err)=>console.error(err))
+          },(err)=>console.error(err))
+        }
+      },(err)=>console.error(err))
     }
-    this.list();
+    Swal.fire({
+      icon: 'success',
+      title: 'Hecho!!',
+      text: 'La compra se ha realizado con éxito!',
+    });
+    
 
-    //////Anidar v;;;;;
-    /*this.carrErrr = 0;
-    for (let tCarro of this.carritos) {
-      this.tCarrAct = tCarro.id;
-      this.productoService.getCantidad(tCarro.id_producto).subscribe(
-        (resusuario: any) => {
-          this.totalPro = resusuario.cantidad;
-          console.log('Verificando a: ', this.totalPro);
-          if (this.totalPro < tCarro.cantidad) {
-            this.carrErrr = 1;
-            console.log('Si ocurrió');
-            $('#modalError').modal();8
-            $('#modalError').modal('open');
-            return;
-          }
-        },
-        (err) => console.error(err)
-      );
-      if (this.carrErrr == 1) {
-        break;
-      }
-    }
-    console.log('Ahora car tiene', this.carrErrr);
-    if (this.carrErrr == 1) {
-      return;
-    }
-    for (let i = 0; i < this.carritos.length; i++) {
-      if (this.carrErrr == 1) {
-        return;
-      }
-      this.productoService
-        .reducirCantidad(
-          this.carritos[i].id_producto,
-          this.carritos[i].cantidad
-        )
-        .subscribe((resusuarios: any) => {
-          console.log(resusuarios);
-        });
-    }
-
-    for (let i = 0; i < this.carritos.length; i++) {
-      if (this.carrErrr == 1) {
-        return;
-      }
-      this.ventaService
-        .crear(
-          this.carritos[i].id_producto,
-          localStorage.getItem('id'),
-          this.carritos[i].cantidad * this.carritos[i].precio,
-          this.carritos[i].cantidad
-        )
-        .subscribe(
-          (resusuario: any) => {
-            this.carritos = resusuario;
-            console.log(resusuario);
-            this.total();
-
-            //console.log(resusuario);
-          },
-          (err) => console.error(err)
-        );
-    }
-    for (let i = 0; i < this.carritos.length; i++) {
-      if (this.carrErrr == 1) {
-        return;
-      }
-      this.carritoService.eliminar(this.carritos[i].id).subscribe(
-        (resusuario: any) => {
-          this.carritos = resusuario;
-          console.log(resusuario);
-          this.carritos = [];
-
-          //console.log(resusuario);
-        },
-        (err) => console.error(err)
-      );
-    }
-    */
   }
 
   eliminar(id_producto: any) {

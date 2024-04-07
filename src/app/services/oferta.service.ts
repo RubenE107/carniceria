@@ -1,45 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class OfertaService {
 
   constructor(private http: HttpClient) { }
-  lis(){
-    return this.http.get(`${environment.API_URI}/showAll/`);
-  }
-  listOne(id: any){
-    return this.http.get(`${environment.API_URI}/listOne/${id}`);
 
+  ofertasActivas(){
+    return this.http.get(`${environment.API_URI}/ofertasActivas/`);
   }
-  create(nombre: string, fecha_inicio: string, fecha_fin: string){
-    return this.http.post(`${environment.API_URI}/create`, 
-    {
-      "nombre": nombre,
-      "fecha_inicio": fecha_inicio,
-      "fecha_fin": fecha_fin
-    });
+  numOfertas(){
+    return this.http.get(`${environment.API_URI}/numOfertasActivas/`);
   }
-  update(id: any, nombre: string, fecha_inicio: string, fecha_fin: string){
-    return this.http.put(`${environment.API_URI}/update/${id}`, 
-    {
-      "nombre": nombre,
-      "fecha_inicio": fecha_inicio,
-      "fecha_fin": fecha_fin
-    });
-
+  duracionOferta(){
+    return this.http.get(`${environment.API_URI}/duracionOfertas/`);
+    
   }
-  delete(id: any){
-    return this.http.delete(`${environment.API_URI}/delete/${id}`);
-
+  ordenarfechasInicio(){
+    return this.http.get(`${environment.API_URI}/ordenarFechaInicio/`);
   }
-  //
-  // ofertaActivas(){}
-  // numOfertas(){}
-  // duracionOferta(){}
-  // ordenarFechasinicio(){}
-
-  
 }

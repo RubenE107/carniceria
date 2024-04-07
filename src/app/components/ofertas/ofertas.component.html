@@ -1,116 +1,129 @@
-<div class="row">
-    <div class="container col s3 ">
-        <div class="row " style="padding: 5%;">
+<div class="switch col12 s12" style="text-align: center;  padding: 10px; margin: auto; width: 50%;">
+    <label class="asignar">
+      Asignar ofertas
+      <input type="checkbox" [(ngModel)]="AGRE_VER_oferta">
+      <span class="lever"></span>
+      Ver ofertas
+    </label>
+</div>
+<div class="row" *ngIf="AGRE_VER_oferta">
+    aqui para ver los productos con las ofertas ya asignadas
+</div>
+<div class="row" *ngIf="!AGRE_VER_oferta">
+    <div class="row">
+        <div class="container col s3 ">
+            <div class="row " style="padding: 5%;">
 
-            <div class="row col s12 card ">
-                <h5 class="center">Para crear una nueva oferta seleccione el producto</h5>
-                <div>
-                    <h5 class="center" style="font-size: large;">Filtrar por animal</h5>
-                </div>
-                <div><select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
-                        (change)="listAnimal()">
-                        <option value="" selected disabled>Escoge un animal</option>
-                        <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
-                    </select>
-                </div>
-                <div class="row center">
-                    <br>
-                    <a (click)="eliminaFiltros()">
-                        <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                            Eliminar filtros
-                            <i class="material-icons right">delete</i>
-                        </button>
-                    </a>
-                </div>
-
-            </div>
-        </div>
-        <div class="row">
-            <ul *ngIf="productos!=undefined">
-                <li *ngFor="let producto of productos| 
-                paginate: { 
-                    itemsPerPage: pageSize, 
-                    currentPage: p 
-                }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
-                    <div class="card horizontal" (click)="AgregaOferta(producto.id)">
-                        <div class="card-image col s4 " style="padding: 2%;">
-                            <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
-                                alt="Imagen{{producto.nombre}}">
-                        </div>
-                        <div class="card-stacked">
-                            <div class="card-content">
-                                <span class="card-title">{{producto.nombre}}</span>
-                                <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
-                            </div>
-                        </div>
-                        
+                <div class="row col s12 card ">
+                    <h5 class="center">Para crear una nueva oferta seleccione el producto</h5>
+                    <div>
+                        <h5 class="center" style="font-size: large;">Filtrar por animal</h5>
+                    </div>
+                    <div><select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
+                            (change)="listAnimal()">
+                            <option value="" selected disabled>Escoge un animal</option>
+                            <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
+                        </select>
+                    </div>
+                    <div class="row center">
+                        <br>
+                        <a (click)="eliminaFiltros()">
+                            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                                Eliminar filtros
+                                <i class="material-icons right">delete</i>
+                            </button>
+                        </a>
                     </div>
 
-                </li>
-            </ul>
-        </div>
-        <div>
-            <div class="row center-align">
-                <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
-                    nextLabel="Siguiente"></pagination-controls>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col s9" *ngIf="A_oferta && A_oferta.length !== 0">
-        <div style="padding-left: 5%; padding-top: 2%;
-        padding-left: 5%;">
-            <table class="highlight " >
-                <tr id="titulos" class="center-align">
-                    <td>Producto</td>
-                    <td>Precio original</td>
-                    <td>Descuento %</td>
-                    <td>Resultado</td>
-                    <td>Fecha inicio</td>
-                    <td>Fecha final</td>
-                </tr>
-                <tr *ngFor="let ModiOferta of A_oferta| 
+            <div class="row">
+                <ul *ngIf="productos!=undefined">
+                    <li *ngFor="let producto of productos| 
                     paginate: { 
                         itemsPerPage: pageSize, 
                         currentPage: p 
-                    }; let i = index">
-                    <td>{{ModiOferta.nombre_producto}}</td>
-                    <td>{{ModiOferta.precio_original}}</td>
-                    <td><input [(ngModel)]="ModiOferta.descuento" id="descuento" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.descuento)"></td>
-                    <td>{{ModiOferta.precio_original*(1-(ModiOferta.descuento/100))}}</td>
-                    <td>{{fecha_inicio}}</td>
-                    <td>{{fecha_final}}</td>
-                    <td><form   (click)="quitar(ModiOferta.id_producto)"><label>
-                        <input type="checkbox"  class="filled-in" checked="checked" checked="checked" />
-                        <span>Deseleccionar</span>
-                      </label></form></td>
-                </tr>
-            </table>
-        </div>
-        <div class="Oferta_aplicar">
-        </div>
-        <div class="row center-align" >
-            <div class="row">
-                <div class="input-field col s3">
-                    <input id="fecha_inicio" type="date" class="validate" [(ngModel)]="fecha_inicio">
-                    <label for="fecha_inicio">Fecha inicio</label>
-                </div>
-                <div class="input-field col s3">
-                    <input id="fecha_final" type="date" class="validate" [(ngModel)]="fecha_final">
-                    <label for="fecha_final">Fecha final</label>
-                </div>
-                <a (click)="AplicarOferta()">
-                    <button class="waves-effect btn-small green lighten-1 white-text " type="submit" [disabled]="!A_oferta || A_oferta.length === 0">
-                        Aplicar oferta
-                        <i class="material-icons right">send</i>
-                    </button>
-                </a>
+                    }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
+                        <div class="card horizontal" (click)="AgregaOferta(producto.id)">
+                            <div class="card-image col s4 " style="padding: 2%;">
+                                <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
+                                    alt="Imagen{{producto.nombre}}">
+                            </div>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <span class="card-title">{{producto.nombre}}</span>
+                                    <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
+                                </div>
+                            </div>
+                            
+                        </div>
 
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <div class="row center-align">
+                    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+                        nextLabel="Siguiente"></pagination-controls>
+                </div>
             </div>
         </div>
-    <div>
-        <div class="row center-align" >
-            <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
-                nextLabel="Siguiente"></pagination-controls>
+        <div class="col s9" *ngIf="A_oferta && A_oferta.length !== 0">
+            <div style="padding-left: 5%; padding-top: 2%;
+            padding-left: 5%;">
+                <table class="highlight " >
+                    <tr id="titulos" class="center-align">
+                        <td>Producto</td>
+                        <td>Precio original</td>
+                        <td>Descuento %</td>
+                        <td>Resultado</td>
+                        <td>Fecha inicio</td>
+                        <td>Fecha final</td>
+                    </tr>
+                    <tr *ngFor="let ModiOferta of A_oferta| 
+                        paginate: { 
+                            itemsPerPage: pageSize, 
+                            currentPage: p 
+                        }; let i = index">
+                        <td>{{ModiOferta.nombre_producto}}</td>
+                        <td>{{ModiOferta.precio_original}}</td>
+                        <td><input [(ngModel)]="ModiOferta.descuento" id="descuento" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.descuento)"></td>
+                        <td>{{ModiOferta.precio_original*(1-(ModiOferta.descuento/100))}}</td>
+                        <td>{{fecha_inicio}}</td>
+                        <td>{{fecha_final}}</td>
+                        <td><form   (click)="quitar(ModiOferta.id_producto)"><label>
+                            <input type="checkbox"  class="filled-in" checked="checked" checked="checked" />
+                            <span>Deseleccionar</span>
+                        </label></form></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="Oferta_aplicar">
+            </div>
+            <div class="row center-align" >
+                <div class="row">
+                    <div class="input-field col s3">
+                        <input id="fecha_inicio" type="date" class="validate" [(ngModel)]="fecha_inicio">
+                        <label for="fecha_inicio">Fecha inicio</label>
+                    </div>
+                    <div class="input-field col s3">
+                        <input id="fecha_final" type="date" class="validate" [(ngModel)]="fecha_final">
+                        <label for="fecha_final">Fecha final</label>
+                    </div>
+                    <a (click)="AplicarOferta()">
+                        <button class="waves-effect btn-small green lighten-1 white-text " type="submit" [disabled]="!A_oferta || A_oferta.length === 0">
+                            Aplicar oferta
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+        <div>
+            <div class="row center-align" >
+                <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+                    nextLabel="Siguiente"></pagination-controls>
+            </div>
         </div>
     </div>
 </div>

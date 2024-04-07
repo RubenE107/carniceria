@@ -43,6 +43,7 @@
                                 <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
                             </div>
                         </div>
+                        
                     </div>
 
                 </li>
@@ -58,42 +59,38 @@
     <div class="col s9">
         <div style="padding-left: 5%; padding-top: 2%;
         padding-left: 5%;">
-            <table class="highlight " *ngIf="ofertas != undefined">
+            <table class="highlight " *ngIf="A_oferta!=undefined">
                 <tr id="titulos" class="center-align">
-                    <div class="col s9">
-                        <div class="col s2">
-                            <td>Producto</td>
-                        </div>
-                        <div class="col s2">
-                            <td>Precio original</td>
-                        </div>
-                        <div class="col s2">
-                            <td>Descuento %</td>
-                        </div>
-                        <div class="col s2">
-                            <td>Resultado</td>
-                        </div>
-                        <div class="col s2">
-                            <td>Fecha inicio</td>
-                        </div>
-                        <div class="col s2">
-                            <td>Fecha final</td>
-                        </div>
-                    </div>
-                    <div class="col s3">
-                        <div class="col s6">
-                            <td></td>
-                        </div>
-
-                        <div class="col s6">
-                            <td></td>
-                        </div>
-
-                    </div>
-
+                    <td>Producto</td>
+                    <td>Precio original</td>
+                    <td>Descuento %</td>
+                    <td>Resultado</td>
+                    <td>Fecha inicio</td>
+                    <td>Fecha final</td>
+                </tr>
+                <tr *ngFor="let ModiOferta of A_oferta| 
+                    paginate: { 
+                        itemsPerPage: pageSize, 
+                        currentPage: p 
+                    }; let i = index">
+                    <td>{{ModiOferta.nombre}}</td>
+                    <td>${{ModiOferta.precio}}</td>
+                    <td>${{descuento}}</td>
+                    <td>${{ModiOferta.precio*(1-descuento/100)}}</td>
+                    <td>${{fecha_inicio}}</td>
+                    <td>${{fecha_final}}</td>
+                    <td><form   (click)="quitar(ModiOferta.id)"><label>
+                        <input type="checkbox"  class="filled-in" checked="checked" checked="checked" />
+                        <span>Deselecionar</span>
+                      </label></form></td>
                 </tr>
             </table>
         </div>
 
+    <div>
+        <div class="row center-align" >
+            <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+                nextLabel="Siguiente"></pagination-controls>
+        </div>
     </div>
 </div>

@@ -75,9 +75,11 @@
           }; let i = index">
               <div class="col s3">
                 <div class="card">
-                  <div class="card-image">
-                    <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg" alt="Imagen{{producto.nombre}}">
+                  <div class="card-image contenedor" style="position: relative;">
+                    <img  src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg" class="imagen1" alt="Imagen{{producto.nombre}}" style="width: 100%;" />
+                    <img *ngIf="producto.oferta==true" src="../../../assets/img/oferta3.png" class="imagen2" alt="oferta.png" style="position: absolute; top: 0; left: 0; width: 50%; z-index: 1;" />
                   </div>
+                  
                   <div class="card-content">
                     <div class="row ">
 

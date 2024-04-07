@@ -41,7 +41,6 @@ export class OfertaService {
   // duracionOferta(){}
   // ordenarFechasinicio(){}
 
-
   /////////Para la tabla productoOferta (para no crear otro servicio)
   listPorProductos(id:any)
   {

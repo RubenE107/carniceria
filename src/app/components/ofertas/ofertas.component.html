@@ -87,7 +87,10 @@
                         }; let i = index">
                         <td>{{ModiOferta.nombre_producto}}</td>
                         <td>{{ModiOferta.precio_original}}</td>
-                        <td><input [(ngModel)]="ModiOferta.descuento" id="descuento" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.descuento)"></td>
+                        <td>
+                            <input *ngIf="qOcupado===true" [(ngModel)]="ModiOferta.descuento" id="descuento1" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.descuento)">
+                            <input *ngIf="qOcupado===false" [(ngModel)]="descuento" id="descuento2" type="text" class="validate s8">
+                        </td>
                         <td>{{ModiOferta.precio_original*(1-(ModiOferta.descuento/100))}}</td>
                         <td>{{fecha_inicio}}</td>
                         <td>{{fecha_final}}</td>
@@ -118,15 +121,11 @@
 aplicar el mismom descuento a todos los productos
                      -->
                   
-                    <div class="input-field col s2">
-                        <input id="descuento" type="text" class="validate" [disabled]="!descuento">
-                        <label for="descuento">Descuento %</label>
-                    </div>
                     <div class="col s2">
-                    <form (click)="descuento=true">
+                    <form>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input type="checkbox" [(ngModel)]="qOcupado" (change)="aplicarMismoDE()">
 
                                 <span><a style="color: rgb(22, 20, 20);">activa el mismo descuento a todo</a></span>
                             </label>

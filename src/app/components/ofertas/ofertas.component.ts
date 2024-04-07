@@ -23,7 +23,7 @@ export class OfertasComponent implements OnInit {
   qOcupado = false;
   AGRE_VER_oferta = true;
   nombre = '';
-  descuento= false;
+  descuento=0;
 
   fecha_inicio = new Date().toISOString().substring(0, 10);
   fecha_final = new Date().toISOString().substring(0, 10);
@@ -44,6 +44,16 @@ export class OfertasComponent implements OnInit {
     $(document).ready(function () {
       $('.modal').modal();
     });
+}
+aplicarMismoDE(){
+  if(this.qOcupado){
+  let i:number;
+  for(i=0; i<this.A_oferta.length;i++)
+  {
+    this.A_oferta[i].descuento = this.descuento;
+  }
+}
+  
 }
   AplicarOferta() {
     this.ofertaService.create(this.nombre,this.fecha_inicio, this.fecha_final).subscribe(

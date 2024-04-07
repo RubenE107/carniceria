@@ -102,16 +102,38 @@
             </div>
             <div class="row center-align" >
                 <div class="row">
-                    <div class="input-field col s3">
+                    <div class="input-field col s2">
+                        <input id="fecha_inicio" type="text" class="validate" [(ngModel)]="nombre">
+                        <label for="fecha_inicio">Nombre De la oferta</label>
+                    </div>
+                    <div class="input-field col s2">
                         <input id="fecha_inicio" type="date" class="validate" [(ngModel)]="fecha_inicio">
                         <label for="fecha_inicio">Fecha inicio</label>
                     </div>
-                    <div class="input-field col s3">
+                    <div class="input-field col s2">
                         <input id="fecha_final" type="date" class="validate" [(ngModel)]="fecha_final">
                         <label for="fecha_final">Fecha final</label>
                     </div>
+<!-- 
+aplicar el mismom descuento a todos los productos
+                     -->
+                  
+                    <div class="input-field col s2">
+                        <input id="descuento" type="text" class="validate" [disabled]="!descuento">
+                        <label for="descuento">Descuento %</label>
+                    </div>
+                    <div class="col s2">
+                    <form (click)="descuento=true">
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span><a style="color: black;">activa el mismo descuento a todo</a></span>
+                            </label>
+                        </p>
+                    </form>
+                    </div>
                     <a (click)="AplicarOferta()">
-                        <button class="waves-effect btn-small green lighten-1 white-text " type="submit" [disabled]="!A_oferta || A_oferta.length === 0">
+                        <button class="waves-effect btn-small green lighten-1 white-text s2" type="submit" [disabled]="!A_oferta || A_oferta.length === 0">
                             Aplicar oferta
                             <i class="material-icons right">send</i>
                         </button>

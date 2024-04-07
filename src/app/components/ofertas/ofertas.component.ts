@@ -22,8 +22,8 @@ export class OfertasComponent implements OnInit {
   pageSize = 4;
   qOcupado = false;
   AGRE_VER_oferta = true;
-  nombre = 'prueba';
-  //descuento: any;
+  nombre = '';
+  descuento= false;
 
   fecha_inicio = new Date().toISOString().substring(0, 10);
   fecha_final = new Date().toISOString().substring(0, 10);

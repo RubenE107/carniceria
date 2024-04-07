@@ -44,7 +44,11 @@ export class OfertasComponent implements OnInit {
     $(document).ready(function () {
       $('.modal').modal();
     });
+
 }
+
+
+
 aplicarMismoDE(){
   if(this.qOcupado){
   let i:number;

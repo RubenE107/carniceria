@@ -44,7 +44,11 @@ export class OfertasComponent implements OnInit {
     $(document).ready(function () {
       $('.modal').modal();
     });
+
 }
+
+
+
 aplicarMismoDE(){
   var elemento = <HTMLInputElement> document.getElementById("descuentoTodos");
   this.qOcupado = elemento.checked

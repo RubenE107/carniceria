@@ -7,7 +7,34 @@
     </label>
 </div>
 <div class="row" *ngIf="AGRE_VER_oferta">
-    aqui para ver los productos con las ofertas ya asignadas
+    
+    <!--  -->
+    <div class="row">
+        <ul *ngIf="productos!=undefined">
+            <li *ngFor="let producto of productos| 
+            paginate: { 
+                itemsPerPage: pageSize, 
+                currentPage: p 
+            }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
+                <div class="card horizontal" (click)="AgregaOferta(producto.id)">
+                    <div class="card-image col s4 " style="padding: 2%;">
+                        <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
+                            alt="Imagen{{producto.nombre}}">
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <span class="card-title">{{producto.nombre}}</span>
+                            <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </li>
+        </ul>
+    </div>
+    <!--  -->
+
 </div>
 <div class="row" *ngIf="!AGRE_VER_oferta">
     <div class="row">

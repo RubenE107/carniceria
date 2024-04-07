@@ -1,3 +1,7 @@
 .correo{
     color: black;
 }
+#modalRestablecerContrasena {
+    /*width: 30%; */
+    margin: auto;
+}

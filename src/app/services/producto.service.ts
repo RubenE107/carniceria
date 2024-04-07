@@ -24,14 +24,7 @@ crear(nombre: any, animal: any, precio:any, cantidad: any,descripcion:any){
   return this.http.post(`${environment.API_URI}/productos/create`,nuevo);
 }
 actualizar(producto: any){
-  const nuevo ={
-    "nombre":producto.nombre,
-    "animal":producto.animal,
-    "precio":producto.precio,
-    "cantidad":producto.cantidad,
-    "descripcion":producto.descripcion    
-  }
-  return this.http.put(`${environment.API_URI}/productos/update/${producto.id}`,nuevo);
+  return this.http.put(`${environment.API_URI}/productos/update/${producto.id}`,producto);
 
 }
 getCantidad(id: any){

@@ -56,10 +56,10 @@
             </div>
         </div>
     </div>
-    <div class="col s9">
+    <div class="col s9" *ngIf="A_oferta && A_oferta.length !== 0">
         <div style="padding-left: 5%; padding-top: 2%;
         padding-left: 5%;">
-            <table class="highlight " *ngIf="A_oferta!=undefined">
+            <table class="highlight " >
                 <tr id="titulos" class="center-align">
                     <td>Producto</td>
                     <td>Precio original</td>
@@ -74,11 +74,11 @@
                         currentPage: p 
                     }; let i = index">
                     <td>{{ModiOferta.nombre}}</td>
-                    <td>${{ModiOferta.precio}}</td>
-                    <td>${{descuento}}</td>
-                    <td>${{ModiOferta.precio*(1-descuento/100)}}</td>
-                    <td>${{fecha_inicio}}</td>
-                    <td>${{fecha_final}}</td>
+                    <td>{{ModiOferta.precio}}</td>
+                    <td>{{descuento}}</td>
+                    <td>{{ModiOferta.precio*(1-(descuento/100))}}</td>
+                    <td>{{fecha_inicio}}</td>
+                    <td>{{fecha_final}}</td>
                     <td><form   (click)="quitar(ModiOferta.id)"><label>
                         <input type="checkbox"  class="filled-in" checked="checked" checked="checked" />
                         <span>Deselecionar</span>
@@ -86,7 +86,31 @@
                 </tr>
             </table>
         </div>
+        <div class="Oferta_aplicar">
+        </div>
+        <div class="row center-align" >
+            <div class="row">
+                <div class="input-field col s3">
+                    <input id="descuento" type="number" class="validate" [(ngModel)]="descuento" (change)="limitarDescuento()">
+                    <label for="descuento">Descuento %</label>
+                </div>
+                <div class="input-field col s3">
+                    <input id="fecha_inicio" type="date" class="validate" [(ngModel)]="fecha_inicio">
+                    <label for="fecha_inicio">Fecha inicio</label>
+                </div>
+                <div class="input-field col s3">
+                    <input id="fecha_final" type="date" class="validate" [(ngModel)]="fecha_final">
+                    <label for="fecha_final">Fecha final</label>
+                </div>
+                <a (click)="AplicarOferta()">
+                    <button class="waves-effect btn-small green lighten-1 white-text " type="submit" [disabled]="!A_oferta || A_oferta.length === 0">
+                        Aplicar oferta
+                        <i class="material-icons right">send</i>
+                    </button>
+                </a>
 
+            </div>
+        </div>
     <div>
         <div class="row center-align" >
             <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"

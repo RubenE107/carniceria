@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+//import { Console } from 'console';
 import { Oferta } from 'src/app/models/Oferta';
 import { Producto } from 'src/app/models/Producto';
 import { OfertaService } from 'src/app/services/oferta.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import Swal from 'sweetalert2';
 declare var $: any;
 @Component({
   selector: 'app-ofertas',
@@ -16,8 +18,9 @@ export class OfertasComponent implements OnInit {
   animales: Animal[] = [];
   listaProductos: any = [];
   p=1
-  pageSize = 4
-  descuento = 0
+  pageSize = 4;
+  descuento :any;
+
   fecha_inicio = new Date().toISOString().substring(0, 10);
   fecha_final = new Date().toISOString().substring(0, 10);
     
@@ -37,6 +40,9 @@ export class OfertasComponent implements OnInit {
     
   
     
+  }
+  AplicarOferta(){
+    console.log("aplicar oferta");
   }
   listProductos(){
     this.productoService.list().subscribe(
@@ -146,7 +152,26 @@ export class OfertasComponent implements OnInit {
     this.listProductos()
     
   }
-  
+  limitarDescuento() {
+    if(this.descuento > 100){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El descuento no puede ser mayor a 100',
+        }).then(() => {
+            this.descuento = '';
+        });
+    }
+    if(this.descuento < 0){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El descuento no puede ser menor a 0',
+        }).then(() => {
+            this.descuento='';
+        });
+    }
+}
 }
 
 class Animal{

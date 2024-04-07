@@ -50,6 +50,10 @@ export class OfertasComponent implements OnInit {
 
 
 aplicarMismoDE(){
+  var elemento = <HTMLInputElement> document.getElementById("descuentoTodos");
+  this.qOcupado = elemento.checked
+  console.log("Cambió, ahora es: ", this.qOcupado)
+  
   if(this.qOcupado){
   let i:number;
   for(i=0; i<this.A_oferta.length;i++)

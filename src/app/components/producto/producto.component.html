@@ -36,6 +36,7 @@
         </div>
 
       </div>
+      
 
     </div>
 
@@ -49,6 +50,16 @@
           <option value="" selected disabled>Escoge un animal</option>
           <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
         </select>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="rol !=1">
+      <div class="col s12">
+          <a class="waves-effect btn blue  white-tex"  (click)="nuevoProducto()">
+            Agregar producto
+            <i class="material-icons">add</i>
+          </a>
+    
       </div>
     </div>
   </div>

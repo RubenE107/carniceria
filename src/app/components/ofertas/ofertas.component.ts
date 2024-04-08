@@ -4,7 +4,9 @@ import { Oferta } from 'src/app/models/Oferta';
 import { Producto } from 'src/app/models/Producto';
 import { OfertaService } from 'src/app/services/oferta.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { ProductoOfertaService } from 'src/app/services/producto-oferta.service';
 import Swal from 'sweetalert2';
+
 declare var $: any;
 @Component({
   selector: 'app-ofertas',
@@ -31,7 +33,8 @@ export class OfertasComponent implements OnInit {
   aux = '';
   constructor(
     private productoService: ProductoService,
-    private ofertaService: OfertaService
+    private ofertaService: OfertaService,
+    private ProductoOferta: ProductoOfertaService
   ) {
     this.listProductos();
     this.getAnimals();
@@ -65,18 +68,11 @@ aplicarMismoDE(){
   
 }
   AplicarOferta() {
-    // this.(this.nombre,this.fecha_inicio, this.fecha_final).subscribe(
-    //   (resusuario: any) => {
-    //     console.log(resusuario);
-    //     // this.ofertas.push(resusuario);
-    //     // this.fecha_inicio = new Date().toISOString().substring(0, 10);
-    //     // this.fecha_final = new Date().toISOString().substring(0, 10);
-    //   },
-    //   (err) => console.error(err)
-    // );
-
-
-
+    console.log("aplicando oferta a:",this.A_oferta);
+    this.A_oferta.forEach(oferta => {
+      this.ProductoOferta.create(oferta.id_producto,1, oferta.precio_orig, oferta.porc_descuento);
+    });
+   
     Swal.fire({
       title: '¿Quieres enviar un correo?',
       text: "Ya se crearon las ofertas\nSe enviará un correo a los clientes",
@@ -126,9 +122,16 @@ aplicarMismoDE(){
   AgregaOferta(producto_id: any) {
     //console.log("se ha seleccionado un producto");
     //console.log(producto_id);
-    if (!this.listaProductos.includes(producto_id)) {
+    console.log(this.ofertas);
+    let ofertaEncontrada = this.ofertas.some(oferta => oferta.id_producto === producto_id);
+    console.log(ofertaEncontrada);
+
+
+
+    if (!this.listaProductos.includes(producto_id) && !ofertaEncontrada) {
       this.listaProductos.push(producto_id);
     }
+    if(!ofertaEncontrada){
     //console.log("lista de id productos:",this.listaProductos);
     this.productoService.listOne(producto_id).subscribe(
       (resusuario: any) => {
@@ -174,6 +177,14 @@ aplicarMismoDE(){
       },
       (err) => console.error(err)
     );
+  }else{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'El producto ya tiene una oferta asignada',
+    });
+  
+  }
   }
   getAnimals() {
     this.productoService.getAnimal().subscribe(

@@ -35,7 +35,7 @@
                 <td>{{producto.nombre_producto}}</td>
                 <td>{{producto.precio_orig}}</td>
                 <td>
-                    <input [(ngModel)]="producto.porc_descuento" [disabled]="qOcupado" id="descuento1" type="text" class="validate s8" (change)="limitarDescuento(producto.porc_descuento)">
+                    {{producto.porc_descuento}}
                 </td>
                 <td>{{producto.precio_orig*(1-(producto.porc_descuento/100))}}</td>
                 <td>{{producto.fecha_inicio}}</td>
@@ -52,7 +52,7 @@
             <div class="row " style="padding: 5%;">
 
                 <div class="row col s12 card ">
-                    <h5 class="center">Para crear una nueva oferta seleccione el producto</h5>
+                    <h5 class="center">Para activar una oferta en uno o más productos, seleccione los productos deseados.</h5>
                     <div>
                         <h5 class="center" style="font-size: large;">Filtrar por animal</h5>
                     </div>
@@ -167,18 +167,12 @@ aplicar el mismom descuento a todos los productos
                         <label for="fecha_inicio" class="active" >Descuento</label>
                     </div>
                     <div class="col s2">
-                    <form style="background-color: aquamarine;">
-                            <label>
-
-
-
-
-                                <input id="descuentoTodos" type="checkbox" (change)="aplicarMismoDE()" name="descuento">
-
-
-                                <span><a style="color: rgb(22, 20, 20);">activa el mismo descuento a todo</a></span>
+                        <form class="form-estilo">
+                            <label class="label-estilo1 waves-effect btn-big green lighten-1 s2">
+                                <input id="descuentoTodos" type="checkbox" (change)="aplicarMismoDE()" name="descuento" class="filled-in asignar">
+                                <span><a class="white-text">activa el mismo descuento a todo</a></span>
                             </label>
-                    </form>
+                        </form>
                     </div>
                     <a (click)="AplicarOferta()">
                         <button class="waves-effect btn-small green lighten-1 white-text s2" type="submit" [disabled]="!A_oferta || A_oferta.length === 0">

@@ -6,6 +6,8 @@ import { OfertaService } from 'src/app/services/oferta.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { ProductoOfertaService } from 'src/app/services/producto-oferta.service';
 import Swal from 'sweetalert2';
+import { CorreoService } from 'src/app/services/correo.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 declare var $: any;
 @Component({
@@ -34,7 +36,9 @@ export class OfertasComponent implements OnInit {
   constructor(
     private productoService: ProductoService,
     private ofertaService: OfertaService,
-    private ProductoOferta: ProductoOfertaService
+    private ProductoOferta: ProductoOfertaService,
+    private correoService: CorreoService,
+    private usuarioService: UsuarioService
   ) {
     this.listProductos();
     this.getAnimals();
@@ -81,13 +85,34 @@ aplicarMismoDE(){
       denyButtonText: `No`,
   }).then((result) => {
       if (result.isConfirmed) {
-          
-      }
+          /*var message: any ={};
+      message = {
+      from: "equipWed@hotmail.com",
+      to: correo,
+      bcc: "",
+      subject: "Probando ando",
+      attachment: [
+      { data: `¡¡Te damos la más cordial bienvenida !!`, alternative: true }
+      ]
+      };
+      console.log(message);*/
+      this.usuarioService.list().subscribe((resusuario: any) => {
+        var correo: any = [];
+        resusuario.forEach((usuario: any) => {
+          correo.push(usuario.correo);
+        });
+        for (let i = 0; i < correo.length; i++) {
+          this.correoService.enviarCorreoOferta({"correo":correo[i]}).subscribe((resusuario: any) => {},
+          err => console.error(err));
+        } 
+      
   });
 
 
 
 
+  }
+});
   }
   listProductos() {
     this.productoService.list().subscribe(

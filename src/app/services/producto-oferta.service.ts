@@ -15,6 +15,6 @@ export class ProductoOfertaService {
       "precio_orig": precio_orig,
       "porc_descuento": porc_descuento  
     }
-    return this.http.post(`${environment.API_URI}/productoOferta/create`,{nuevo});
+    return this.http.post(`${environment.API_URI}/productoOferta/create`,nuevo);
   }
 }

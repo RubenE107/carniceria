@@ -1,22 +1,21 @@
 <header>
-
     <!-- Barra -->
     <nav>
-        <div class="nav-wrapper">
-            <a (click)="producto()" class="brand-logo right">
-                <img src="../../../assets/1_Imagenes/9_Logo_Minimalista.png" alt="Logo" class="logo-img">
-            </a>
-            <ul id="nav-mobile" class="">
-                <li><a (click)="producto()">Productos<i class="material-icons right">store</i></a></li>
-                <li><a (click)="carrito()">Carrito<i class="material-icons right">shopping_cart</i></a></li>
-                <li><a (click)="compras()">Compras <i class="material-icons right">local_mall</i> </a></li>
-                <li><a (click)="prefil()">Mi perfil<i class="material-icons right">account_circle</i> </a></li>
-                <li *ngIf="aux==3"><a (click)="ofertas()">Ofertas<i class="material-icons right">local_offer</i> </a></li>
-                <li *ngIf="aux==3"><a (click)="usuario()">Usuarios<i class="material-icons right">account_box</i></a></li>
-                <li *ngIf="aux==3"><a (click)="venta()">Ventas<i class="material-icons right">attach_money</i></a></li>
-                <li class="logout"><a (click)="cerrarSesion()" >Cerrar sesion<i class="material-icons right">exit_to_app</i> </a></li>
-
-            </ul>
-        </div>
+      <div class="nav-wrapper">
+        <a (click)="producto()" class="brand-logo right">
+          <img src="../../../assets/1_Imagenes/9_Logo_Minimalista.png" alt="Logo" class="logo-img">
+        </a>
+        <ul id="nav-mobile" class="">
+          <li [ngClass]="{ 'active': currentPage === 'producto' }"><a (click)="producto()">Productos<i class="material-icons right">store</i></a></li>
+          <li [ngClass]="{ 'active': currentPage === 'carrito' }"><a (click)="carrito()">Carrito<i class="material-icons right">shopping_cart</i></a></li>
+          <li [ngClass]="{ 'active': currentPage === 'compras' }"><a (click)="compras()">Compras <i class="material-icons right">local_mall</i></a></li>
+          <li [ngClass]="{ 'active': currentPage === 'perfil' }"><a (click)="perfil()">Mi perfil<i class="material-icons right">account_circle</i></a></li>
+          <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'ofertas' }"><a (click)="ofertas()">Ofertas<i class="material-icons right">local_offer</i></a></li>
+          <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'usuario' }"><a (click)="usuario()">Usuarios<i class="material-icons right">account_box</i></a></li>
+          <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'venta' }"><a (click)="venta()">Ventas<i class="material-icons right">attach_money</i></a></li>
+          <li class="logout"><a (click)="cerrarSesion()">Cerrar sesión<i class="material-icons right">exit_to_app</i></a></li>
+        </ul>
+      </div>
     </nav>
-</header>
+  </header>
+  

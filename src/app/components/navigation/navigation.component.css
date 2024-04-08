@@ -1,6 +1,15 @@
 .nav-wrapper {
     position: relative;
 }
+/* Estilos para el elemento activo en la barra de navegación */
+.nav-wrapper #nav-mobile li.active {
+    background-color: #007bff; /* Color de fondo azul */
+  }
+  
+  .nav-wrapper #nav-mobile li.active a {
+    color: #fff; /* Color de texto blanco */
+  }
+
 
 .logo-img {
     position: absolute;

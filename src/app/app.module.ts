@@ -18,6 +18,7 @@ import { CompraComponent } from './components/compra/compra.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReestablecerComponent } from './components/reestablecer/reestablecer.component';
 import { OfertasComponent } from './components/ofertas/ofertas.component';
+import { OfertaCarritoComponent } from './components/oferta-carrito/oferta-carrito.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { OfertasComponent } from './components/ofertas/ofertas.component';
     CompraComponent,
     ReestablecerComponent,
     OfertasComponent,
+    OfertaCarritoComponent,
   ],
   imports: [
     BrowserModule,

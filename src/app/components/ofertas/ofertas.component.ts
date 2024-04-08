@@ -72,9 +72,17 @@ aplicarMismoDE(){
   
 }
   AplicarOferta() {
+    let textOf :string[] = [];
+    let ides: number[] =[]
     console.log("aplicando oferta a:",this.A_oferta);
     this.A_oferta.forEach(oferta => {
-      this.ProductoOferta.create(oferta.id_producto,1, oferta.precio_orig, oferta.porc_descuento);
+      this.ProductoOferta.create(oferta.id_producto,1, oferta.precio_orig, oferta.porc_descuento).subscribe((resOferta)=>
+      {
+        console.log("Eso devolvió: ", resOferta);
+        textOf.push("Increible descuento :" + oferta.nombre_producto + " está a " + oferta.porc_descuento + "% de descuento\n");
+        ides.push(oferta.id_producto)
+      });
+     
     });
    
     Swal.fire({
@@ -102,18 +110,16 @@ aplicarMismoDE(){
           correo.push(usuario.correo);
         });
         for (let i = 0; i < correo.length; i++) {
-          this.correoService.enviarCorreoOferta({"correo":correo[i]}).subscribe((resusuario: any) => {},
+          this.correoService.enviarCorreoOferta({"correo":correo[i], "texto":textOf, "productos": ides}).subscribe((resusuario: any) => {},
           err => console.error(err));
         } 
       
   });
-
-
-
-
   }
 });
   }
+
+
   listProductos() {
     this.productoService.list().subscribe(
       (resusuario: any) => {

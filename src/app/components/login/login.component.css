@@ -1,7 +1,50 @@
-.correo{
+.correo {
     color: black;
 }
+
 #modalRestablecerContrasena {
     /*width: 30%; */
     margin: auto;
+}
+
+body {
+    min-height: 100vh;
+    /* Establece la altura mínima como el 100% del viewport */
+    background-color: #e16767;
+    background-attachment: fixed;
+    margin: 0;
+    /* Asegura que no haya margen alrededor del cuerpo */
+    padding: 0;
+    /* Asegura que no haya relleno alrededor del cuerpo */
+}
+
+/* label color */
+.input-field label {
+    color: #005fe4;
+}
+
+/* label focus color */
+.input-field input[type=email]:focus+label {
+    color: #e16767;
+}
+
+/* label focus color */
+.input-field input[type=password]:focus+label {
+    color: #e16767;
+}
+
+/* Cambiar el color del borde inferior al hacer clic en el input */
+.input-field input[type=email]:focus {
+    border-bottom: 1px solid #e16767;
+    box-shadow: 0 1px 0 0 #e16767;
+}
+
+.input-field input[type=password]:focus {
+    border-bottom: 1px solid #e16767;
+    box-shadow: 0 1px 0 0 #e16767;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #e16767;
 }

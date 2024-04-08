@@ -17,4 +17,18 @@ export class ProductoOfertaService {
     }
     return this.http.post(`${environment.API_URI}/productoOferta/create`,nuevo);
   }
+  update(id_oferta:any, id_producto:any,porc_descuento: number){
+    console.log("Creando producto oferta");
+    const nuevo ={
+      "porc_descuento": porc_descuento  
+    }
+    return this.http.put(`${environment.API_URI}/productoOferta/update/${id_producto}/${id_oferta}`,nuevo);
+  }
+  
+  
+
+  listOne(id_producto: any, id_oferta:any){
+    return this.http.get(`${environment.API_URI}/productoOferta/listOneByIdProductoOferta/${id_producto}/${id_oferta}`);
+
+  }
 }

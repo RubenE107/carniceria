@@ -22,6 +22,7 @@ export class OfertasComponent implements OnInit {
   A_oferta: Oferta[] = [];
   animales: Animal[] = [];
   listaProductos: any = [];
+  oferta : Oferta = new Oferta() ;
   p = 1;
   pageSize = 4;
   qOcupado = false;
@@ -119,7 +120,31 @@ aplicarMismoDE(){
 });
   }
 
+  actualizarOferta(id_oferta: any,id_producto:any,fecha_inicio:any, fecha_final:any , porc_descuento:any) {
+    $('#modalModificaOferta').modal();
+    $("#modalModificaOferta").modal("open");
+    this.oferta.id_oferta=id_oferta;
+    this.oferta.id_producto=id_producto
+    this.oferta.fecha_inicio = fecha_inicio
+    this.oferta.fecha_fin = fecha_final
+    this.oferta.porc_descuento = porc_descuento
+  }
+  guardarActualizarOferta(){
+    this.ofertaService.updateWithoutName(this.oferta.id_oferta, this.oferta.fecha_inicio, this.oferta.fecha_fin).subscribe(
+      (resusuario: any) => {
+        this.ProductoOferta.update(this.oferta.id_oferta,this.oferta.id_producto, this.oferta.porc_descuento).subscribe(
+          (resusuario: any) => {
+            this.listAll_Ofertas_Producto()
+    
+          },
+          (err) => console.error(err)
+        );
 
+      },
+      (err) => console.error(err)
+    );
+
+  }
   listProductos() {
     this.productoService.list().subscribe(
       (resusuario: any) => {

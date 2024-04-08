@@ -1,15 +1,15 @@
 <div class="switch col12 s12" style="text-align: center;  padding: 10px; margin: auto; width: 50%;">
     <label class="asignar">
-      Asignar ofertas
-      <input type="checkbox" [(ngModel)]="AGRE_VER_oferta" >
-      <span class="lever"></span>
-      Ver productos en oferta
+        Asignar ofertas
+        <input type="checkbox" [(ngModel)]="AGRE_VER_oferta">
+        <span class="lever"></span>
+        Ver productos en oferta
     </label>
 </div>
 <div class="row" *ngIf="AGRE_VER_oferta">
-    
+
     <!--  -->
-    <div class="row col s3">
+    <div class="row col s8">
         <table class="highlight" *ngIf="ofertas!=undefined">
             <tr id="titulos" class="center-align">
                 <td style="width:20%; height: 20%;">Imagen</td>
@@ -20,13 +20,13 @@
                 <td>Fecha inicio</td>
                 <td>Fecha final</td>
             </tr>
-            
+
             <tr *ngFor="let producto of ofertas | 
             paginate: { 
                 itemsPerPage: pageSize, 
                 currentPage: p 
             }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
-                <td style="width:20%; height: 20%;"> 
+                <td style="width:20%; height: 20%;">
                     <a class="card-image" style="padding: 0%;">
                         <img src="../../../assets/1_Imagenes/{{producto.nombre_producto}}.jpg"
                             alt="Imagen{{producto.nombre_producto}}" class="custom-image-size">
@@ -40,6 +40,13 @@
                 <td>{{producto.precio_orig*(1-(producto.porc_descuento/100))}}</td>
                 <td>{{producto.fecha_inicio}}</td>
                 <td>{{producto.fecha_fin}}</td>
+                <td>
+                    <a (click)="actualizarOferta(producto.id_oferta,producto.id_producto,producto.fecha_inicio,producto.fecha_fin,
+                producto.porc_descuento)"
+                        class="waves-effect waves-light blue btn-small ">Actualizar
+                        <i class="material-icons">create</i>
+                    </a>
+                </td>
             </tr>
         </table>
     </div>
@@ -52,14 +59,16 @@
             <div class="row " style="padding: 5%;">
 
                 <div class="row col s12 card ">
-                    <h5 class="center">Para activar una oferta en uno o más productos, seleccione los productos deseados.</h5>
+                    <h5 class="center">Para activar una oferta en uno o más productos, seleccione los productos
+                        deseados.</h5>
                     <div>
                         <h5 class="center" style="font-size: large;">Filtrar por animal</h5>
                     </div>
                     <div><select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
                             (change)="listAnimal()">
                             <option value="" selected disabled>Escoge un animal</option>
-                            <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
+                            <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}
+                            </option>
                         </select>
                     </div>
                     <div class="row center">
@@ -92,7 +101,7 @@
                                     <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
                                 </div>
                             </div>
-                            
+
                         </div>
 
                     </li>
@@ -108,7 +117,7 @@
         <div class="col s9" *ngIf="A_oferta && A_oferta.length !== 0">
             <div style="padding-left: 5%; padding-top: 2%;
             padding-left: 5%;">
-                <table class="highlight " >
+                <table class="highlight ">
                     <tr id="titulos" class="center-align">
                         <td>Imagen</td>
                         <td>Producto</td>
@@ -124,28 +133,31 @@
                             currentPage: p 
                         }; let i = index">
                         <td style="width:20%; height: 20%;"> <a class="card-image" style="padding: 0%;">
-                            <img src="../../../assets/1_Imagenes/{{ModiOferta.nombre_producto}}.jpg"
-                                alt="Imagen{{ModiOferta.nombre_producto}}" class="custom-image-size">
-                        </a></td>
+                                <img src="../../../assets/1_Imagenes/{{ModiOferta.nombre_producto}}.jpg"
+                                    alt="Imagen{{ModiOferta.nombre_producto}}" class="custom-image-size">
+                            </a></td>
                         <td>{{ModiOferta.nombre_producto}}</td>
                         <td>{{ModiOferta.precio_orig}}</td>
                         <td>
-                            <input [(ngModel)]="ModiOferta.porc_descuento" [disabled]="qOcupado" id="descuento1" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.porc_descuento)">
-                            
+                            <input [(ngModel)]="ModiOferta.porc_descuento" [disabled]="qOcupado" id="descuento1"
+                                type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.porc_descuento)">
+
                         </td>
                         <td>{{ModiOferta.precio_orig*(1-(ModiOferta.porc_descuento/100))}}</td>
                         <td>{{fecha_inicio}}</td>
                         <td>{{fecha_final}}</td>
-                        <td><form   (click)="quitar(ModiOferta.id_producto)"><label>
-                            <input type="checkbox"  class="filled-in" checked="checked" checked="checked" />
-                            <span>Deseleccionar</span>
-                        </label></form></td>
+                        <td>
+                            <form (click)="quitar(ModiOferta.id_producto)"><label>
+                                    <input type="checkbox" class="filled-in" checked="checked" checked="checked" />
+                                    <span>Deseleccionar</span>
+                                </label></form>
+                        </td>
                     </tr>
                 </table>
             </div>
             <div class="Oferta_aplicar">
             </div>
-            <div class="row center-align" >
+            <div class="row center-align">
                 <div class="row">
                     <!-- <div class="input-field col s2">
                         <input id="fecha_inicio" type="text" class="validate" [(ngModel)]="nombre">
@@ -159,23 +171,26 @@
                         <input id="fecha_final" type="date" class="validate" [(ngModel)]="fecha_final">
                         <label for="fecha_final">Fecha final</label>
                     </div>
-<!-- 
+                    <!-- 
 aplicar el mismom descuento a todos los productos
                      -->
-                    <div class="input-field col s2" >
-                        <input id="Descuentogl" type="text" class="validate" (change)="aplicarMismoDE()" [(ngModel)]="descuento" [disabled]="!qOcupado" >
-                        <label for="fecha_inicio" class="active" >Descuento</label>
+                    <div class="input-field col s2">
+                        <input id="Descuentogl" type="text" class="validate" (change)="aplicarMismoDE()"
+                            [(ngModel)]="descuento" [disabled]="!qOcupado">
+                        <label for="fecha_inicio" class="active">Descuento</label>
                     </div>
                     <div class="col s2">
                         <form class="form-estilo">
                             <label class="label-estilo1 waves-effect btn-big green lighten-1 s2">
-                                <input id="descuentoTodos" type="checkbox" (change)="aplicarMismoDE()" name="descuento" class="filled-in asignar">
+                                <input id="descuentoTodos" type="checkbox" (change)="aplicarMismoDE()" name="descuento"
+                                    class="filled-in asignar">
                                 <span><a class="white-text">activa el mismo descuento a todo</a></span>
                             </label>
                         </form>
                     </div>
                     <a (click)="AplicarOferta()">
-                        <button class="waves-effect btn-small green lighten-1 white-text s2" type="submit" [disabled]="!A_oferta || A_oferta.length === 0">
+                        <button class="waves-effect btn-small green lighten-1 white-text s2" type="submit"
+                            [disabled]="!A_oferta || A_oferta.length === 0">
                             Aplicar oferta
                             <i class="material-icons right">send</i>
                         </button>
@@ -183,11 +198,60 @@ aplicar el mismom descuento a todos los productos
 
                 </div>
             </div>
-        <div>
-            <div class="row center-align " >
-                <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
-                    nextLabel="Siguiente"></pagination-controls>
+            <div>
+                <div class="row center-align ">
+                    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+                        nextLabel="Siguiente"></pagination-controls>
+                </div>
             </div>
+        </div>
+    </div>
+</div>
+<div id="modalModificaOferta" class="modal">
+    <div class="modal-content">
+        <div class="container">
+            <h2 class="center">Modificación de Oferta</h2>
+            <form id="modificaForm">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input [(ngModel)]="oferta.fecha_inicio" type="email" id="correo" name="correo" required>
+                        <label for="correo" class="active">fecha inicio</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input [(ngModel)]="oferta.fecha_fin" type="tel" id="telefono" name="telefono"
+                            pattern="[0-9]{10}" required>
+                        <label for="telefono" class="active">Fecha final</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <input [(ngModel)]="oferta.porc_descuento" type="number" name="descuento" required>
+                        <label for="descuento" class="active">Descuento %</label>
+                    </div>
+                    
+
+
+
+
+
+                </div>
+                <div class="row">
+                    <div class="col s6 center">
+                        <a (click)="guardarActualizarOferta()">
+                            <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
+                                Modificar
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="col s6 center">
+                        <button class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
+                            type="submit">Cancelar
+                            <i class="material-icons right">cancel</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -31,6 +31,15 @@ export class OfertaService {
     });
 
   }
+  updateWithoutName(id: any, fecha_inicio: string, fecha_fin: string){
+    return this.http.put(`${environment.API_URI}/ofertas/update/${id}`, 
+    {
+      "fecha_inicio": fecha_inicio,
+      "fecha_fin": fecha_fin
+    });
+
+  }
+
   delete(id: any){
     return this.http.delete(`${environment.API_URI}/ofertas/delete/${id}`);
 

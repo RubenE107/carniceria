@@ -12,6 +12,8 @@ export class CorreoService {
     `${environment.API_URI_CORREOS}/enviarCorreoOferta`,
     body
   );
+}
+  enviarCorreo(body: any) {
     return this.http.post(
       `${environment.API_URI_CORREOS}/enviarCorreoRecuperarContrasenya`,
       body

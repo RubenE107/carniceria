@@ -1,163 +1,165 @@
-<div class="container center" style="padding-top:5% ;">
-    <div class="row">
-            
-
-        <div class="col s12">
-            <!-- Contenido del formulario de login -->
-            <div class="card">
-                <div class="card-content">
-                    <div class="row">
-                        <div class="card-image col s6">
-                            <img src="../../../assets/1_Imagenes/6_Logo.png" class="logo-img">
-                        </div>
-    
-                        <form class="col s6">
-                            <h2 class="center-align">Iniciar Sesión</h2>
-                            <div class="row col s12">
-                                <div class=" input-field">
-                                    <i class="material-icons prefix">email</i>
-                                    <input type="email" [(ngModel)]="usuariologin.correo" name="emailLogin"
-                                        id="emailLogin" placeholder="correo" autocomplete="off">
-                                    <label class="active" for="emailLogin">correo</label>
+<body>
+    <div class="container center" style="padding-top:5% ;">
+        <div class="row">
+            <div class="col s12">
+                <!-- Contenido del formulario de login -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="card-image col s6">
+                                <img src="../../../assets/1_Imagenes/6_Logo.png" class="logo-img">
+                            </div>
+        
+                            <form class="col s6">
+                                <h2 class="center-align" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Iniciar Sesión</h2>
+                                <div class="row col s12">
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">email</i>
+                                        <input type="email" [(ngModel)]="usuariologin.correo" name="emailLogin"
+                                            id="emailLogin" placeholder="correo" autocomplete="off">
+                                        <label class="active" for="emailLogin">correo</label>
+                                    </div>
+                                    <br>
+                                    <div class="input-field">
+                                        <i class="material-icons prefix">lock</i>
+                                        <input [(ngModel)]="usuariologin.contrasena" type="password" id="passwordLogin"
+                                            name="passwordLogin" required>
+                                        <label class="active" for="passwordLogin">Contraseña</label>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <a (click)="logueo()">
+                                            <button class="waves-effect btn red lighten-1 white-text">LOGIN</button>
+                                        </a>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <a (click)="Modalrestablecer()">
+                                            <button class="waves-effect btn-smaller blue-text"
+                                                style=" background: transparent; border: none; text-decoration: underline;">
+                                                Recuperar Contraseña
+                                            </button>
+                                        </a>
+                                        <br>
+                                        <br>
+                                    </div>
+                                    <div>
+                                        No tienes cuenta
+                                        <a (click)="nuevoUsuario()">
+                                            <button class="waves-effect btn-smaller blue-text"
+                                                style=" background: transparent; border: none; text-decoration: underline;">
+                                                Crea una aqui
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modalNuevoUsuario" class="modal">
+        <div class="modal-content">
+            <div class="col s12 m6">
+                <!-- Contenido del div de nuevo -->
+                <div class="card">
+                    <div class="card-content">
+                        <div class="container center">
+                            <h2>Registro de Usuario</h2>
+                            <form id="registroForm">
+                                <div class="input-field">
+                                    <i class="material-icons prefix">account_circle</i>
+                                    <input [(ngModel)]="usuarioNuevo.nombre" type="text" id="nombreNuevo" name="nombreNuevo"
+                                        required>
+                                    <label for="nombreNuevo">Nombre</label>
+                                </div>
+    
+                                <div class="input-field">
+                                    <i class="material-icons prefix">email</i>
+                                    <input [(ngModel)]="usuarioNuevo.correo" type="email" id="correoNuevo"
+                                        name="correoNuevo" required>
+                                    <label for="correoNuevo">Correo Electrónico</label>
+                                </div>
+    
+                                <div class="input-field">
+                                    <i class="material-icons prefix">phone</i>
+                                    <input [(ngModel)]="usuarioNuevo.telefono" type="tel" id="telefonoNuevo"
+                                        name="telefonoNuevo" pattern="[0-9]{10}" required>
+                                    <label for="telefonoNuevo">Teléfono (10 dígitos)</label>
+                                </div>
+    
                                 <div class="input-field">
                                     <i class="material-icons prefix">lock</i>
-                                    <input [(ngModel)]="usuariologin.contrasena" type="password" id="passwordLogin"
-                                        name="passwordLogin" required>
-                                    <label class="active" for="passwordLogin">Contraseña</label>
+                                    <input [(ngModel)]="usuarioNuevo.contrasena" type="password" id="passwordNuevo"
+                                        name="passwordNuevo" required>
+                                    <label for="passwordNuevo">Contraseña</label>
                                 </div>
-                                <div>
-                                    <a (click)="logueo()">
-                                        <button class="waves-effect btn red lighten-1 white-text">LOGIN</button>
-                                    </a>
-                                </div>
-                                <br>
-                                <div>
-                                    <a (click)="Modalrestablecer()">
-                                        <button class="waves-effect btn-smaller blue-text"
-                                            style=" background: transparent; border: none; text-decoration: underline;">
-                                            Recuperar Contraseña
+    
+                                <div class="row">
+                                    <div class="col s6 center">
+                                        <a (click)="guardarNuevoUsuario()">
+                                            <button class="waves-effect btn-large red lighten-1 white-text modal-close"
+                                                type="submit">
+                                                Registrar
+                                                <i class="material-icons right">send</i>
+                                            </button>
+                                        </a>
+                                    </div>
+    
+                                    <div class="col s6 center">
+                                        <button
+                                            class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
+                                            type="submit">Cancelar
+                                            <i class="material-icons right">cancel</i>
                                         </button>
-                                    </a>
-                                    <br>
-                                    <br>
+                                    </div>
                                 </div>
-                                <div>
-                                    No tienes cuenta
-                                    <a (click)="nuevoUsuario()">
-                                        <button class="waves-effect btn-smaller blue-text"
-                                            style=" background: transparent; border: none; text-decoration: underline;">
-                                            Crea una aqui
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div id="modalNuevoUsuario" class="modal">
-    <div class="modal-content">
-        <div class="col s12 m6">
-            <!-- Contenido del div de nuevo -->
-            <div class="card">
-                <div class="card-content">
-                    <div class="container center">
-                        <h2>Registro de Usuario</h2>
-                        <form id="registroForm">
-                            <div class="input-field">
-                                <i class="material-icons prefix">account_circle</i>
-                                <input [(ngModel)]="usuarioNuevo.nombre" type="text" id="nombreNuevo" name="nombreNuevo"
-                                    required>
-                                <label for="nombreNuevo">Nombre</label>
-                            </div>
-
-                            <div class="input-field">
-                                <i class="material-icons prefix">email</i>
-                                <input [(ngModel)]="usuarioNuevo.correo" type="email" id="correoNuevo"
-                                    name="correoNuevo" required>
-                                <label for="correoNuevo">Correo Electrónico</label>
-                            </div>
-
-                            <div class="input-field">
-                                <i class="material-icons prefix">phone</i>
-                                <input [(ngModel)]="usuarioNuevo.telefono" type="tel" id="telefonoNuevo"
-                                    name="telefonoNuevo" pattern="[0-9]{10}" required>
-                                <label for="telefonoNuevo">Teléfono (10 dígitos)</label>
-                            </div>
-
-                            <div class="input-field">
-                                <i class="material-icons prefix">lock</i>
-                                <input [(ngModel)]="usuarioNuevo.contrasena" type="password" id="passwordNuevo"
-                                    name="passwordNuevo" required>
-                                <label for="passwordNuevo">Contraseña</label>
-                            </div>
-
-                            <div class="row">
-                                <div class="col s6 center">
-                                    <a (click)="guardarNuevoUsuario()">
-                                        <button class="waves-effect btn-large red lighten-1 white-text modal-close"
-                                            type="submit">
-                                            Registrar
-                                            <i class="material-icons right">send</i>
-                                        </button>
-                                    </a>
-                                </div>
-
-                                <div class="col s6 center">
-                                    <button
-                                        class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
-                                        type="submit">Cancelar
-                                        <i class="material-icons right">cancel</i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    
+    
+    
+    <div id="modalRestablecerContrasena" class="modal">
+        <div class="modal-content">
+            <div class="row col s12" style="margin-bottom: 0px !important;">
+                <h5 class="center">Restablecer Contraseña</h5>
             </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div id="modalRestablecerContrasena" class="modal">
-    <div class="modal-content">
-        <div class="row col s12" style="margin-bottom: 0px !important;">
-            <h5 class="center">Restablecer Contraseña</h5>
-        </div>
-        <div class="row col s12" style="margin-bottom: 0px !important;">
-            <p>Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico.<br>
-            También la carpeta de correo no deseado en caso de no verlo en la bandeja de entrada.
+            <div class="row col s12" style="margin-bottom: 0px !important;">
+                <p>Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico.<br>
+                También la carpeta de correo no deseado en caso de no verlo en la bandeja de entrada.
+                <br>
+                Si no recibes el correo electrónico en unos minutos, verifica que la dirección de correo electrónico introducida sea correcta.</p>
+            </div>
+            <div style="border: .5px solid #060707; padding: 10px;">
+                <label class="correo">Correo electronico</label>
+                <input required type="email" [(ngModel)]="usuarioRestablecer.correo" placeholder="correo"
+                    value="usuario.correo">
+            </div>
             <br>
-            Si no recibes el correo electrónico en unos minutos, verifica que la dirección de correo electrónico introducida sea correcta.</p>
-        </div>
-        <div style="border: .5px solid #060707; padding: 10px;">
-            <label class="correo">Correo electronico</label>
-            <input required type="email" [(ngModel)]="usuarioRestablecer.correo" placeholder="correo"
-                value="usuario.correo">
-        </div>
-        <br>
-        <div class="row">
-            <div class="col s6 center">
-                <a (click)="restablecerContrasena(usuarioRestablecer.correo)">
-                    <button class="waves-effect btn red lighten-1 white-text modal-close" type="submit">
-                        Enviar
-                        <i class="material-icons right">send</i>
+            <div class="row">
+                <div class="col s6 center">
+                    <a (click)="restablecerContrasena(usuarioRestablecer.correo)">
+                        <button class="waves-effect btn red lighten-1 white-text modal-close" type="submit">
+                            Enviar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </a>
+                </div>
+                <div class="col s6 center">
+                    <button class="modal-action modal-close waves-effect btn red lighten-1 white-text"
+                        type="submit">Cancelar
+                        <i class="material-icons right">cancel</i>
                     </button>
-                </a>
-            </div>
-            <div class="col s6 center">
-                <button class="modal-action modal-close waves-effect btn red lighten-1 white-text"
-                    type="submit">Cancelar
-                    <i class="material-icons right">cancel</i>
-                </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    </body>

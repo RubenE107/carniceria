@@ -23,7 +23,7 @@ export class OfertaCarritoComponent implements OnInit {
       {
         let producto = params.get('id');
         carritoService.crear(1, producto, localStorage.getItem("id")).subscribe((resCarro)=>{
-          Swal.fire("Felicidades, ha aprovechado la oferta");
+          Swal.fire({title:"Bien ahí", text:"Felicidades, ha aprovechado la oferta", icon:"success"});
           router.navigateByUrl("/home/carrito");
         })
 

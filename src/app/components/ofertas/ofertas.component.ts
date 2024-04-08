@@ -44,6 +44,7 @@ export class OfertasComponent implements OnInit {
     $(document).ready(function () {
       $('.modal').modal();
     });
+    this.listAll_Ofertas_Producto()
 
 }
 
@@ -58,7 +59,7 @@ aplicarMismoDE(){
   let i:number;
   for(i=0; i<this.A_oferta.length;i++)
   {
-    this.A_oferta[i].descuento = this.descuento;
+    this.A_oferta[i].porc_descuento = this.descuento;
   }
 }
   
@@ -152,7 +153,7 @@ aplicarMismoDE(){
             // console.log(this.A_oferta[i].id);
             // console.log("¿==?");
             // console.log(resusuario.id);
-            if (this.A_oferta[i].id == resusuario.id) {
+            if (this.A_oferta[i].id_producto == resusuario.id) {
               Encotrado = true;
             }
             //console.log(i);
@@ -163,7 +164,7 @@ aplicarMismoDE(){
           let auxOferta = new Oferta();
           auxOferta.id_producto = resusuario.id;
           auxOferta.nombre_producto = resusuario.nombre;
-          auxOferta.precio_original = resusuario.precio;
+          auxOferta.precio_orig = resusuario.precio;
           
 
           this.A_oferta.push(auxOferta);
@@ -209,24 +210,35 @@ aplicarMismoDE(){
       }
     }
 
-    if (this.A_oferta[i].descuento > 100) {
+    if (this.A_oferta[i].porc_descuento > 100) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'El descuento no puede ser mayor a 100',
+        text: 'El porc_descuento no puede ser mayor a 100',
       }).then(() => {
-        this.A_oferta[i].descuento = 0;
+        this.A_oferta[i].porc_descuento = 0;
       });
     }
-    if (this.A_oferta[i].descuento < 0) {
+    if (this.A_oferta[i].porc_descuento < 0) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'El descuento no puede ser menor a 0',
+        text: 'El porc_descuento no puede ser menor a 0',
       }).then(() => {
-        this.A_oferta[i].descuento = 0;
+        this.A_oferta[i].porc_descuento = 0;
       });
     }
+  }
+  listAll_Ofertas_Producto(){
+    this.ofertaService.listAll_Ofertas_Producto().subscribe(
+      (resusuario: any) => {
+        this.ofertas = resusuario;
+        
+        console.log("ofertas:",this.ofertas);
+      },
+      (err) => console.error(err)
+    );
+  
   }
 }
 

@@ -1,37 +1,47 @@
 <div class="switch col12 s12" style="text-align: center;  padding: 10px; margin: auto; width: 50%;">
     <label class="asignar">
       Asignar ofertas
-      <input type="checkbox" [(ngModel)]="AGRE_VER_oferta">
+      <input type="checkbox" [(ngModel)]="AGRE_VER_oferta" >
       <span class="lever"></span>
-      Ver ofertas
+      Ver productos en oferta
     </label>
 </div>
 <div class="row" *ngIf="AGRE_VER_oferta">
     
     <!--  -->
-    <div class="row">
-        <ul *ngIf="productos!=undefined">
-            <li *ngFor="let producto of productos| 
+    <div class="row col s3">
+        <table class="highlight" *ngIf="ofertas!=undefined">
+            <tr id="titulos" class="center-align">
+                <td style="width:20%; height: 20%;">Imagen</td>
+                <td>Producto</td>
+                <td>Precio original</td>
+                <td>Descuento %</td>
+                <td>Resultado</td>
+                <td>Fecha inicio</td>
+                <td>Fecha final</td>
+            </tr>
+            
+            <tr *ngFor="let producto of ofertas | 
             paginate: { 
                 itemsPerPage: pageSize, 
                 currentPage: p 
             }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
-                <div class="card horizontal" (click)="AgregaOferta(producto.id)">
-                    <div class="card-image col s4 " style="padding: 2%;">
-                        <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
-                            alt="Imagen{{producto.nombre}}">
-                    </div>
-                    <div class="card-stacked">
-                        <div class="card-content">
-                            <span class="card-title">{{producto.nombre}}</span>
-                            <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
-                        </div>
-                    </div>
-                    
-                </div>
-
-            </li>
-        </ul>
+                <td style="width:20%; height: 20%;"> 
+                    <a class="card-image" style="padding: 0%;">
+                        <img src="../../../assets/1_Imagenes/{{producto.nombre_producto}}.jpg"
+                            alt="Imagen{{producto.nombre_producto}}" class="custom-image-size">
+                    </a>
+                </td>
+                <td>{{producto.nombre_producto}}</td>
+                <td>{{producto.precio_orig}}</td>
+                <td>
+                    <input [(ngModel)]="producto.porc_descuento" [disabled]="qOcupado" id="descuento1" type="text" class="validate s8" (change)="limitarDescuento(producto.porc_descuento)">
+                </td>
+                <td>{{producto.precio_orig*(1-(producto.porc_descuento/100))}}</td>
+                <td>{{producto.fecha_inicio}}</td>
+                <td>{{producto.fecha_fin}}</td>
+            </tr>
+        </table>
     </div>
     <!--  -->
 
@@ -72,7 +82,7 @@
                         currentPage: p 
                     }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
                         <div class="card horizontal" (click)="AgregaOferta(producto.id)">
-                            <div class="card-image col s4 " style="padding: 2%;">
+                            <div class="card-image col s3 " style="padding: 2%;">
                                 <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
                                     alt="Imagen{{producto.nombre}}">
                             </div>
@@ -88,7 +98,7 @@
                     </li>
                 </ul>
             </div>
-            <div>
+            <div class="color_ajustar">
                 <div class="row center-align">
                     <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
                         nextLabel="Siguiente"></pagination-controls>
@@ -100,6 +110,7 @@
             padding-left: 5%;">
                 <table class="highlight " >
                     <tr id="titulos" class="center-align">
+                        <td>Imagen</td>
                         <td>Producto</td>
                         <td>Precio original</td>
                         <td>Descuento %</td>
@@ -109,16 +120,20 @@
                     </tr>
                     <tr *ngFor="let ModiOferta of A_oferta| 
                         paginate: { 
-                            itemsPerPage: pageSize, 
+                            itemsPerPage: 4, 
                             currentPage: p 
                         }; let i = index">
+                        <td style="width:20%; height: 20%;"> <a class="card-image" style="padding: 0%;">
+                            <img src="../../../assets/1_Imagenes/{{ModiOferta.nombre_producto}}.jpg"
+                                alt="Imagen{{ModiOferta.nombre_producto}}" class="custom-image-size">
+                        </a></td>
                         <td>{{ModiOferta.nombre_producto}}</td>
-                        <td>{{ModiOferta.precio_original}}</td>
+                        <td>{{ModiOferta.precio_orig}}</td>
                         <td>
-                            <input [(ngModel)]="ModiOferta.descuento" [disabled]="qOcupado" id="descuento1" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.descuento)">
+                            <input [(ngModel)]="ModiOferta.porc_descuento" [disabled]="qOcupado" id="descuento1" type="text" class="validate s8" (change)="limitarDescuento(ModiOferta.porc_descuento)">
                             
                         </td>
-                        <td>{{ModiOferta.precio_original*(1-(ModiOferta.descuento/100))}}</td>
+                        <td>{{ModiOferta.precio_orig*(1-(ModiOferta.porc_descuento/100))}}</td>
                         <td>{{fecha_inicio}}</td>
                         <td>{{fecha_final}}</td>
                         <td><form   (click)="quitar(ModiOferta.id_producto)"><label>

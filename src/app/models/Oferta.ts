@@ -1,18 +1,20 @@
 export class Oferta{
-    id: number;
+    id_oferta: number;
     id_producto: number;
-    precio_original : number;
-    descuento: number;
+    nombre_oferta: string;
+    precio_orig : number;
+    porc_descuento: number;
     fecha_inicio: string;
-    fecha_final: string;
+    fecha_fin: string;
     nombre_producto: string
-    constructor() {
-        this.id = 0;
-        this.id_producto=0
-        this.precio_original=0
-        this.descuento=0
-        this.fecha_inicio=""
-        this.fecha_final=""
-        this.nombre_producto=""
+    constructor(){
+        this.id_oferta = 0;
+        this.id_producto = 0;
+        this.nombre_oferta = '';
+        this.precio_orig = 0;
+        this.porc_descuento = 0;
+        this.fecha_inicio = '';
+        this.fecha_fin = '';
+        this.nombre_producto = '';
     }
 }

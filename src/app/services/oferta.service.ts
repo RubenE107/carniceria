@@ -65,6 +65,9 @@ export class OfertaService {
   {
     return this.http.put(`${environment.API_URI}/productoOferta/anularOferta`, {"id":id});
   }
+  listAll_Ofertas_Producto(){
+    return this.http.get(`${environment.API_URI}/ofertas/listAll_Ofertas_Producto/`);
+  }
 
   }
   

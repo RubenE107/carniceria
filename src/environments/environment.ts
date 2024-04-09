@@ -5,7 +5,7 @@
 export const environment = {
   production: true,
   API_URI: "http://server-357x.onrender.com/api",
-    API_URI_CORREO: "http://localhost:3001",
+    API_URI_CORREO: "https://servercorreo.onrender.com",
   };
 /*
  * For easier debugging in development mode, you can import the following file

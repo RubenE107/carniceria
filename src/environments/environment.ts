@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  API_URI: "http://localhost:3000/api",
+  API_URI: "http://server-357x.onrender.com/api",
     API_URI_CORREO: "http://localhost:3001",
   };
 /*

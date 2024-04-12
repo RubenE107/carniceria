@@ -1,25 +1,32 @@
 .nav-wrapper {
-    position: relative;
+  position: relative;
 }
+
 /* Estilos para el elemento activo en la barra de navegación */
 .nav-wrapper #nav-mobile li.active {
-    background-color: #007bff; /* Color de fondo azul */
-  }
-  
-  .nav-wrapper #nav-mobile li.active a {
-    color: #fff; /* Color de texto blanco */
-  }
+  background-color: #007bff;
+  /* Color de fondo azul */
+}
+
+.nav-wrapper #nav-mobile li.active a {
+  color: #fff;
+  /* Color de texto blanco */
+}
 
 
 .logo-img {
-    position: absolute;
-    right: 15px; /* Ajusta este valor según sea necesario */
-    transform: translateY(-5%);
-    width: 70px; /* Modifica el ancho del logo según sea necesario */
-    height: auto; /* Establece la altura automática para mantener la proporción */
+  position: absolute;
+  right: 1px;
+  /* Ajusta este valor según sea necesario */
+  transform: translateY(-5%);
+  width: 70px;
+  /* Modifica el ancho del logo según sea necesario */
+  height: auto;
+  /* Establece la altura automática para mantener la proporción */
 }
 
 .logout {
-    position: absolute;
-    right: 80px; /* ajusta según sea necesario */
+  position: absolute;
+  right: 80px;
+  /* ajusta según sea necesario */
 }

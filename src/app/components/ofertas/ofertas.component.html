@@ -1,10 +1,15 @@
-<div class="switch col12 s12" style="text-align: center;  padding: 10px; margin: auto; width: 50%;">
-    <label class="asignar">
-        Asignar ofertas
-        <input type="checkbox" [(ngModel)]="AGRE_VER_oferta">
-        <span class="lever"></span>
-        Ver productos en oferta
-    </label>
+<div class="row">
+    <p></p>
+    <div class="col s12" style="text-align: center;">
+        <div class="switch">
+            <label style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
+                Asignar ofertas
+                <input type="checkbox" [(ngModel)]="AGRE_VER_oferta">
+                <span class="lever"></span>
+                Ver productos en oferta
+            </label>
+        </div>
+    </div>
 </div>
 <div class="row" *ngIf="AGRE_VER_oferta">
     <!--  -->

@@ -9,20 +9,20 @@ export class CorreoService {
   constructor(private http: HttpClient) { }
   enviarCorreoOferta(body: any) {
     return this.http.post(
-    `${environment.API_URI_CORREOS}/enviarCorreoOferta`,
+    `${environment.API_URI_CORREO}/enviarCorreoOferta`,
     body
   );
 }
   enviarCorreo(body: any) {
     return this.http.post(
-      `${environment.API_URI_CORREOS}/enviarCorreoRecuperarContrasenya`,
+      `${environment.API_URI_CORREO}/enviarCorreoRecuperarContrasenya`,
       body
     );
   }
   decodificarMail(token: any) {
     let dato = { token: token };
     return this.http.post(
-      `${environment.API_URI_CORREOS}/decodificarMail`,
+      `${environment.API_URI_CORREO}/decodificarMail`,
       dato
     );
   }

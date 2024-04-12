@@ -10,7 +10,7 @@ declare var $: any;
 })
 export class NavigationComponent implements OnInit {
   aux: any;
-  currentPage: string = 'venta'; // Variable para mantener la página activa
+  currentPage: any = this.router.url.split('/')[2]; // Variable para mantener la página activa
 
   constructor(private router: Router) {
     this.aux = localStorage.getItem("id_rol");
@@ -44,7 +44,7 @@ export class NavigationComponent implements OnInit {
         this.currentPage = 'carrito';
         break;
       case 'compra':
-        this.currentPage = 'compras';
+        this.currentPage = 'compra';
         break;
       case 'venta':
         this.currentPage = 'venta';
@@ -53,7 +53,7 @@ export class NavigationComponent implements OnInit {
         this.currentPage = 'perfil';
         break;
       case 'oferta':
-        this.currentPage = 'ofertas';
+        this.currentPage = 'oferta';
         break;
       default:
         this.currentPage = ''; // Página no encontrada o inicial

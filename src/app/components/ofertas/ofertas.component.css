@@ -1,12 +1,23 @@
-
-.asignar{
-    color: rgb(153, 62, 62);
-    font-size: 1.5em;
-    font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
-    size: 15px;
-}
 .custom-image-size {
     width: 50%;
     height: 50%;
+}
+
+/*Color cuando está activado*/
+.switch label input[type="checkbox"]:checked + .lever {
+    background-color: #2196F3;
+}
+
+/* Cambiar color del switch cuando está desactivado */
+.switch label .lever {
+    background-color: #e57373;
+}
+
+.switch label {
+    color: #000000; /* Cambia el color del texto a naranja (#FF5722) */
+    font-size: 1.5em;  /* Cambia el tamaño del texto*/
+}
+
+.switch label .lever:after {
+    background-color: rgb(255, 255, 255); /* Color del botón del switch cuando está activado */
 }

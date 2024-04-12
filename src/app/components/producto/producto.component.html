@@ -36,7 +36,7 @@
         </div>
 
       </div>
-      
+
 
     </div>
 
@@ -46,7 +46,7 @@
       </div>
       <div>
         <select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
-         (change)="listAnimal()">
+          (change)="listAnimal()">
           <option value="" selected disabled>Escoge un animal</option>
           <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
         </select>
@@ -55,87 +55,101 @@
 
     <div class="row" *ngIf="rol !=1">
       <div class="col s12">
-          <a class="waves-effect btn blue  white-tex"  (click)="nuevoProducto()">
-            Agregar producto
-            <i class="material-icons">add</i>
-          </a>
-    
+        <a class="waves-effect btn blue  white-tex" (click)="nuevoProducto()">
+          Agregar producto
+          <i class="material-icons">add</i>
+        </a>
+
       </div>
     </div>
   </div>
 
   <div class="col s10 center container">
-      <div class="row">
-        <ul *ngIf="productos != undefined ">
-          <div class="row col s12">
-            <li *ngFor="let producto of productos | 
+    <div class="row">
+      <ul *ngIf="productos != undefined ">
+        <div class="row col s12">
+          <li *ngFor="let producto of productos | 
           paginate: { 
               itemsPerPage: pageSize, 
               currentPage: p 
           }; let i = index">
-              <div class="col s3">
-                <div class="card">
-                  <div class="card-image contenedor" style="position: relative;">
-                    <img  src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg" class="imagen1" alt="Imagen{{producto.nombre}}" style="width: 100%;" />
-                    <img *ngIf="producto.oferta==true" src="../../../assets/img/oferta3.png" class="imagen2" alt="oferta.png" style="position: absolute; top: 0; left: 0; width: 50%; z-index: 1;" />
-                  </div>
-                  
-                  <div class="card-content">
-                    <div class="row ">
 
-                      <span class="card-title">{{producto.nombre}}</span>
-                      <p><strong>Animal de origen: </strong> {{producto.animal}}</p>
-                      <p><strong>Precio por Kg:</strong> ${{producto.precio}}</p>
-                      <p><strong>Cantidad disponible: </strong> {{producto.cantidad}} Kg</p>
-                      <p>{{producto.descripcion}}</p>
-                      <div class="row " *ngIf="producto.cantidad>0">
-                        <br>
-                        <div class="col s12 center">
-                          <a (click)="agregaCarrito(producto.id, producto.cantidad)">
-                            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                              Agregar al carrito
-                              <i class="material-icons right">add</i>
-                            </button>
-                          </a>
-                        </div>
+            <div class="col s3">
+              <div class="card">
+                <div class="card-image contenedor" style="position: relative;">
+                  <!-- <img  src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg" class="imagen1" alt="Imagen{{producto.nombre}}" style="width: 100%;" /> -->
+                  <img src="{{liga}}/{{producto.id}}.jpg" alt="{{liga}}/{{producto.id}}.jpg">
+                  <img *ngIf="producto.oferta==true" src="../../../assets/img/oferta3.png" class="imagen2"
+                    alt="oferta.png" style="position: absolute; top: 0; left: 0; width: 50%; z-index: 1;" />
+                </div>
+
+                <div class="card-content">
+                  <div class="row ">
+
+                    <span class="card-title">{{producto.nombre}}</span>
+                    <p><strong>Animal de origen: </strong> {{producto.animal}}</p>
+                    <p><strong>Precio por Kg:</strong> ${{producto.precio}}</p>
+                    <p><strong>Cantidad disponible: </strong> {{producto.cantidad}} Kg</p>
+                    <p>{{producto.descripcion}}</p>
+                    
+                    <div class="row " *ngIf="producto.cantidad>0">
+                      <br>
+                      <div class="col s12 center">
+                        <a (click)="agregaCarrito(producto.id, producto.cantidad)">
+                          <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                            Agregar al carrito
+                            <i class="material-icons right">add</i>
+                          </button>
+                        </a>
                       </div>
-                      <h5 *ngIf="producto.cantidad==0" class="black-text font-size xlarge center">
-                        <p>Agotado</p>
+                    </div>
+                    <h5 *ngIf="producto.cantidad==0" class="black-text font-size xlarge center">
+                      <p>Agotado</p>
 
-                      </h5>
+                    </h5>
 
-                      <div class="row col s12" *ngIf="rol!=1">
-                        <div class="col s6 center">
-                          <a (click)="modificaProducto(producto.id)">
-                            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                              Modificar
-                              <i class="material-icons right">edit</i>
-                            </button>
-                          </a>
-                        </div>
-                        <div class="col s6 center">
-                          <a (click)="eliminaProducto(producto.id)">
-                            <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                              Eliminar
-                              <i class="material-icons right">delete</i>
-                            </button>
-                          </a>
-                        </div>
+                    <div class="row col s12" *ngIf="rol!=1">
+                      <div class="col s6 center">
+                        <a (click)="modificaProducto(producto.id)">
+                          <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                            Modificar
+                            <i class="material-icons right">edit</i>
+                          </button>
+                        </a>
+                      </div>
+                      <div class="col s6 center">
+                        <a (click)="eliminaProducto(producto.id)">
+                          <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
+                            Eliminar
+                            <i class="material-icons right">delete</i>
+                          </button>
+                        </a>
+                      </div>
+                      <br>
+                      <br>  
+                      <div class="col s12 center" >
+                        <a (click)="mostrarImagen(producto.id)" href="javascript: void(0);" >
+                          <button class="waves-effect btn-small red lighten-1 white-text  " type="submit">
+                            Actualizar imagen
+                            <i class="material-icons right">image</i>
+                          </button>
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </li>
-          </div>
-        </ul>
+            </div>
+          </li>
+        </div>
+      </ul>
 
 
-      </div>
-      <div class="row center-align">
-        <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
-          nextLabel="Siguiente"></pagination-controls>
-      </div>
+    </div>
+    <div class="row center-align">
+      <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+        nextLabel="Siguiente"></pagination-controls>
+    </div>
   </div>
 </div>
 
@@ -163,12 +177,12 @@
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">comment</i>
-            <input [(ngModel)]="producto.descripcion" type="text" id="descripcion" name="descripcion"  required>
+            <input [(ngModel)]="producto.descripcion" type="text" id="descripcion" name="descripcion" required>
             <label for="descripcion" class="active">Descripcion</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">money</i>
-            <input [(ngModel)]="producto.cantidad" type="number" id="cantidad" name="cantidad"  required>
+            <input [(ngModel)]="producto.cantidad" type="number" id="cantidad" name="cantidad" required>
             <label for="cantidad" class="active">Cantidad disponible</label>
           </div>
 
@@ -207,7 +221,7 @@
             <input [(ngModel)]="cantidad" type="number" id="cantidadCarrito" name="cantidadCarrito" required>
             <label for="cantidadCarrito" class="active">Cantidad</label>
           </div>
-          
+
         </div>
         <div class="row">
           <div class="col s6 center">
@@ -254,13 +268,18 @@
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">comment</i>
-            <input [(ngModel)]="producto.descripcion" type="text" id="descripcion" name="descripcion"  required>
+            <input [(ngModel)]="producto.descripcion" type="text" id="descripcion" name="descripcion" required>
             <label for="descripcion" class="active">Descripcion</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">money</i>
-            <input [(ngModel)]="producto.cantidad" type="number" id="cantidad" name="cantidad"  required>
+            <input [(ngModel)]="producto.cantidad" type="number" id="cantidad" name="cantidad" required>
             <label for="cantidad" class="active">Cantidad disponible</label>
+          </div>
+          <div class="input-field col s12">
+            <label>Imagen del producto</label>
+            <br><br>
+            <input type="file" (change)="cargandoImagen($event.target)" multiple>
           </div>
 
 
@@ -297,6 +316,45 @@
       <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
         OK
       </button>
-    </a>  
+    </a>
+  </div>
+</div>
+
+
+<div id="Imagen" class="modal">
+  <div class="modal-content">
+    <div class="row" style="margin-bottom: 0px !important;">
+      <div class="col s12">
+        <h5 class="center">Imagen</h5>
+      </div>
+    </div>
+    <div style="border: .5px solid #78909c; padding: 10px;">
+      <div class="row">
+        <div class="input-field col s12">
+
+          <div align="center">
+            <img *ngIf="producto.fotito == 1" width="64" src="{{liga}}/{{producto.id}}.jpg"
+              alt="{{liga}}/{{producto.id}}.jpg">
+            <img *ngIf="producto.fotito == 0" width="64" src="{{liga}}/0.jpg" alt="{{liga}}/0.jpg">
+          </div>
+        </div>
+
+        <div class="input-field col s6">
+          <label>Imagen del producto</label>
+          <br><br>
+          <input type="file" (change)="cargandoImagen($event.target)" multiple>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 center">
+          <input type="submit" class="waves-effect btn-large brown lighten-3 modal-close" (click)="ActualizaImagen()"
+            value="Enviar">
+        </div>
+        <div class="col s6 center">
+          <a class="modal-action modal-close waves-effect btn-large brown lighten-3
+  black-text">Cancelar</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

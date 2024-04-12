@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { Console } from 'console';
 import { Oferta } from 'src/app/models/Oferta';
 import { Producto } from 'src/app/models/Producto';
 import { OfertaService } from 'src/app/services/oferta.service';
@@ -8,6 +7,7 @@ import { ProductoOfertaService } from 'src/app/services/producto-oferta.service'
 import Swal from 'sweetalert2';
 import { CorreoService } from 'src/app/services/correo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { environment } from 'src/environments/environment';
 
 declare var $: any;
 @Component({
@@ -34,6 +34,7 @@ export class OfertasComponent implements OnInit {
   fecha_final = new Date().toISOString().substring(0, 10);
 
   aux = '';
+  liga : string =""
   constructor(
     private productoService: ProductoService,
     private ofertaService: OfertaService,
@@ -41,6 +42,8 @@ export class OfertasComponent implements OnInit {
     private correoService: CorreoService,
     private usuarioService: UsuarioService
   ) {
+    this.liga = environment.API_URI_IMAGENES + "/productos";
+
     this.listProductos();
     this.getAnimals();
   }

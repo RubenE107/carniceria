@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from 'src/app/models/Producto';
 import { Compra } from 'src/app/models/compra';
-import { ProductoService } from 'src/app/services/producto.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
 import { VentaService } from 'src/app/services/venta.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-compra',
@@ -12,11 +10,13 @@ import { VentaService } from 'src/app/services/venta.service';
 })
 export class CompraComponent implements OnInit {
   compras : Compra [] = [];
-  compra!: Compra;
+  compra = new Compra();
   p = 1;
   pageSize = 5
+  liga : string =""
   constructor(private ventasServices: VentaService) { 
-
+    this.liga = environment.API_URI_IMAGENES + "/productos";
+    
   }
 
 

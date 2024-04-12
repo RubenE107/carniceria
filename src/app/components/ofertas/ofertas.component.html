@@ -28,8 +28,11 @@
             }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
                 <td style="width:20%; height: 20%;">
                     <a class="card-image" style="padding: 0%;">
-                        <img src="../../../assets/1_Imagenes/{{producto.nombre_producto}}.jpg"
-                            alt="Imagen{{producto.nombre_producto}}" class="custom-image-size">
+                        <!-- <img src="../../../assets/1_Imagenes/{{producto.nombre_producto}}.jpg" -->
+                            <!-- alt="Imagen{{producto.nombre_producto}}" class="custom-image-size"> -->
+                            <img src="{{liga}}/{{producto.id_producto}}.jpg" alt="{{liga}}/{{producto.id_producto}}.jpg"
+                            class="custom-image-size">
+
                     </a>
                 </td>
                 <td>{{producto.nombre_producto}}</td>
@@ -95,8 +98,10 @@
                     }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
                         <div class="card horizontal" (click)="AgregaOferta(producto.id)">
                             <div class="card-image col s3 " style="padding: 2%;">
-                                <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
-                                    alt="Imagen{{producto.nombre}}">
+                                <!-- <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
+                                    alt="Imagen{{producto.nombre}}"> -->
+                                    <img src="{{liga}}/{{producto.id}}.jpg" alt="{{liga}}/{{producto.id}}.jpg">
+
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content">

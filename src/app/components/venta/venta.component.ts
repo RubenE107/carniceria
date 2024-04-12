@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Venta } from 'src/app/models/Venta';
 import { ProductoService } from 'src/app/services/producto.service';
 import { VentaService } from 'src/app/services/venta.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 declare var $: any;
 
@@ -22,9 +23,13 @@ export class VentaComponent implements OnInit {
   GananciaTotal = -1
   p=1
   pageSize = 5
+
+  liga : string =""
+
   constructor(private ventasServices: VentaService, private productoService: ProductoService, private router: Router) {
     if (localStorage.getItem("id_rol") != '3')
       router.navigateByUrl("home/producto")
+    this.liga = environment.API_URI_IMAGENES + "/productos";
 
   }
   ngOnInit(): void {

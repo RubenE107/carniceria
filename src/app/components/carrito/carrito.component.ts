@@ -5,6 +5,7 @@ import { CarritoService } from 'src/app/services/carrito.service';
 import { OfertaService } from 'src/app/services/oferta.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { VentaService } from 'src/app/services/venta.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 declare var $: any;
 @Component({
@@ -21,6 +22,9 @@ export class CarritoComponent implements OnInit {
 
   totalPro = 0;
   tCarrAct = 0;
+
+  liga : string =""
+
   constructor(
     private carritoService: CarritoService,
     private productoService: ProductoService,
@@ -28,13 +32,15 @@ export class CarritoComponent implements OnInit {
     private router: Router,
     private ofertaService: OfertaService
   ) {
+    this.liga = environment.API_URI_IMAGENES + "/productos";
+
     //console.log(localStorage.getItem('id'))
     let fecha = new Date();
-    console.log(fecha.getDate());
-    console.log(fecha.getDay());
-    console.log(fecha.toJSON().substring(0, 10));
-    console.log(fecha.toDateString().substring(0, 10));
-    console.log(fecha.getFullYear());
+    // console.log(fecha.getDate());
+    // console.log(fecha.getDay());
+    // console.log(fecha.toJSON().substring(0, 10));
+    // console.log(fecha.toDateString().substring(0, 10));
+    // console.log(fecha.getFullYear());
 
     this.list();
   }

@@ -6,6 +6,7 @@ export class Producto{
     cantidad: number;
     descripcion: string;
     oferta: boolean;
+    fotito: number;
 
     constructor() {
         this.id = 0;
@@ -15,5 +16,6 @@ export class Producto{
         this.cantidad = 0;
         this.descripcion = '';
         this.oferta=true;
+        this.fotito = 0;
     }
 }

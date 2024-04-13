@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 declare var $: any;
 
@@ -12,7 +13,7 @@ export class NavigationComponent implements OnInit {
   aux: any;
   currentPage: any = this.router.url.split('/')[2]; // Variable para mantener la página activa
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private translate: TranslateService) {
     this.aux = localStorage.getItem("id_rol");
   }
 
@@ -20,6 +21,7 @@ export class NavigationComponent implements OnInit {
     // Inicializar componentes de Materialize al cargar la página
     $(document).ready(function () {
       $('select').formSelect();
+      $(".dropdown-trigger").dropdown();
     });
 
     // Escuchar cambios de ruta para actualizar la página activa
@@ -92,23 +94,34 @@ export class NavigationComponent implements OnInit {
 
   cerrarSesion(): void {
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Tendrás que volver a iniciar sesión',
+      title: this.translate.instant('¿Estás seguro?'),
+      text: this.translate.instant('Tendrás que volver a iniciar sesión'),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, quiero cerrar sesión'
+      confirmButtonText: this.translate.instant('Sí, quiero cerrar sesión')
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
         this.router.navigateByUrl('/');
         Swal.fire({
-          title: '¡Hasta luego!',
-          text: 'Tu sesión se ha cerrado',
+          title: this.translate.instant('¡Hasta luego!'),
+          text: this.translate.instant('Tu sesión se ha cerrado'),
           icon: 'success'
         });
       }
     });
+  }
+
+  setIdioma(idioma: any) {
+    if (idioma == 1) {
+      this.translate.use("en");
+      console.log("Inglés");
+    }
+    if (idioma == 2) {
+      this.translate.use("es");
+      console.log("Español");
+    }
   }
 }

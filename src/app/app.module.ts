@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from "@angular/common/http";
+import { HttpClient, HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -19,6 +19,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ReestablecerComponent } from './components/reestablecer/reestablecer.component';
 import { OfertasComponent } from './components/ofertas/ofertas.component';
 import { OfertaCarritoComponent } from './components/oferta-carrito/oferta-carrito.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
 
 @NgModule({
   declarations: [
@@ -43,7 +48,14 @@ import { OfertaCarritoComponent } from './components/oferta-carrito/oferta-carri
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

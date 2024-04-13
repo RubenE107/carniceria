@@ -6,23 +6,29 @@
         <img src="../../../assets/1_Imagenes/9_Logo_Minimalista.png" alt="Logo" class="logo-img">
       </a>
       <ul id="nav-mobile" class="">
-        <li [ngClass]="{ 'active': currentPage === 'producto' }"><a (click)="producto()">Productos<i
+        <li [ngClass]="{ 'active': currentPage === 'producto' }"><a (click)="producto()">{{"Productos" | translate}}<i
               class="material-icons right">store</i></a></li>
-        <li [ngClass]="{ 'active': currentPage === 'carrito' }"><a (click)="carrito()">Carrito<i
+        <li [ngClass]="{ 'active': currentPage === 'carrito' }"><a (click)="carrito()">{{"Carrito" | translate}}<i
               class="material-icons right">shopping_cart</i></a></li>
-        <li [ngClass]="{ 'active': currentPage === 'compra' }"><a (click)="compras()">Compras <i
+        <li [ngClass]="{ 'active': currentPage === 'compra' }"><a (click)="compras()">{{"Compras" | translate}}<i
               class="material-icons right">local_mall</i></a></li>
-        <li [ngClass]="{ 'active': currentPage === 'perfil' }"><a (click)="perfil()">Mi perfil<i
+        <li [ngClass]="{ 'active': currentPage === 'perfil' }"><a (click)="perfil()">{{"Mi perfil" | translate}}<i
               class="material-icons right">account_circle</i></a></li>
-        <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'oferta' }"><a (click)="ofertas()">Ofertas<i
+        <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'oferta' }"><a (click)="ofertas()">{{"Ofertas" | translate}}<i
               class="material-icons right">local_offer</i></a></li>
-        <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'usuario' }"><a (click)="usuario()">Usuarios<i
+        <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'usuario' }"><a (click)="usuario()">{{"Usuarios" | translate}}<i
               class="material-icons right">account_box</i></a></li>
-        <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'venta' }"><a (click)="venta()">Ventas<i
+        <li *ngIf="aux==3" [ngClass]="{ 'active': currentPage === 'venta' }"><a (click)="venta()">{{"Ventas" | translate}}<i
               class="material-icons right">attach_money</i></a></li>
-        <li class="logout"><a (click)="cerrarSesion()">Cerrar sesión<i class="material-icons right">exit_to_app</i></a>
+        <li><a class="dropdown-trigger" data-target="dropdown_lang">{{"Idioma" | translate}}<i
+              class="material-icons right">arrow_drop_down</i><i class="material-icons right">language</i></a> </li>
+        <li class="logout"><a (click)="cerrarSesion()">{{"Cerrar sesión" | translate}}<i class="material-icons right">exit_to_app</i></a>
         </li>
       </ul>
     </div>
   </nav>
+  <ul id="dropdown_lang" class="dropdown-content idioma-nav">
+      <li (click)="setIdioma(1)"><a>English</a></li>
+      <li (click)="setIdioma(2)"><a>Español</a></li>
+  </ul>
 </header>

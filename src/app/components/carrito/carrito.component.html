@@ -13,15 +13,15 @@
               <div class="card-stacked">
                 <div class="card-content">
                   <span class="card-title">{{car.nombre}}</span>
-                  <p><strong>Precio por unidad: ${{car.precio}}</strong></p>
-                  <p><strong>Subtotal: ${{car.precio}}</strong></p>
-                  <p><strong>Cantidad: {{car.cantidad}} Kg</strong></p>
+                  <p><strong>{{"Precio por unidad:" | translate}} ${{car.precio}}</strong></p>
+                  <p><strong>{{"Subtotal:" | translate}} ${{car.precio}}</strong></p>
+                  <p><strong>{{"Cantidad:" | translate}} {{car.cantidad}} {{"Kg" | translate}}</strong></p>
                 </div>
                 <div class="card-action">
                   <div class="col s6 center">
                     <a (click)="modificaCantidad(car.id)">
                       <button class="waves-effect btn red lighten-1 white-text" type="submit">
-                        Modificar cantidad
+                        {{"Modificar cantidad" | translate}}
                         <i class="material-icons right">edit</i>
                       </button>
                     </a>
@@ -29,7 +29,7 @@
 
                   <div class="col s6 center">
                     <button (click)="eliminar(car.id)" class=" waves-effect btn red lighten-1 white-text"
-                      type="submit">Eliminar
+                      type="submit">{{"Eliminar" | translate}}
                       <i class="material-icons right">delete</i>
                     </button>
                   </div>
@@ -47,12 +47,12 @@
       <div class="card">
         <div class="card-content">
 
-          <h5>Total de la compra</h5>
-          <p><strong>Cantidad: {{totalCarrito}}</strong></p>
+          <h5>{{"Total de la compra" | translate}}</h5>
+          <p><strong>{{"Cantidad:" | translate}} {{totalCarrito}}</strong></p>
           <div>
             <a (click)="compraCarrito()">
               <button class="waves-effect btn-large red lighten-1 white-text">
-                Comprar
+                {{"Comprar" | translate}}
               </button>
             </a>
           </div>
@@ -69,9 +69,9 @@
       <div class="card">
         <div class="card-content">
           <div class="container center">
-            <h2>Selector de cantidad</h2>
+            <h2>{{"Selector de cantidad" | translate}}</h2>
             <div class="container">
-              <p><strong>Cantidad disponible: {{cantidadDisponible}} unidades</strong></p>
+              <p><strong>{{"Cantidad disponible:" | translate}} {{cantidadDisponible}} {{"unidades" | translate}}</strong></p>
               <div class="seleccion">
                 <button class="waves-effect btn-small red lighten-1 white-text lef" (click)="decrementar()"
                   id="decrementar">
@@ -88,7 +88,7 @@
               <div class="col s6 center">
                 <a (click)="modificar()">
                   <button class="waves-effect btn-large red lighten-1 white-text " type="submit">
-                    Registrar
+                    {{"Registrar" | translate}}
                     <i class="material-icons right">send</i>
                   </button>
                 </a>
@@ -96,7 +96,7 @@
 
               <div class="col s6 center">
                 <button class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
-                  type="submit">Cancelar
+                  type="submit">{{"Cancelar" | translate}}
                   <i class="material-icons right">cancel</i>
                 </button>
               </div>

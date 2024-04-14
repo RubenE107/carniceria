@@ -3,10 +3,10 @@
     <div class="col s12" style="text-align: center;">
         <div class="switch">
             <label style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
-                Asignar ofertas
+                {{"Asignar ofertas" | translate}}
                 <input type="checkbox" [(ngModel)]="AGRE_VER_oferta">
                 <span class="lever"></span>
-                Ver productos en oferta
+                {{"Ver productos en oferta" | translate}}
             </label>
         </div>
     </div>
@@ -17,13 +17,13 @@
 
         <table class="highlight" *ngIf="ofertas!=undefined">
             <tr id="titulos" class="center-align">
-                <td style="width:20%; height: 20%;">Imagen</td>
-                <td>Producto</td>
-                <td>Precio original</td>
-                <td>Descuento %</td>
-                <td>Resultado</td>
-                <td>Fecha inicio</td>
-                <td>Fecha final</td>
+                <td style="width:20%; height: 20%;">{{"Imagen" | translate}}</td>
+                <td>{{"Producto" | translate}}</td>
+                <td>{{"Precio original" | translate}}</td>
+                <td>{{"Descuento %" | translate}}</td>
+                <td>{{"Resultado" | translate}}</td>
+                <td>{{"Fecha inicial" | translate}}</td>
+                <td>{{"Fecha final" | translate}}</td>
             </tr>
 
             <tr *ngFor="let producto of ofertas | 
@@ -51,7 +51,7 @@
                 <td>
                     <a (click)="actualizarOferta(producto.id_oferta,producto.id_producto,producto.fecha_inicio,producto.fecha_fin,
                 producto.porc_descuento)"
-                        class="waves-effect waves-light blue btn-small ">Actualizar
+                        class="waves-effect waves-light blue btn-small ">{{"Actualizar" | translate}}
                         <i class="material-icons">create</i>
                     </a>
                 </td>
@@ -70,14 +70,13 @@
             <div class="row " style="padding: 5%;">
 
                 <div class="row col s12 card ">
-                    <h5 class="center">Para activar una oferta en uno o más productos, seleccione los productos
-                        deseados.</h5>
+                    <h5 class="center">{{"Para activar una oferta en uno o más productos, seleccione los productos deseados." | translate}}</h5>
                     <div>
-                        <h5 class="center" style="font-size: large;">Filtrar por animal</h5>
+                        <h5 class="center" style="font-size: large;">{{"Filtrar por animal" | translate}}</h5>
                     </div>
                     <div><select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
                             (change)="listAnimal()">
-                            <option value="" selected disabled>Escoge un animal</option>
+                            <option value="" selected disabled>{{"Escoge un animal" | translate}}</option>
                             <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}
                             </option>
                         </select>
@@ -86,7 +85,7 @@
                         <br>
                         <a (click)="eliminaFiltros()">
                             <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                                Eliminar filtros
+                                {{"Eliminar filtros" | translate}}
                                 <i class="material-icons right">delete</i>
                             </button>
                         </a>
@@ -111,7 +110,7 @@
                             <div class="card-stacked">
                                 <div class="card-content">
                                     <span class="card-title">{{producto.nombre}}</span>
-                                    <p><strong>Precio por unidad: ${{producto.precio}}</strong></p>
+                                    <p><strong>{{"Precio por unidad:" | translate}} ${{producto.precio}}</strong></p>
                                 </div>
                             </div>
 
@@ -132,13 +131,13 @@
             padding-left: 5%;">
                 <table class="highlight ">
                     <tr id="titulos" class="center-align">
-                        <td>Imagen</td>
-                        <td>Producto</td>
-                        <td>Precio original</td>
-                        <td>Descuento %</td>
-                        <td>Resultado</td>
-                        <td>Fecha inicio</td>
-                        <td>Fecha final</td>
+                        <td>{{"Imagen" | translate}}</td>
+                        <td>{{"Producto" | translate}}</td>
+                        <td>{{"Precio original" | translate}}</td>
+                        <td>{{"Descuento %" | translate}}</td>
+                        <td>{{"Resultado" | translate}}</td>
+                        <td>{{"Fecha inicial" | translate}}</td>
+                        <td>{{"Fecha final" | translate}}</td>
                     </tr>
                     <tr *ngFor="let ModiOferta of A_oferta| 
                         paginate: { 
@@ -162,7 +161,7 @@
                         <td>
                             <form (click)="quitar(ModiOferta.id_producto)"><label>
                                     <input type="checkbox" class="filled-in" checked="checked" checked="checked" />
-                                    <span>Deseleccionar</span>
+                                    <span>{{"Deseleccionar" | translate}}</span>
                                 </label></form>
                         </td>
                     </tr>
@@ -178,11 +177,11 @@
                     </div> -->
                     <div class="input-field col s2">
                         <input id="fecha_inicio" type="date" class="validate" [(ngModel)]="fecha_inicio">
-                        <label for="fecha_inicio">Fecha inicio</label>
+                        <label for="fecha_inicio">{{"Fecha inicial" | translate}}</label>
                     </div>
                     <div class="input-field col s2">
                         <input id="fecha_final" type="date" class="validate" [(ngModel)]="fecha_final">
-                        <label for="fecha_final">Fecha final</label>
+                        <label for="fecha_final">{{"Fecha final" | translate}}</label>
                     </div>
                     <!-- 
 aplicar el mismom descuento a todos los productos
@@ -190,21 +189,21 @@ aplicar el mismom descuento a todos los productos
                     <div class="input-field col s2">
                         <input id="Descuentogl" type="text" class="validate" (change)="aplicarMismoDE()"
                             [(ngModel)]="descuento" [disabled]="!qOcupado">
-                        <label for="fecha_inicio" class="active">Descuento</label>
+                        <label for="fecha_inicio" class="active">{{"Descuento" | translate}}</label>
                     </div>
                     <div class="col s2">
                         <form class="form-estilo">
                             <label class="label-estilo1 waves-effect btn-big green lighten-1 s2">
                                 <input id="descuentoTodos" type="checkbox" (change)="aplicarMismoDE()" name="descuento"
                                     class="filled-in asignar">
-                                <span><a class="white-text">activa el mismo descuento a todo</a></span>
+                                <span><a class="white-text">{{"Activa el mismo descuento a todo" | translate}}</a></span>
                             </label>
                         </form>
                     </div>
                     <a (click)="AplicarOferta()">
                         <button class="waves-effect btn-small green lighten-1 white-text s2" type="submit"
                             [disabled]="!A_oferta || A_oferta.length === 0">
-                            Aplicar oferta
+                            {{"Aplicar oferta" | translate}}
                             <i class="material-icons right">send</i>
                         </button>
                     </a>
@@ -223,22 +222,22 @@ aplicar el mismom descuento a todos los productos
 <div id="modalModificaOferta" class="modal">
     <div class="modal-content">
         <div class="container">
-            <h2 class="center">Modificación de Oferta</h2>
+            <h2 class="center">{{"Modificación de Oferta" | translate}}</h2>
             <form id="modificaForm">
                 <div class="row">
                     <div class="input-field col s12">
                         <input [(ngModel)]="oferta.fecha_inicio" type="email" id="correo" name="correo" required>
-                        <label for="correo" class="active">fecha inicio</label>
+                        <label for="correo" class="active">{{"Fecha inicial" | translate}}</label>
                     </div>
 
                     <div class="input-field col s12">
                         <input [(ngModel)]="oferta.fecha_fin" type="tel" id="telefono" name="telefono"
                             pattern="[0-9]{10}" required>
-                        <label for="telefono" class="active">Fecha final</label>
+                        <label for="telefono" class="active">{{"Fecha final" | translate}}</label>
                     </div>
                     <div class="input-field col s12">
                         <input [(ngModel)]="oferta.porc_descuento" type="number" name="descuento" required>
-                        <label for="descuento" class="active">Descuento %</label>
+                        <label for="descuento" class="active">{{"Descuento %" | translate}}</label>
                     </div>
                     
 
@@ -251,7 +250,7 @@ aplicar el mismom descuento a todos los productos
                     <div class="col s6 center">
                         <a (click)="guardarActualizarOferta()">
                             <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
-                                Modificar
+                                {{"Modificar" | translate}}
                                 <i class="material-icons right">send</i>
                             </button>
                         </a>
@@ -259,7 +258,7 @@ aplicar el mismom descuento a todos los productos
 
                     <div class="col s6 center">
                         <button class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
-                            type="submit">Cancelar
+                            type="submit">{{"Cancelar" | translate}}
                             <i class="material-icons right">cancel</i>
                         </button>
                     </div>

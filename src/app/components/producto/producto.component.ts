@@ -8,6 +8,7 @@ import { Oferta } from 'src/app/models/Oferta';
 import { OfertaService } from 'src/app/services/oferta.service';
 import { environment } from 'src/environments/environment';
 import { ImagenesService } from 'src/app/services/imagenes.service';
+import { TranslateService } from '@ngx-translate/core';
 declare var $: any;
 @Component({
   selector: 'app-producto',
@@ -44,7 +45,7 @@ export class ProductoComponent implements OnInit {
   }
 
   constructor(private imagenesService: ImagenesService, private productoService: ProductoService, private carritoService: CarritoService,
-    private ofertaService: OfertaService, private router: Router) {
+    private ofertaService: OfertaService, private router: Router, private translate: TranslateService) {
     this.liga = environment.API_URI_IMAGENES + "/productos";
     this.imgUsuario = null;
     this.fileToUpload = null;
@@ -177,13 +178,13 @@ export class ProductoComponent implements OnInit {
   eliminaProducto(id_producto: any) {
 
     Swal.fire({
-      title: '¿Estás seguro bro?',
-      text: 'No es posible revertir este!',
+      title: this.translate.instant('¿Estás seguro, bro?'),
+      text: this.translate.instant('¡No es posible revertir esta acción!'),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, quiero eliminarlo!',
+      confirmButtonText: this.translate.instant('¡Sí, quiero eliminarlo!'),
     }).then((result) => {
       if (result.isConfirmed) {
         this.productoService.eliminar(id_producto).subscribe(
@@ -196,8 +197,8 @@ export class ProductoComponent implements OnInit {
         );
 
         Swal.fire({
-          title: 'Eliminado!',
-          text: 'Tu producto ha sido eliminado.',
+          title: this.translate.instant('¡Eliminado!'),
+          text: this.translate.instant('El producto ha sido eliminado.'),
           icon: 'success',
         });
       }

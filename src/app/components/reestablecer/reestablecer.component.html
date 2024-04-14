@@ -4,30 +4,41 @@
             <!-- Contenido del formulario de login -->
             <div class="card">
                 <div class="card-content">
-                    <h2 class="center-align">Reestablecimiento de contraseña!!</h2>
+                    <h2 class="center-align">{{"Reestablecimiento de Contraseña" | translate}}</h2>
                     <div class="row">
                         <form class="col s12">
                             <div class="row col s12">
                                 <div class=" input-field">
                                     <i class="material-icons prefix">lock</i>
-                                    <input [(ngModel)]="contra" type="password"  name="contra"
-                                        id="contra" autocomplete="off">
+                                    <input [(ngModel)]="contra" type="password" name="contra" id="contra"
+                                        autocomplete="off">
                                     <label class="active" for="emailLogin">Contraseña</label>
                                 </div>
                                 <div class="input-field">
                                     <i class="material-icons prefix">lock_outline</i>
-                                    <input [(ngModel)]="CContra"  type="password" id="contraConf"
-                                        name="passwordLogin" required>
+                                    <input [(ngModel)]="CContra" type="password" id="contraConf" name="passwordLogin"
+                                        required>
                                     <label class="active" for="passwordLogin">Confirme contraseña</label>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div>
-                        <a >
-                            <button (click)="reestablecer()" class="waves-effect btn-large red lighten-1 white-text">Reestablecer</button>
+                        <a>
+                            <button (click)="reestablecer()"
+                                class="waves-effect btn-large red lighten-1 white-text">Reestablecer</button>
                         </a>
                         <br>
+                    </div>
+                    <div>
+                        <br>
+                        <a class="dropdown-trigger btn" data-target="dropdown_lang">{{"Idioma" | translate}}<i
+                                class="material-icons right">arrow_drop_down</i><i
+                                class="material-icons right">language</i></a>
+                        <ul id="dropdown_lang" class="dropdown-content idioma-login">
+                            <li><a (click)="setIdioma(1)">English</a></li>
+                            <li><a (click)="setIdioma(2)">Español</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

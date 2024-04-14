@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { CorreoService } from 'src/app/services/correo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+declare var $: any;
 
 @Component({
   selector: 'app-reestablecer',
@@ -13,7 +15,7 @@ export class ReestablecerComponent implements OnInit {
   usuarioC : any
   contra : any
   CContra : any
-  constructor(private route : ActivatedRoute, private correoService:CorreoService, private usuarioService:UsuarioService, private router:Router) {
+  constructor(private route : ActivatedRoute, private correoService:CorreoService, private usuarioService:UsuarioService, private router:Router, private translate: TranslateService) {
     this.route.paramMap.subscribe(params =>
       {
         let token = params.get('token')
@@ -23,7 +25,7 @@ export class ReestablecerComponent implements OnInit {
           console.log("primeiro: ",resUsuario)
           if(resUsuario == 0)
           {
-            Swal.fire("Ha ocurrido un error");
+            Swal.fire(this.translate.instant("Ha ocurrido un error"));
             this.router.navigateByUrl("");
           }
           this.usuarioC = resUsuario
@@ -33,7 +35,7 @@ export class ReestablecerComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    
+    $(".dropdown-trigger").dropdown();
   }
 
 
@@ -41,16 +43,24 @@ export class ReestablecerComponent implements OnInit {
   {
     if(this.contra!= this.CContra)
     {
-      Swal.fire("Las contraseñas no coinciden, por favor, reintente!");
+      Swal.fire(this.translate.instant("Las contraseñas no coinciden.\nPor favor, intente de nuevo."));
       return;
     }
     console.log(this.usuarioC)
     this.usuarioService.actualizarContrasenha(this.usuarioC.correo, this.contra).subscribe((resUsuario:any)=>
     {
-      
-      Swal.fire("La contraseña ha cambiado exitosamente, por favor, ahora inicie seción");
+      Swal.fire(this.translate.instant("La contraseña ha cambiado exitosamente.\nPor favor, ahora inicie sesión."));
       this.router.navigateByUrl("");
     })
 
+  }
+
+  setIdioma(idioma: any) {
+    if (idioma == 1) {
+      this.translate.use("en");
+    }
+    if (idioma == 2) {
+      this.translate.use("es");
+    }
   }
 }

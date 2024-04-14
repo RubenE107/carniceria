@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { CorreoService } from 'src/app/services/correo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var $: any;
 @Component({
@@ -40,7 +41,8 @@ export class OfertasComponent implements OnInit {
     private ofertaService: OfertaService,
     private ProductoOferta: ProductoOfertaService,
     private correoService: CorreoService,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private translate: TranslateService
   ) {
     this.liga = environment.API_URI_IMAGENES + "/productos";
 
@@ -83,18 +85,18 @@ aplicarMismoDE(){
       this.ProductoOferta.create(oferta.id_producto,1, oferta.precio_orig, oferta.porc_descuento).subscribe((resOferta)=>
       {
         console.log("Eso devolvió: ", resOferta);
-        textOf.push("Increible descuento :" + oferta.nombre_producto + " está a " + oferta.porc_descuento + "% de descuento\n");
+        textOf.push("Increible descuento: " + oferta.nombre_producto + " está a " + oferta.porc_descuento + "% de descuento\n");
         ides.push(oferta.id_producto)
       });
      
     });
    
     Swal.fire({
-      title: '¿Quieres enviar un correo?',
-      text: "Ya se crearon las ofertas\nSe enviará un correo a los clientes",
+      title: this.translate.instant('¿Quieres enviar un correo?'),
+      text: this.translate.instant("Ya se crearon las ofertas.\nSe enviará un correo a los clientes."),
       showDenyButton: true,
-      confirmButtonText: `Sí`,
-      denyButtonText: `No`,
+      confirmButtonText: this.translate.instant(`Sí`),
+      denyButtonText: this.translate.instant(`No`),
   }).then((result) => {
       if (result.isConfirmed) {
           /*var message: any ={};
@@ -239,8 +241,8 @@ aplicarMismoDE(){
   }else{
     Swal.fire({
       icon: 'error',
-      title: 'Oops...',
-      text: 'El producto ya tiene una oferta asignada',
+      title: this.translate.instant('Oops...'),
+      text: this.translate.instant('El producto ya tiene una oferta asignada'),
     });
   
   }
@@ -283,8 +285,8 @@ aplicarMismoDE(){
     if (this.A_oferta[i].porc_descuento > 100) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'El porc_descuento no puede ser mayor a 100',
+        title: this.translate.instant('Oops...'),
+        text: this.translate.instant('El porcentaje de descuento no puede ser mayor a 100'),
       }).then(() => {
         this.A_oferta[i].porc_descuento = 0;
       });
@@ -292,8 +294,8 @@ aplicarMismoDE(){
     if (this.A_oferta[i].porc_descuento < 0) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'El porc_descuento no puede ser menor a 0',
+        title: this.translate.instant('Oops...'),
+        text: this.translate.instant('El porcentaje de descuento no puede ser menor a 0'),
       }).then(() => {
         this.A_oferta[i].porc_descuento = 0;
       });

@@ -2,11 +2,14 @@ export class Oferta{
     id_oferta: number;
     id_producto: number;
     nombre_oferta: string;
+    name_oferta : string;
     precio_orig : number;
     porc_descuento: number;
     fecha_inicio: string;
     fecha_fin: string;
     nombre_producto: string
+    product_name : string;
+
     constructor(){
         this.id_oferta = 0;
         this.id_producto = 0;
@@ -16,5 +19,8 @@ export class Oferta{
         this.fecha_inicio = '';
         this.fecha_fin = '';
         this.nombre_producto = '';
+
+        this.name_oferta = '';
+        this.product_name = '';
     }
 }

@@ -4,6 +4,7 @@ export class Carrito{
     id_producto: number;
     id_usuario: number;
     nombre : string;
+    name : string;
     cantidad: number;
     precio: number;
     constructor() {
@@ -13,5 +14,6 @@ export class Carrito{
         this.id_usuario = 0;
         this.precio = 0;
         this.nombre= "";
+        this.name = '';
     }
 }

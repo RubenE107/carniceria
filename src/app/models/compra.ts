@@ -5,6 +5,7 @@ export class Compra{
     monto: number;
     fecha: string;
     nombre: string;
+    name : string;
     constructor() {
         this.id = 0;
         this.cantidad = 0;
@@ -12,5 +13,6 @@ export class Compra{
         this.monto= 0;
         this.fecha = '';
         this.nombre = ''
+        this.name = '';
     }
 }

@@ -185,6 +185,7 @@ export class ProductoComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: this.translate.instant('¡Sí, quiero eliminarlo!'),
+      cancelButtonText: this.translate.instant('Cancelar')
     }).then((result) => {
       if (result.isConfirmed) {
         this.productoService.eliminar(id_producto).subscribe(

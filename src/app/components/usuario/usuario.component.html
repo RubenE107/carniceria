@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col m6 offset-m4">
-    <h5>Agregar usuario
+    <h5>{{"Agregar Usuario" | translate}}
 
       <a class="btn-floating btn-large red lighten-1 white-tex" (click)="nuevoUsuario()">
         <i class="material-icons">add</i>
@@ -21,16 +21,16 @@
     <table class="highlight " *ngIf="usuarios != undefined">
       <tr id="titulos" class="center-align">
         <div class="col s2">
-          <td>nombre</td>
+          <td>{{"Nombre" | translate}}</td>
         </div>
         <div class="col s2">
-          <td>correo</td>
+          <td>{{"Correo" | translate}}</td>
         </div>
         <div class="col s2">
-          <td>telefono</td>
+          <td>{{"Teléfono" | translate}}</td>
         </div>
         <div class="col s2">
-          <td>rol</td>
+          <td>{{"Rol" | translate}}</td>
         </div>
 
       </tr>
@@ -57,14 +57,14 @@
         <div class="col s2">
           <td id="actualizar">
             <a id="actualizar" (click)="actualizarUsuario(usuario.id)"
-              class="waves-effect waves-light blue btn-small ">Actualizar
+              class="waves-effect waves-light blue btn-small ">{{"Actualizar" | translate}}
               <i class="material-icons">create</i>
             </a>
           </td>
         </div>
         <div class="col s2 ">
           <td id="eliminar">
-            <a (click)="eliminarUsuario(usuario.id)" class="waves-effect waves-light red btn-small m4">Eliminar
+            <a (click)="eliminarUsuario(usuario.id)" class="waves-effect waves-light red btn-small m4">{{"Eliminar" | translate}}
               <i class="material-icons">delete</i>
             </a>
           </td>
@@ -92,39 +92,39 @@
       <div class="card">
         <div class="card-content">
           <div class="container center">
-            <h2>Registro de Usuario</h2>
+            <h2>{{"Registro de Usuario" | translate}}</h2>
             <form id="registroForm">
               <div class="input-field">
                 <i class="material-icons prefix">account_circle</i>
                 <input [(ngModel)]="usuarioNuevo.nombre" type="text" id="nombreNuevo" name="nombreNuevo" required>
-                <label for="nombreNuevo">Nombre</label>
+                <label for="nombreNuevo">{{"Nombre" | translate}}</label>
               </div>
 
               <div class="input-field">
                 <i class="material-icons prefix">email</i>
                 <input [(ngModel)]="usuarioNuevo.correo" type="email" id="correoNuevo" name="correoNuevo" required>
-                <label for="correoNuevo">Correo Electrónico</label>
+                <label for="correoNuevo">{{"Correo electrónico" | translate}}</label>
               </div>
 
               <div class="input-field">
                 <i class="material-icons prefix">phone</i>
                 <input [(ngModel)]="usuarioNuevo.telefono" type="tel" id="telefonoNuevo" name="telefonoNuevo"
                   pattern="[0-9]{10}" required>
-                <label for="telefonoNuevo">Teléfono (10 dígitos)</label>
+                <label for="telefonoNuevo">{{"Teléfono (10 dígitos)" | translate}}</label>
               </div>
 
               <div class="input-field">
                 <i class="material-icons prefix">lock</i>
                 <input [(ngModel)]="usuarioNuevo.contrasena" type="password" id="passwordNuevo" name="passwordNuevo"
                   required>
-                <label for="passwordNuevo">Contraseña</label>
+                <label for="passwordNuevo">{{"Contraseña" | translate}}</label>
               </div>
 
               <div class="row">
                 <div class="col s6 center">
                   <a (click)="guardarNuevoUsuario()">
                     <button class="waves-effect btn-large red lighten-1 white-text modal-close" type="submit">
-                      Registrar
+                      {{"Registrar" | translate}}
                       <i class="material-icons right">send</i>
                     </button>
                   </a>
@@ -132,7 +132,7 @@
 
                 <div class="col s6 center">
                   <button class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
-                    type="submit">Registrar
+                    type="submit">{{"Cancelar" | translate}}
                     <i class="material-icons right">cancel</i>
                   </button>
                 </div>
@@ -152,29 +152,29 @@
 <div id="modalModificaUsuario" class="modal">
   <div class="modal-content">
     <div class="container">
-      <h2 class="center">Modificación de Usuario</h2>
+      <h2 class="center">{{"Modificación de Usuario" | translate}}</h2>
       <form id="modificaForm">
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
             <input [(ngModel)]="usuario.nombre" type="text" id="nombre" name="nombre" required>
-            <label for="nombre" class="active">Nombre</label>
+            <label for="nombre" class="active">{{"Nombre" | translate}}</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">email</i>
             <input [(ngModel)]="usuario.correo" type="email" id="correo" name="correo" required>
-            <label for="correo" class="active">Correo Electrónico</label>
+            <label for="correo" class="active">{{"Correo electrónico" | translate}}</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">phone</i>
             <input [(ngModel)]="usuario.telefono" type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" required>
-            <label for="telefono" class="active">Teléfono (10 dígitos)</label>
+            <label for="telefono" class="active">{{"Teléfono (10 dígitos)" | translate}}</label>
           </div>
 
           <div class=" col s11 offset-s1">
-            <label class="active">Rol</label>
+            <label class="active">{{"Rol" | translate}}</label>
             <select [(ngModel)]="usuario.id_rol" id="rol" name="rol" class="browser-default waves-block s12" >
-              <option value="" disabled selected>Escoge un rol</option>
+              <option value="" disabled selected>{{"Escoge un rol" | translate}}</option>
               <option *ngFor="let rol of roles" value="{{rol.id}}" >{{ rol.nombre }}</option>
             </select>
           </div>
@@ -186,7 +186,7 @@
           <div class="col s6 center">
             <a (click)="guardarActualizarUsuario()">
               <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
-                Modificar
+                {{"Modificar" | translate}}
                 <i class="material-icons right">send</i>
               </button>
             </a>
@@ -194,7 +194,7 @@
 
           <div class="col s6 center">
             <button class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
-              type="submit">Cancelar
+              type="submit">{{"Cancelar" | translate}}
               <i class="material-icons right">cancel</i>
             </button>
           </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Venta } from 'src/app/models/Venta';
 import { ProductoService } from 'src/app/services/producto.service';
 import { VentaService } from 'src/app/services/venta.service';
@@ -26,7 +27,7 @@ export class VentaComponent implements OnInit {
 
   liga : string =""
 
-  constructor(private ventasServices: VentaService, private productoService: ProductoService, private router: Router) {
+  constructor(private ventasServices: VentaService, private productoService: ProductoService, private router: Router, private translate: TranslateService) {
     if (localStorage.getItem("id_rol") != '3')
       router.navigateByUrl("home/producto")
     this.liga = environment.API_URI_IMAGENES + "/productos";
@@ -92,8 +93,8 @@ export class VentaComponent implements OnInit {
         console.error(err)
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: "No tienes ventas de productos este año y mes!",
+          title: this.translate.instant("Oops..."),
+          text: this.translate.instant("¡No tienes ventas de productos en este año y mes!"),
         });
       } 
     );
@@ -130,8 +131,8 @@ export class VentaComponent implements OnInit {
         console.error(err)
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: "No hay ventas de este producto!\nIntenta con otro producto"
+          title: this.translate.instant("Oops..."),
+          text: this.translate.instant("¡No hay ventas de este producto!\nIntenta con otro producto.")
         });
       }
     );

@@ -67,6 +67,7 @@ export class PerfilComponent implements OnInit {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: this.translate.instant('¡Sí, quiero eliminarlo!'),
+      cancelButtonText: this.translate.instant('Cancelar')
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuarioService.eliminarUsuario(this.usuarios[0].id).subscribe(

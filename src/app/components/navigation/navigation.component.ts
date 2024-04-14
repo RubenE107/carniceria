@@ -100,14 +100,15 @@ export class NavigationComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: this.translate.instant('Sí, quiero cerrar sesión')
+      confirmButtonText: this.translate.instant('Sí, quiero cerrar sesión'),
+      cancelButtonText: this.translate.instant('Cancelar')
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
         this.router.navigateByUrl('/');
         Swal.fire({
           title: this.translate.instant('¡Hasta luego!'),
-          text: this.translate.instant('Tu sesión se ha cerrado'),
+          text: this.translate.instant('Tu sesión se ha cerrado.'),
           icon: 'success'
         });
       }

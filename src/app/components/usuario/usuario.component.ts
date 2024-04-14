@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Rol } from 'src/app/models/Rol';
 import Swal from 'sweetalert2';
 import { RolService } from 'src/app/services/rol.service';
+import { TranslateService } from '@ngx-translate/core';
 declare var $:any;
 @Component({
   selector: 'app-usuario',
@@ -32,7 +33,7 @@ export class UsuarioComponent implements OnInit{
     });
   }
 
-  constructor(private usuarioService: UsuarioService,private rolService:RolService, private router: Router) {
+  constructor(private usuarioService: UsuarioService,private rolService:RolService, private router: Router, private translate: TranslateService) {
     if(localStorage.getItem("id_rol")!='3')
       router.navigateByUrl("home/producto")
     this.list();
@@ -86,18 +87,24 @@ export class UsuarioComponent implements OnInit{
     console.log('Click en eliminar usuario');
     console.log('Identificador del usuario: ', id);
     Swal.fire({
-      title: '¿Estás seguro bro?',
-      text: 'No es posible revertir este!',
+      title: this.translate.instant('¿Estás seguro, bro?'),
+      text: this.translate.instant('¡No es posible revertir esta acción!'),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, quiero eliminarlo!',
+      confirmButtonText: this.translate.instant('¡Sí, quiero eliminarlo!'),
+      cancelButtonText: this.translate.instant('Cancelar')
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuarioService.eliminarUsuario(id).subscribe(
           (resusuario: any) => {
             console.log('resusuario: ', resusuario);
+            if (Number(localStorage.getItem("id")) == this.usuario.id)
+            {
+              
+            }
+
             this.usuarioService.list().subscribe(
               (resusuario: any) => {
                 this.usuarios = resusuario;
@@ -112,8 +119,8 @@ export class UsuarioComponent implements OnInit{
         );
 
         Swal.fire({
-          title: 'Eliminado!',
-          text: 'Tu archivo ha sido eliminado.',
+          title: this.translate.instant('¡Eliminado!'),
+          text: this.translate.instant('El usuario ha sido eliminado.'),
           icon: 'success',
         });
       }

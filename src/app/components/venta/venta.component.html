@@ -5,7 +5,7 @@
                 <br>
                 <a (click)="eliminaFiltros()">
                     <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                        Eliminar filtros
+                        {{"Eliminar filtros" | translate}}
                         <i class="material-icons right">delete</i>
                     </button>
                 </a>
@@ -13,12 +13,12 @@
         </div>
         <div class="row col s12 card ">
             <div>
-                <h5 class="center">Filtrar por productos</h5>
+                <h5 class="center">{{"Filtrar por productos" | translate}}</h5>
             </div>
             <div class="input-field col s12">
                 <select [(ngModel)]="aux" id="producto" name="producto" class="browser-default "
                     (change)="listProducto()">
-                    <option value="" disabled selected>Escoge un producto</option>
+                    <option value="" disabled selected>{{"Escoge un producto" | translate}}</option>
                     <option *ngFor="let producto of productos" value="{{producto.id}}">{{ producto.nombre }}</option>
                 </select>
 
@@ -26,24 +26,24 @@
         </div>
         <div class="col s12 card ">
             <div>
-                <h5 class="center">Filtrar por precio de compra</h5>
+                <h5 class="center">{{"Filtrar por precio de compra" | translate}}</h5>
             </div>
             <div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">money</i>
                     <input [(ngModel)]="compramin" type="number" id="pmin" name="pmin" required>
-                    <label for="pmin" class="active">compra minimo</label>
+                    <label for="pmin" class="active">{{"Compra mínima" | translate}}</label>
                 </div>
                 <div class="input-field col s12">
                     <i class="material-icons prefix">money</i>
                     <input [(ngModel)]="compramax" type="number" id="pmax" name="pmax" required>
-                    <label for="pmax" class="active">compra maximo</label>
+                    <label for="pmax" class="active">{{"Compra máxima" | translate}}</label>
                 </div>
                 <div class="row">
                     <div class="col s12 center">
                         <a (click)="filtraPrecio()">
                             <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                                Filtrar
+                                {{"Filtrar" | translate}}
                                 <i class="material-icons right">search</i>
                             </button>
                         </a>
@@ -53,17 +53,17 @@
         </div>
         <div class="col s12 card">
             <div>
-                <h5 class="container">Filtrado por fecha</h5>
+                <h5 class="container">{{"Filtrado por fecha" | translate}}</h5>
             </div>
             <div class="input-field col s12 ">
-                <label class="active">Fecha </label>
+                <label class="active">{{"Fecha" | translate}}</label>
                 <input [(ngModel)]="venta.fecha" type="text" id="fechaVenta" #fechaD
                     (change)="actualizarFecha(fechaD.value)" class="datepicker" [value]="venta.fecha">
             </div>
             <div class=" row col s12 center">
                 <a (click)="filtrarFechaYear()">
                     <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                        Filtrar por año
+                        {{"Filtrar por año" | translate}}
                         <i class="material-icons right">search</i>
                     </button>
                 </a>
@@ -71,7 +71,7 @@
             <div class="row col s12 center">
                 <a (click)="filtrarFechaYearMonth()">
                     <button class="waves-effect btn-small red lighten-1 white-text " type="submit">
-                        Filtrar por año y mes
+                        {{"Filtrar por año y mes" | translate}}
                         <i class="material-icons right">search</i>
                     </button>
                 </a>
@@ -82,8 +82,8 @@
         <div class="container " *ngIf="Ventatotal!=-1" >
             <div class="card">
                 <div class="container ">
-                    <h5><strong>Total de veces que se ha comprado el producto:</strong> {{Ventatotal}}</h5>
-                    <h5><strong>El total ganado con este producto es:</strong> {{GananciaTotal}}</h5>
+                    <h5><strong>{{"Total de veces que se ha comprado el producto:" | translate}}</strong> {{Ventatotal}}</h5>
+                    <h5><strong>{{"El total ganado con este producto es:" | translate}}</strong> ${{GananciaTotal}}</h5>
                 </div>
             </div>
         </div>
@@ -105,9 +105,9 @@
                             <div class="card-stacked">
                                 <div class="card-content">
                                     <span class="card-title">{{ venta.nombre }}</span>
-                                    <p>Cantidad de producto: {{ venta.cantidad }}</p>
-                                    <p><strong>Precio: ${{ venta.monto }}</strong></p>
-                                    <p><strong>Fecha: {{ venta.fecha }}</strong></p>
+                                    <p>{{"Cantidad de producto:" | translate}} {{ venta.cantidad }} {{"Kg" | translate}}</p>
+                                    <p><strong>{{"Precio:" | translate}} ${{ venta.monto }}</strong></p>
+                                    <p><strong>{{"Fecha:" | translate}} {{ venta.fecha }}</strong></p>
                                 
                                 </div>
                               </div>

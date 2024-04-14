@@ -32,6 +32,18 @@ export class ReestablecerComponent implements OnInit {
           console.log("este: ",this.usuarioC)
         },err => console.error(err))
       })
+
+      if (localStorage.getItem("idioma") != null) {
+        if (localStorage.getItem("idioma") == "1") {
+          translate.use("en");
+        }
+        else if (localStorage.getItem("idioma") == "2") {
+          translate.use("es");
+        }
+      }
+      else {
+        localStorage.setItem("idioma" ,"2")
+      }
    }
 
   ngOnInit(): void {
@@ -58,9 +70,11 @@ export class ReestablecerComponent implements OnInit {
   setIdioma(idioma: any) {
     if (idioma == 1) {
       this.translate.use("en");
+      localStorage.setItem("idioma", "1");
     }
     if (idioma == 2) {
       this.translate.use("es");
+      localStorage.setItem("idioma", "2");
     }
   }
 }

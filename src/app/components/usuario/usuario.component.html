@@ -1,12 +1,15 @@
+<label style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: black;">
+  <p></p>
+  <h4 class="center-align">{{ 'Usuarios' | translate }}</h4>
+</label>
+
 <div class="row">
-  <div class="col m6 offset-m4">
-    <h5>{{"Agregar Usuario" | translate}}
+  <div class="col m12 offset-m2">
 
-      <a class="btn-floating btn-large red lighten-1 white-tex" (click)="nuevoUsuario()">
-        <i class="material-icons">add</i>
-      </a>
+    <a class="waves-effect waves-light  btn-small red custom-btn" (click)="nuevoUsuario()">
+      <i class="material-icons left">person_add</i> {{ 'Agregar Usuario' | translate }}
+    </a>
 
-    </h5>
   </div>
 </div>
 <div class="row container">
@@ -19,65 +22,70 @@
       </div> -->
 
     <table class="highlight " *ngIf="usuarios != undefined">
-      <tr id="titulos" class="center-align">
-        <div class="col s2">
-          <td>{{"Nombre" | translate}}</td>
-        </div>
-        <div class="col s2">
-          <td>{{"Correo" | translate}}</td>
-        </div>
-        <div class="col s2">
-          <td>{{"Teléfono" | translate}}</td>
-        </div>
-        <div class="col s2">
-          <td>{{"Rol" | translate}}</td>
-        </div>
-
-      </tr>
-<!-----------Paginación--------------------------------------------------->
-      <ng-container *ngFor="let usuario of usuarios|
+      <thead>
+        <tr id="titulos" class="center-align">
+          <div class="col s2">
+            <td>{{"Nombre" | translate}}</td>
+          </div>
+          <div class="col s2">
+            <td>{{"Correo" | translate}}</td>
+          </div>
+          <div class="col s2">
+            <td>{{"Teléfono" | translate}}</td>
+          </div>
+          <div class="col s2">
+            <td>{{"Rol" | translate}}</td>
+          </div>
+        </tr>
+      </thead>
+      <tbody>
+        <!-----------Paginación--------------------------------------------------->
+        <ng-container *ngFor="let usuario of usuarios|
         paginate: {
         itemsPerPage: pageSize,
         currentPage: p
         };let i=index">
-      <tr>
+          <tr>
 
-        <div class="col s2">
-          <td>{{ usuario.nombre }}</td>
-        </div>
-        <div class="col s2 ">
-          <td>{{ usuario.correo }}</td>
-        </div>
-        <div class="col s2">
-          <td>{{usuario.telefono}}</td>
-        </div>
-        <div class="col s2">
-          <td>{{usuario.rol}}</td>
-        </div>
-        <div class="col s2">
-          <td id="actualizar">
-            <a id="actualizar" (click)="actualizarUsuario(usuario.id)"
-              class="waves-effect waves-light blue btn-small ">{{"Actualizar" | translate}}
-              <i class="material-icons">create</i>
-            </a>
-          </td>
-        </div>
-        <div class="col s2 ">
-          <td id="eliminar">
-            <a (click)="eliminarUsuario(usuario.id)" class="waves-effect waves-light red btn-small m4">{{"Eliminar" | translate}}
-              <i class="material-icons">delete</i>
-            </a>
-          </td>
-        </div>
-      </tr>
-      </ng-container>
+            <div class="col s2">
+              <td>{{ usuario.nombre }}</td>
+            </div>
+            <div class="col s2 ">
+              <td>{{ usuario.correo }}</td>
+            </div>
+            <div class="col s2">
+              <td>{{usuario.telefono}}</td>
+            </div>
+            <div class="col s2">
+              <td>{{usuario.rol}}</td>
+            </div>
+            <div class="col s2">
+              <td id="actualizar">
+                <a id="actualizar" (click)="actualizarUsuario(usuario.id)"
+                  class="waves-effect waves-light blue btn-small ">{{"Actualizar" | translate}}
+                  <i class="material-icons">create</i>
+                </a>
+              </td>
+            </div>
+            <div class="col s2 ">
+              <td id="eliminar">
+                <a (click)="eliminarUsuario(usuario.id)" class="waves-effect waves-light red btn-small m4">{{"Eliminar"
+                  |
+                  translate}}
+                  <i class="material-icons">delete</i>
+                </a>
+              </td>
+            </div>
+          </tr>
+        </ng-container>
+      </tbody>
     </table>
-<!-----------Paginación--------------------------------------------------->
+    <!-----------Paginación--------------------------------------------------->
     <div class="row center-align">
-      <pagination-controls class="my-pagination" (pageChange)="p = ($event)"
-      previousLabel="Anterior" nextLabel="Siguiente">
+      <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
+        nextLabel="Siguiente">
       </pagination-controls>
-      </div> 
+    </div>
   </div>
 
 
@@ -173,9 +181,9 @@
 
           <div class=" col s11 offset-s1">
             <label class="active">{{"Rol" | translate}}</label>
-            <select [(ngModel)]="usuario.id_rol" id="rol" name="rol" class="browser-default waves-block s12" >
+            <select [(ngModel)]="usuario.id_rol" id="rol" name="rol" class="browser-default waves-block s12">
               <option value="" disabled selected>{{"Escoge un rol" | translate}}</option>
-              <option *ngFor="let rol of roles" value="{{rol.id}}" >{{ rol.nombre }}</option>
+              <option *ngFor="let rol of roles" value="{{rol.id}}">{{ rol.nombre }}</option>
             </select>
           </div>
 

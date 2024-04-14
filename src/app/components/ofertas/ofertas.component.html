@@ -13,49 +13,51 @@
 </div>
 <div class="row" *ngIf="AGRE_VER_oferta">
     <!--  -->
-    <div class="row col s8">
+    <div class="col s10 offset-s1">
 
         <table class="highlight" *ngIf="ofertas!=undefined">
-            <tr id="titulos" class="center-align">
-                <td style="width:20%; height: 20%;">{{"Imagen" | translate}}</td>
-                <td>{{"Producto" | translate}}</td>
-                <td>{{"Precio original" | translate}}</td>
-                <td>{{"Descuento %" | translate}}</td>
-                <td>{{"Resultado" | translate}}</td>
-                <td>{{"Fecha inicial" | translate}}</td>
-                <td>{{"Fecha final" | translate}}</td>
-            </tr>
-
-            <tr *ngFor="let producto of ofertas | 
+            <thead>
+                <tr id="titulos" class="center-align">
+                    <td style="width:20%; height: 20%;">{{"Imagen" | translate}}</td>
+                    <td>{{"Producto" | translate}}</td>
+                    <td>{{"Precio original" | translate}}</td>
+                    <td>{{"Descuento %" | translate}}</td>
+                    <td>{{"Resultado" | translate}}</td>
+                    <td>{{"Fecha inicial" | translate}}</td>
+                    <td>{{"Fecha final" | translate}}</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let producto of ofertas | 
             paginate: { 
                 itemsPerPage: pageSize, 
                 currentPage: p 
             }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
-                <td style="width:20%; height: 20%;">
-                    <a class="card-image" style="padding: 0%;">
-                        <!-- <img src="../../../assets/1_Imagenes/{{producto.nombre_producto}}.jpg" -->
+                    <td style="width:20%; height: 20%;">
+                        <a class="card-image" style="padding: 0%;">
+                            <!-- <img src="../../../assets/1_Imagenes/{{producto.nombre_producto}}.jpg" -->
                             <!-- alt="Imagen{{producto.nombre_producto}}" class="custom-image-size"> -->
                             <img src="{{liga}}/{{producto.id_producto}}.jpg" alt="{{liga}}/{{producto.id_producto}}.jpg"
-                            class="custom-image-size">
+                                class="custom-image-size">
 
-                    </a>
-                </td>
-                <td>{{producto.nombre_producto}}</td>
-                <td>{{producto.precio_orig}}</td>
-                <td>
-                    {{producto.porc_descuento}}
-                </td>
-                <td>{{producto.precio_orig*(1-(producto.porc_descuento/100))}}</td>
-                <td>{{producto.fecha_inicio}}</td>
-                <td>{{producto.fecha_fin}}</td>
-                <td>
-                    <a (click)="actualizarOferta(producto.id_oferta,producto.id_producto,producto.fecha_inicio,producto.fecha_fin,
-                producto.porc_descuento)"
-                        class="waves-effect waves-light blue btn-small ">{{"Actualizar" | translate}}
-                        <i class="material-icons">create</i>
-                    </a>
-                </td>
-            </tr>
+                        </a>
+                    </td>
+                    <td>{{producto.nombre_producto}}</td>
+                    <td>{{producto.precio_orig}}</td>
+                    <td>
+                        {{producto.porc_descuento}}
+                    </td>
+                    <td>{{producto.precio_orig*(1-(producto.porc_descuento/100))}}</td>
+                    <td>{{producto.fecha_inicio}}</td>
+                    <td>{{producto.fecha_fin}}</td>
+                    <td>
+                        <a (click)="actualizarOferta(producto.id_oferta,producto.id_producto,producto.fecha_inicio,producto.fecha_fin,
+                producto.porc_descuento)" class="waves-effect waves-light blue btn-small ">{{"Actualizar" | translate}}
+                            <i class="material-icons">create</i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
     <!--  -->
@@ -70,7 +72,8 @@
             <div class="row " style="padding: 5%;">
 
                 <div class="row col s12 card ">
-                    <h5 class="center">{{"Para activar una oferta en uno o más productos, seleccione los productos deseados." | translate}}</h5>
+                    <h5 class="center">{{"Para activar una oferta en uno o más productos, seleccione los productos
+                        deseados." | translate}}</h5>
                     <div>
                         <h5 class="center" style="font-size: large;">{{"Filtrar por animal" | translate}}</h5>
                     </div>
@@ -104,7 +107,7 @@
                             <div class="card-image col s3 " style="padding: 2%;">
                                 <!-- <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
                                     alt="Imagen{{producto.nombre}}"> -->
-                                    <img src="{{liga}}/{{producto.id}}.jpg" alt="{{liga}}/{{producto.id}}.jpg">
+                                <img src="{{liga}}/{{producto.id}}.jpg" alt="{{liga}}/{{producto.id}}.jpg">
 
                             </div>
                             <div class="card-stacked">
@@ -196,7 +199,8 @@ aplicar el mismom descuento a todos los productos
                             <label class="label-estilo1 waves-effect btn-big green lighten-1 s2">
                                 <input id="descuentoTodos" type="checkbox" (change)="aplicarMismoDE()" name="descuento"
                                     class="filled-in asignar">
-                                <span><a class="white-text">{{"Activa el mismo descuento a todo" | translate}}</a></span>
+                                <span><a class="white-text">{{"Activa el mismo descuento a todo" |
+                                        translate}}</a></span>
                             </label>
                         </form>
                     </div>
@@ -239,7 +243,7 @@ aplicar el mismom descuento a todos los productos
                         <input [(ngModel)]="oferta.porc_descuento" type="number" name="descuento" required>
                         <label for="descuento" class="active">{{"Descuento %" | translate}}</label>
                     </div>
-                    
+
 
 
 

@@ -30,3 +30,19 @@
   right: 80px;
   /* ajusta según sea necesario */
 }
+
+#dropdown_lang.dropdown-content.idioma-nav {
+  background-color: #007bff; /* Color de fondo de la lista */
+}
+
+#dropdown_lang.dropdown-content.idioma-nav li a {
+  color: #ffffff; /* Color del texto */
+}
+
+#dropdown_lang.dropdown-content.idioma-nav li:hover {
+  background-color: #ffffff; /* Cambiar color de fondo al pasar el cursor */
+}
+
+#dropdown_lang.dropdown-content.idioma-nav li a:hover {
+  color: #000000; /* Cambiar color del texto al pasar el cursor */
+}

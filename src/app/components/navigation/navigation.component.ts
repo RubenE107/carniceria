@@ -117,11 +117,9 @@ export class NavigationComponent implements OnInit {
   setIdioma(idioma: any) {
     if (idioma == 1) {
       this.translate.use("en");
-      console.log("Inglés");
     }
     if (idioma == 2) {
       this.translate.use("es");
-      console.log("Español");
     }
   }
 }

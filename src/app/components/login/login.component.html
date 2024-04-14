@@ -11,25 +11,25 @@
                             </div>
         
                             <form class="col s6">
-                                <h2 class="center-align" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Iniciar Sesión</h2>
+                                <h2 class="center-align" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{"Iniciar Sesión" | translate}}</h2>
                                 <div class="row col s12">
                                     <div class="input-field">
                                         <i class="material-icons prefix">email</i>
                                         <input type="email" [(ngModel)]="usuariologin.correo" name="emailLogin"
                                             id="emailLogin" placeholder="correo" autocomplete="off">
-                                        <label class="active" for="emailLogin">correo</label>
+                                        <label class="active" for="emailLogin">{{"Correo" | translate}}</label>
                                     </div>
                                     <br>
                                     <div class="input-field">
                                         <i class="material-icons prefix">lock</i>
                                         <input [(ngModel)]="usuariologin.contrasena" type="password" id="passwordLogin"
                                             name="passwordLogin" required>
-                                        <label class="active" for="passwordLogin">Contraseña</label>
+                                        <label class="active" for="passwordLogin">{{"Contraseña" | translate}}</label>
                                     </div>
                                     <br>
                                     <div>
                                         <a (click)="logueo()">
-                                            <button class="waves-effect btn red lighten-1 white-text">LOGIN</button>
+                                            <button class="waves-effect btn red lighten-1 white-text">{{"Acceder" | translate}}</button>
                                         </a>
                                     </div>
                                     <br>
@@ -37,20 +37,27 @@
                                         <a (click)="Modalrestablecer()">
                                             <button class="waves-effect btn-smaller blue-text"
                                                 style=" background: transparent; border: none; text-decoration: underline;">
-                                                Recuperar Contraseña
+                                                {{"Recuperar Contraseña" | translate}}
                                             </button>
                                         </a>
-                                        <br>
                                         <br>
                                     </div>
                                     <div>
-                                        No tienes cuenta
+                                        {{"¿No tienes cuenta?" | translate}}
                                         <a (click)="nuevoUsuario()">
                                             <button class="waves-effect btn-smaller blue-text"
                                                 style=" background: transparent; border: none; text-decoration: underline;">
-                                                Crea una aqui
+                                                {{"Crea una aquí" | translate}}
                                             </button>
                                         </a>
+                                    </div>
+                                    <div>
+                                        <br>
+                                        <a class="dropdown-trigger btn" data-target="dropdown_lang">{{"Idioma" | translate}}<i class="material-icons right">arrow_drop_down</i><i class="material-icons right">language</i></a>
+                                        <ul id="dropdown_lang" class="dropdown-content idioma-login">
+                                            <li><a (click)="setIdioma(1)">English</a></li>
+                                            <li><a (click)="setIdioma(2)">Español</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </form>
@@ -68,34 +75,34 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="container center">
-                            <h2>Registro de Usuario</h2>
+                            <h2>{{"Registro de Usuario" | translate}}</h2>
                             <form id="registroForm">
                                 <div class="input-field">
                                     <i class="material-icons prefix">account_circle</i>
                                     <input [(ngModel)]="usuarioNuevo.nombre" type="text" id="nombreNuevo" name="nombreNuevo"
                                         required>
-                                    <label for="nombreNuevo">Nombre</label>
+                                    <label for="nombreNuevo">{{"Nombre" | translate}}</label>
                                 </div>
     
                                 <div class="input-field">
                                     <i class="material-icons prefix">email</i>
                                     <input [(ngModel)]="usuarioNuevo.correo" type="email" id="correoNuevo"
                                         name="correoNuevo" required>
-                                    <label for="correoNuevo">Correo Electrónico</label>
+                                    <label for="correoNuevo">{{"Correo Electrónico" | translate}}</label>
                                 </div>
     
                                 <div class="input-field">
                                     <i class="material-icons prefix">phone</i>
                                     <input [(ngModel)]="usuarioNuevo.telefono" type="tel" id="telefonoNuevo"
                                         name="telefonoNuevo" pattern="[0-9]{10}" required>
-                                    <label for="telefonoNuevo">Teléfono (10 dígitos)</label>
+                                    <label for="telefonoNuevo">{{"Teléfono (10 dígitos)" | translate}}</label>
                                 </div>
     
                                 <div class="input-field">
                                     <i class="material-icons prefix">lock</i>
                                     <input [(ngModel)]="usuarioNuevo.contrasena" type="password" id="passwordNuevo"
                                         name="passwordNuevo" required>
-                                    <label for="passwordNuevo">Contraseña</label>
+                                    <label for="passwordNuevo">{{"Contraseña" | translate}}</label>
                                 </div>
     
                                 <div class="row">
@@ -103,7 +110,7 @@
                                         <a (click)="guardarNuevoUsuario()">
                                             <button class="waves-effect btn-large red lighten-1 white-text modal-close"
                                                 type="submit">
-                                                Registrar
+                                                {{"Registrar" | translate}}
                                                 <i class="material-icons right">send</i>
                                             </button>
                                         </a>
@@ -112,7 +119,7 @@
                                     <div class="col s6 center">
                                         <button
                                             class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
-                                            type="submit">Cancelar
+                                            type="submit">{{"Cancelar" | translate}}
                                             <i class="material-icons right">cancel</i>
                                         </button>
                                     </div>
@@ -130,16 +137,16 @@
     <div id="modalRestablecerContrasena" class="modal">
         <div class="modal-content">
             <div class="row col s12" style="margin-bottom: 0px !important;">
-                <h5 class="center">Restablecer Contraseña</h5>
+                <h5 class="center">{{"Restablecer Contraseña" | translate}}</h5>
             </div>
             <div class="row col s12" style="margin-bottom: 0px !important;">
-                <p>Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico.<br>
-                También la carpeta de correo no deseado en caso de no verlo en la bandeja de entrada.
+                <p>{{"Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico." | translate}}<br>
+                {{"También la carpeta de correo no deseado en caso de no verlo en la bandeja de entrada." | translate}}
                 <br>
-                Si no recibes el correo electrónico en unos minutos, verifica que la dirección de correo electrónico introducida sea correcta.</p>
+                {{"Si no recibes el correo electrónico en unos minutos, verifica que la dirección de correo electrónico introducida sea correcta." | translate}}</p>
             </div>
             <div style="border: .5px solid #060707; padding: 10px;">
-                <label class="correo">Correo electronico</label>
+                <label class="correo">{{"Correo electrónico" | translate}}</label>
                 <input required type="email" [(ngModel)]="usuarioRestablecer.correo" placeholder="correo"
                     value="usuario.correo">
             </div>
@@ -148,14 +155,14 @@
                 <div class="col s6 center">
                     <a (click)="restablecerContrasena(usuarioRestablecer.correo)">
                         <button class="waves-effect btn red lighten-1 white-text modal-close" type="submit">
-                            Enviar
+                            {{"Enviar" | translate}}
                             <i class="material-icons right">send</i>
                         </button>
                     </a>
                 </div>
                 <div class="col s6 center">
                     <button class="modal-action modal-close waves-effect btn red lighten-1 white-text"
-                        type="submit">Cancelar
+                        type="submit">{{"Cancelar" | translate}}
                         <i class="material-icons right">cancel</i>
                     </button>
                 </div>

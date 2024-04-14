@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Carrito } from 'src/app/models/Carrito';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { OfertaService } from 'src/app/services/oferta.service';
@@ -30,7 +31,8 @@ export class CarritoComponent implements OnInit {
     private productoService: ProductoService,
     private ventaService: VentaService,
     private router: Router,
-    private ofertaService: OfertaService
+    private ofertaService: OfertaService,
+    private translate: TranslateService
   ) {
     this.liga = environment.API_URI_IMAGENES + "/productos";
 
@@ -120,8 +122,8 @@ export class CarritoComponent implements OnInit {
     ) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
+        title: this.translate.instant('Oops...'),
+        text: this.translate.instant('¡Algo salió mal!'),
       });
     } else {
       this.carritoService
@@ -176,8 +178,8 @@ export class CarritoComponent implements OnInit {
     if(this.carritos.length < 1){
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
-        text: 'No tienes productos en tu carrito!',
+        title: this.translate.instant('Oops...'),
+        text: this.translate.instant('¡No tienes productos en tu carrito!'),
       });
       return;
     }
@@ -217,8 +219,8 @@ export class CarritoComponent implements OnInit {
     }
     Swal.fire({
       icon: 'success',
-      title: 'Hecho!!',
-      text: 'La compra se ha realizado con éxito!',
+      title: this.translate.instant('¡¡Hecho!!'),
+      text: this.translate.instant('¡La compra se ha realizado con éxito!'),
     });
     
 
@@ -226,13 +228,13 @@ export class CarritoComponent implements OnInit {
 
   eliminar(id_producto: any) {
     Swal.fire({
-      title: '¿Estás seguro bro?',
-      text: 'No es posible revertir este!',
+      title: this.translate.instant('¿Estás seguro, bro?'),
+      text: this.translate.instant('¡No es posible revertir esta acción!'),
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, quiero eliminarlo!',
+      confirmButtonText: this.translate.instant('¡Sí, quiero eliminarlo!'),
     }).then((result) => {
       if (result.isConfirmed) {
         this.carritoService.eliminar(id_producto).subscribe(
@@ -243,8 +245,8 @@ export class CarritoComponent implements OnInit {
         );
 
         Swal.fire({
-          title: 'Eliminado!',
-          text: 'Tu carrito ha sido eliminado.',
+          title: this.translate.instant('¡Eliminado!'),
+          text: this.translate.instant('Tu carrito ha sido eliminado.'),
           icon: 'success',
         });
       }

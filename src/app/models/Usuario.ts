@@ -6,6 +6,7 @@ export class Usuario{
     rol:string
     contrasena: string;
     telefono: string;
+    img:number;
 
     constructor() {
         this.id = 0;
@@ -15,5 +16,6 @@ export class Usuario{
         this.rol ='';
         this.contrasena = '';
         this.telefono = '';
+        this.img = 0;
     }
 }

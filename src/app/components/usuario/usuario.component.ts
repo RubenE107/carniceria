@@ -6,6 +6,8 @@ import { Rol } from 'src/app/models/Rol';
 import Swal from 'sweetalert2';
 import { RolService } from 'src/app/services/rol.service';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
+
 declare var $:any;
 @Component({
   selector: 'app-usuario',
@@ -20,6 +22,8 @@ export class UsuarioComponent implements OnInit{
   roles: Rol[] =[];
   p=1
   pageSize = 7
+
+  liga: string = ""
 
   ngOnInit(): void {
     this.rolService.list().subscribe((resRoles:any)=>{
@@ -36,6 +40,7 @@ export class UsuarioComponent implements OnInit{
   constructor(private usuarioService: UsuarioService,private rolService:RolService, private router: Router, private translate: TranslateService) {
     if(localStorage.getItem("id_rol")!='3')
       router.navigateByUrl("home/producto")
+    this.liga = environment.API_URI_IMAGENES + "/usuarios";
     this.list();
     
 

@@ -55,8 +55,8 @@ export class ProductoComponent implements OnInit {
     this.getAnimal()
   }
 
-  mostrarImagen(id_usuario: any) {
-    this.productoService.listOne(id_usuario).subscribe(
+  mostrarImagen(id_producto: any) {
+    this.productoService.listOne(id_producto).subscribe(
       (resusuario: any) => {
         this.producto = resusuario;
 
@@ -71,7 +71,6 @@ export class ProductoComponent implements OnInit {
   cargandoImagen(archivo: any) {
     this.imgUsuario = null;
     this.fileToUpload = archivo.files.item(0);
-    
   }
 
   ActualizaImagen() {
@@ -79,10 +78,10 @@ export class ProductoComponent implements OnInit {
     imgPromise.then(blob => {
       console.log("convirtiendo imagen")
       console.log(this.liga);
-
-
       this.imagenesService.guardarImagen(this.producto.id, "productos", blob).subscribe(
         (res: any) => {
+          if(this.fileToUpload!=null) this.producto.fotito=1
+          this.guardaModifica()
           this.imgUsuario = blob;
           // Actualizar la variable 'liga' después de cargar la imagen
           this.liga = environment.API_URI_IMAGENES + "/productos/";
@@ -111,11 +110,14 @@ export class ProductoComponent implements OnInit {
 
     $('#modalNuevoProducto').modal();
     $("#modalNuevoProducto").modal("open");
+    console.log(this.fileToUpload)
+
 
   }
   guardaNuevoProducto() {
-    this.productoService.crear(this.producto.nombre, this.producto.animal, this.producto.precio, this.producto.cantidad, this.producto.descripcion)
-      .subscribe((resusuario: any) => {
+    console.log(this.fileToUpload)
+    if(this.fileToUpload!=null) this.producto.fotito=1;    
+    this.productoService.crear(this.producto).subscribe((resusuario: any) => {
         $('#modalNuevoProducto').modal('close');
         console.log(resusuario.insertId);
         this.producto.id=resusuario.insertId;
@@ -167,7 +169,6 @@ export class ProductoComponent implements OnInit {
   guardaModifica() {
     this.producto.animal = this.producto.animal.toLocaleLowerCase();
     this.productoService.actualizar(this.producto).subscribe((resusuario: any) => {
-      $('#modalModificaProducto').modal('close');
       this.list();
     },
       err => console.error(err)

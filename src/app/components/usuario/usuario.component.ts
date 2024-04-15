@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { RolService } from 'src/app/services/rol.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { ImagenesService } from 'src/app/services/imagenes.service';
 
 declare var $:any;
 @Component({
@@ -23,6 +24,10 @@ export class UsuarioComponent implements OnInit{
   p=1
   pageSize = 7
 
+
+  imgUsuario: any;
+  fileToUpload: any;
+
   liga: string = ""
 
   ngOnInit(): void {
@@ -37,7 +42,7 @@ export class UsuarioComponent implements OnInit{
     });
   }
 
-  constructor(private usuarioService: UsuarioService,private rolService:RolService, private router: Router, private translate: TranslateService) {
+  constructor(private usuarioService: UsuarioService,private rolService:RolService, private router: Router, private translate: TranslateService, private imagenesService:ImagenesService) {
     if(localStorage.getItem("id_rol")!='3')
       router.navigateByUrl("home/producto")
     this.liga = environment.API_URI_IMAGENES + "/usuarios";
@@ -150,4 +155,69 @@ export class UsuarioComponent implements OnInit{
     
     $('#modalNuevoUsuario').modal('close');
   }
+
+  mostrarImagen(id: any) {
+    this.usuarioService.listOne(id).subscribe(
+      (resusuario: any) => {
+        this.usuario = resusuario;
+
+        //console.log(this.usuario)
+        $('#Imagen').modal();
+        $("#Imagen").modal("open");
+      },
+      (err) => console.error(err)
+    );
+  }
+
+  cargandoImagen(archivo: any) {
+    this.imgUsuario = null;
+    this.fileToUpload = archivo.files.item(0);
+  }
+
+
+  ActualizaImagen() {
+    let imgPromise = this.getFileBlob(this.fileToUpload);
+    imgPromise.then(blob => {
+      console.log("convirtiendo imagen")
+      console.log(this.liga);
+      this.imagenesService.guardarImagen(this.usuario.id, "usuarios", blob).subscribe(
+        (res: any) => {
+          if(this.fileToUpload!=null) this.usuario.img=1
+          this.guardaModifica()
+          this.imgUsuario = blob;
+          // Actualizar la variable 'liga' después de cargar la imagen
+          this.liga = environment.API_URI_IMAGENES + "/usuarios";
+
+        },
+        err => console.error(err));
+    });
+  }
+
+  guardaModifica() {
+    this.usuarioService.actualizar(this.usuario).subscribe((resusuario: any) => {
+      this.list();
+    },
+      err => console.error(err)
+    );
+
+    this.list();
+  }
+
+  getFileBlob(file: any) {
+    var reader = new FileReader();
+    return new Promise(function (resolve, reject) { //Espera a que se cargue la img
+      reader.onload = (function (thefile) {
+        return function (e) {
+          // console.log(e.target?.result)
+          resolve(e.target?.result);
+        };
+
+      })(file);
+      reader.readAsDataURL(file);
+    });
+
+  }
+
 }
+
+

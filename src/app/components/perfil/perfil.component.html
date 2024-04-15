@@ -1,37 +1,44 @@
-<div class="container" >
+<div class="container">
+    <div class="row">
 
-
-    <div *ngIf="flag!=0">
-        <h2>{{"Información de Usuario" | translate}}</h2>
-        <div class="input-field" >
-            <i class="material-icons prefix">account_circle</i>
-            <input [(ngModel)]="usuario.nombre" type="text" id="nombre" disabled >
-
-            <label for="nombre" class="active">{{"Nombre" | translate}}</label>
+        <div class="col s4">
+            <img class="col s12" src="{{liga}}" alt="{{liga}}">
         </div>
 
-        <div class="input-field">
-            <i class="material-icons prefix">email</i>
-            <input [(ngModel)]="usuario.correo" type="email" id="correo" name="correo" disabled>
-            <label for="correo" class="active">{{"Correo electrónico" | translate}}</label>
-        </div>
+        <div class="col s8" *ngIf="flag!=0">
+            <h2>{{"Información de Usuario" | translate}}</h2>
 
-        <div class="input-field">
-            <i class="material-icons prefix">phone</i>
-            <input [(ngModel)]="usuario.telefono" type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" disabled>
-            <label for="telefono" class="active">{{"Teléfono (10 dígitos)" | translate}}</label>
-        </div>
-    
-        <div class="row">
-            <div class="col s4 center">
-                <a (click)="modificarUsuario(usuario.id)">
-                    <button class="waves-effect btn-large  lighten-1 white-text modal-close" type="submit">
-                        {{"Actualizar datos" | translate}}
-                        <i class="material-icons right">send</i>
-                    </button>
-                </a>
+            <div class="input-field">
+                <i class="material-icons prefix">account_circle</i>
+                <input [(ngModel)]="usuario.nombre" type="text" id="nombre" disabled>
+
+                <label for="nombre" class="active">{{"Nombre" | translate}}</label>
             </div>
-            <!-- <div class="col s4 center">
+
+
+            <div class="input-field">
+                <i class="material-icons prefix">email</i>
+                <input [(ngModel)]="usuario.correo" type="email" id="correo" name="correo" disabled>
+                <label for="correo" class="active">{{"Correo electrónico" | translate}}</label>
+            </div>
+
+            <div class="input-field">
+                <i class="material-icons prefix">phone</i>
+                <input [(ngModel)]="usuario.telefono" type="tel" id="telefono" name="telefono" pattern="[0-9]{10}"
+                    disabled>
+                <label for="telefono" class="active">{{"Teléfono (10 dígitos)" | translate}}</label>
+            </div>
+
+            <div class="row">
+                <div class="col s4 center">
+                    <a (click)="modificarUsuario(usuario.id)">
+                        <button class="waves-effect btn-large  lighten-1 white-text modal-close" type="submit">
+                            {{"Actualizar datos" | translate}}
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </a>
+                </div>
+                <!-- <div class="col s4 center">
                 <a (click)="modificarContra()">
                     <button class="waves-effect btn-large  lighten-1 white-text modal-close" type="submit">
                         modificar Contraseña
@@ -40,15 +47,26 @@
                 </a>
             </div> -->
 
-            <div class="col s4 center">
-                <button class="modal-action modal-close waves-effect btn-large red  white-text" type="submit" (click)="eliminar()">{{"Eliminar" | translate}}
-                    <i class="material-icons right">delete</i>
-                </button>
+                <div class="col s4 center">
+                    <button class="modal-action modal-close waves-effect btn-large red  white-text" type="submit"
+                        (click)="eliminar()">{{"Eliminar" | translate}}
+                        <i class="material-icons right">delete</i>
+                    </button>
+                </div>
+
+                <div class="col s4 center">
+                    <a (click)="mostrarImagen()" href="javascript: void(0);">
+                        <button class="modal-action modal-close waves-effect btn-large blue  white-text" type="submit">
+                            {{"Actualizar imagen" | translate}}
+                            <i class="material-icons right">image</i>
+                        </button>
+                    </a>
+                </div>
             </div>
+
         </div>
 
     </div>
-
 
 </div>
 
@@ -122,8 +140,8 @@
                         <form id="registroForm">
                             <div class="input-field">
                                 <i class="material-icons prefix">account_circle</i>
-                                <input [(ngModel)]="actualizaUsuario.nombre" type="text" id="nombreNuevo" name="nombreNuevo"
-                                    required>
+                                <input [(ngModel)]="actualizaUsuario.nombre" type="text" id="nombreNuevo"
+                                    name="nombreNuevo" required>
                                 <label for="nombreNuevo" class="active">{{"Nombre" | translate}}</label>
                             </div>
 
@@ -138,13 +156,15 @@
                                 <i class="material-icons prefix">phone</i>
                                 <input [(ngModel)]="actualizaUsuario.telefono" type="tel" id="telefonoNuevo"
                                     name="telefonoNuevo" pattern="[0-9]{10}" required>
-                                <label for="telefonoNuevo" class="active">{{"Teléfono (10 dígitos)" | translate}}</label>
+                                <label for="telefonoNuevo" class="active">{{"Teléfono (10 dígitos)" |
+                                    translate}}</label>
                             </div>
 
                             <div class="row">
                                 <div class="col s6 center">
                                     <a (click)="cambiaUsuario()">
-                                        <button  class="waves-effect btn-large red lighten-1 white-text modal-close" type="submit">
+                                        <button class="waves-effect btn-large red lighten-1 white-text modal-close"
+                                            type="submit">
                                             {{"Registrar" | translate}}
                                             <i class="material-icons right">send</i>
                                         </button>
@@ -152,8 +172,9 @@
                                 </div>
 
                                 <div class="col s6 center">
-                                    <button 
-                                        class="modal-action modal-close waves-effect btn-large red lighten-1 white-text" type="submit">{{"Cancelar" | translate}}
+                                    <button
+                                        class="modal-action modal-close waves-effect btn-large red lighten-1 white-text"
+                                        type="submit">{{"Cancelar" | translate}}
                                         <i class="material-icons right">cancel</i>
                                     </button>
                                 </div>
@@ -163,6 +184,42 @@
 
                         </form>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="Imagen" class="modal">
+    <div class="modal-content">
+        <div class="row" style="margin-bottom: 0px !important;">
+            <div class="col s12">
+                <h5 class="center">{{"Imagen" | translate}}</h5>
+            </div>
+        </div>
+        <div style="border: .5px solid #78909c; padding: 10px;">
+            <div class="row">
+                <div class="input-field col s12">
+
+                    <div align="center">
+                        <img *ngIf="usuario.img === 1" width="64" src="{{liga}}" alt="{{liga}}">
+                    </div>
+                </div>
+
+                <div class="input-field col s6">
+                    <label>{{"Imagen" | translate}}</label>
+                    <br><br>
+                    <input type="file" (change)="cargandoImagen($event.target)" multiple>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s6 center">
+                    <a class="waves-effect btn-large brown lighten-3 black-text modal-close"
+                        (click)="ActualizaImagen()">{{"Enviar" | translate}}</a>
+                </div>
+                <div class="col s6 center">
+                    <a class="modal-action modal-close waves-effect btn-large brown lighten-3
+    black-text">{{"Cancelar" | translate}}</a>
                 </div>
             </div>
         </div>

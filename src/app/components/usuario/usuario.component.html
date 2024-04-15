@@ -12,9 +12,9 @@
 
   </div>
 </div>
-<div class="row container">
+<div class=" container ">
   <!-- Parte de 8 columnas -->
-  <div class="col s12 ">
+  <div class="row col s12 ">
     <!-- <div class="input-field">
         <i class="material-icons prefix">search</i>
         <input type="text" id="busqueda" name="busqueda" [(ngModel)]="busqueda" (click)="Buscar()">
@@ -24,7 +24,7 @@
     <table class="highlight " *ngIf="usuarios != undefined">
       <thead>
         <tr id="titulos" class="center-align">
-          <div class="col s2">
+          <div class="col s1">
             <td></td>
           </div>
           <div class="col s2">
@@ -49,8 +49,13 @@
         currentPage: p
         };let i=index">
           <tr>
-            <div class="col s2">
-              <td><img width="64" height="64" *ngIf="usuario.img!=0" src="{{liga}}/{{usuario.id}}.jpg"><img width="64" height="64" *ngIf="usuario.img==0" src="{{liga}}/0.jpg"></td>
+            <div class="col s1">
+              <td>
+                <img width="64" height="64" *ngIf="usuario.img!=0" src="{{liga}}/{{usuario.id}}.jpg">
+                <img width="64" height="64" *ngIf="usuario.img==0 && usuario.id_rol==1" src="{{liga}}/cliente.jpg">
+                <img width="64" height="64" *ngIf="usuario.img==0 && usuario.id_rol==2" src="{{liga}}/empleado.jpg">
+                <img width="64" height="64" *ngIf="usuario.img==0 && usuario.id_rol==3" src="{{liga}}/admin.jpg">
+              </td>
             </div>
 
             <div class="col s2">
@@ -65,7 +70,8 @@
             <div class="col s2">
               <td>{{usuario.rol}}</td>
             </div>
-            <div class="col s2">
+            <div>
+            <div class="col s1">
               <td id="actualizar">
                 <a id="actualizar" (click)="actualizarUsuario(usuario.id)"
                   class="waves-effect waves-light blue btn-small ">{{"Actualizar" | translate}}
@@ -73,7 +79,7 @@
                 </a>
               </td>
             </div>
-            <div class="col s2 ">
+            <div class="col s1 ">
               <td id="eliminar">
                 <a (click)="eliminarUsuario(usuario.id)" class="waves-effect waves-light red btn-small m4">{{"Eliminar"
                   |
@@ -82,6 +88,17 @@
                 </a>
               </td>
             </div>
+            <div class="col s1 ">
+              <td >
+                <a (click)="mostrarImagen(usuario.id)" href="javascript: void(0);">
+                  <!-- <button class="waves-effect btn-small red lighten-1 white-text  " type="submit">
+                    {{"Actualizar imagen" | translate}} -->
+                    <i class="material-icons right">image</i>
+                  <!-- </button> -->
+                </a>
+              </td>
+            </div>
+          </div>
           </tr>
         </ng-container>
       </tbody>
@@ -194,8 +211,6 @@
             </select>
           </div>
 
-
-
         </div>
         <div class="row">
           <div class="col s6 center">
@@ -215,6 +230,45 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="Imagen" class="modal">
+  <div class="modal-content">
+    <div class="row" style="margin-bottom: 0px !important;">
+      <div class="col s12">
+        <h5 class="center">{{"Imagen" | translate}}</h5>
+      </div>
+    </div>
+    <div style="border: .5px solid #78909c; padding: 10px;">
+      <div class="row">
+        <div class="input-field col s12">
+
+          <div align="center">
+            <img *ngIf="usuario.img === 1" width="64" src="{{liga}}/{{usuario.id}}.jpg"
+              alt="{{liga}}/{{usuario.id}}.jpg">
+            <img *ngIf="usuario.img === 0" width="64" src="{{liga}}/0.jpg" alt="{{liga}}/0.jpg">
+          </div>
+        </div>
+
+        <div class="input-field col s6">
+          <label>{{"Imagen" | translate}}</label>
+          <br><br>
+          <input type="file" (change)="cargandoImagen($event.target)" multiple>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6 center">
+          <a class="waves-effect btn-large brown lighten-3 black-text modal-close"
+            (click)="ActualizaImagen()">{{"Enviar" | translate}}</a>
+        </div>
+        <div class="col s6 center">
+          <a class="modal-action modal-close waves-effect btn-large brown lighten-3
+  black-text">{{"Cancelar" | translate}}</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

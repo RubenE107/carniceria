@@ -45,7 +45,8 @@ actualizar(usuario: any){
     "id_rol":usuario.id_rol,
     "correo":usuario.correo,
     "telefono":usuario.telefono,
-    "contra":usuario.contra    
+    "contra":usuario.contra,
+    "img": usuario.img    
   }
   return this.http.put(`${environment.API_URI}/users/update/${usuario.id}`,nuevo);
 }

@@ -3,12 +3,18 @@
 
     <div >
         <h2>{{"Información de Usuario" | translate}}</h2>
+        <div class="col s2" *ngIf="usuarios.length>0">
+            <img width="64" height="64" *ngIf="usuarios[0].img!=0" src="{{liga}}/{{usuarios[0].id}}.jpg">
+            <img width="64" height="64" *ngIf="usuarios[0].img==0" src="{{liga}}/0.jpg">
+        </div>
+
         <div class="input-field" >
             <i class="material-icons prefix">account_circle</i>
             <input [(ngModel)]="usuarios[0].nombre" type="text" id="nombre" disabled >
 
             <label for="nombre" class="active">{{"Nombre" | translate}}</label>
         </div>
+
 
         <div class="input-field">
             <i class="material-icons prefix">email</i>

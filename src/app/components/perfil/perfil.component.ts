@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Usuario } from 'src/app/models/Usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 declare var $:any;;
 
@@ -18,10 +19,15 @@ export class PerfilComponent implements OnInit {
   contra1 : string = '';
   contra2 :string ='';
   newContra: string = '';
+  id:any = '';
+  liga :string = '';
+
   flag=0;
   constructor(private usuarioService: UsuarioService, private router: Router, private translate: TranslateService) {
     this.list()
-    console.log(localStorage.getItem("id_rol"))
+    console.log(localStorage.getItem("id"))
+    this.id = localStorage.getItem("id");
+    this.liga = environment.API_URI_IMAGENES + "/usuarios";
    }
 
   ngOnInit(): void {

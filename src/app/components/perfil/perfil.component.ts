@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Usuario } from 'src/app/models/Usuario';
+import { ImagenesService } from 'src/app/services/imagenes.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { environment } from 'src/environments/environment';
+
+
+
 import Swal from 'sweetalert2';
 declare var $:any;;
 
@@ -22,16 +26,21 @@ export class PerfilComponent implements OnInit {
   id:any = '';
   liga :string = '';
 
+  imgUsuario: any;
+  fileToUpload: any;
   flag=0;
-  constructor(private usuarioService: UsuarioService, private router: Router, private translate: TranslateService) {
+  constructor(private usuarioService: UsuarioService, private router: Router, private translate: TranslateService, private imagenesService:ImagenesService) {
+    
     this.list()
     console.log(localStorage.getItem("id"))
     this.id = localStorage.getItem("id");
-    this.liga = environment.API_URI_IMAGENES + "/usuarios";
+    //this.liga = environment.API_URI_IMAGENES + "/usuarios";
+
+    this.imagen()
    }
 
   ngOnInit(): void {
-    
+    this.imagen()
   }
 
   list(){
@@ -102,4 +111,88 @@ export class PerfilComponent implements OnInit {
     $('#modalContra').modal('close');
 
   }
+
+
+
+
+  imagen()
+  {
+    this.usuarioService.listOne(localStorage.getItem('id')).subscribe((resusuario:any)=>
+    {
+      let user:Usuario = resusuario;
+
+      if(user.img == 0)
+        this.liga = environment.API_URI_IMAGENES+"/usuarios/0.jpg"
+      else
+        this.liga = environment.API_URI_IMAGENES+"/usuarios/"+user.id+".jpg"
+
+      console.log(this.liga)
+    })
+  }
+
+  mostrarImagen() {
+    this.usuarioService.listOne(localStorage.getItem('id')).subscribe(
+      (resusuario: any) => {
+        this.usuario = resusuario;
+
+        //console.log(this.usuario)
+        $('#Imagen').modal();
+        $("#Imagen").modal("open");
+      },
+      (err) => console.error(err)
+    );
+  }
+
+  cargandoImagen(archivo: any) {
+    this.imgUsuario = null;
+    this.fileToUpload = archivo.files.item(0);
+  }
+
+
+  ActualizaImagen() {
+    let imgPromise = this.getFileBlob(this.fileToUpload);
+    imgPromise.then(blob => {
+      console.log("convirtiendo imagen")
+      console.log(this.liga);
+      this.imagenesService.guardarImagen(this.usuario.id, "usuarios", blob).subscribe(
+        (res: any) => {
+          if(this.fileToUpload!=null) this.usuario.img=1
+          this.guardaModifica()
+          this.imgUsuario = blob;
+          // Actualizar la variable 'liga' después de cargar la imagen
+          this.imagen();
+
+        },
+        err => console.error(err));
+    });
+  }
+
+  guardaModifica() {
+    this.usuarioService.actualizar(this.usuario).subscribe((resusuario: any) => {
+      this.list();
+    },
+      err => console.error(err)
+    );
+
+    this.list();
+  }
+
+  getFileBlob(file: any) {
+    var reader = new FileReader();
+    return new Promise(function (resolve, reject) { //Espera a que se cargue la img
+      reader.onload = (function (thefile) {
+        return function (e) {
+          // console.log(e.target?.result)
+          resolve(e.target?.result);
+        };
+
+      })(file);
+      reader.readAsDataURL(file);
+    });
+
+  }
+
 }
+
+
+

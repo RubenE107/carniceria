@@ -12,9 +12,9 @@
 
   </div>
 </div>
-<div class="container">
+<div class=" container ">
   <!-- Parte de 8 columnas -->
-  <div class="row s12 ">
+  <div class="row col s12 ">
     <!-- <div class="input-field">
         <i class="material-icons prefix">search</i>
         <input type="text" id="busqueda" name="busqueda" [(ngModel)]="busqueda" (click)="Buscar()">
@@ -65,7 +65,8 @@
             <div class="col s2">
               <td>{{usuario.rol}}</td>
             </div>
-            <div class="col s2">
+            <div>
+            <div class="col s1">
               <td id="actualizar">
                 <a id="actualizar" (click)="actualizarUsuario(usuario.id)"
                   class="waves-effect waves-light blue btn-small ">{{"Actualizar" | translate}}
@@ -73,7 +74,7 @@
                 </a>
               </td>
             </div>
-            <div class="col s2 ">
+            <div class="col s1 ">
               <td id="eliminar">
                 <a (click)="eliminarUsuario(usuario.id)" class="waves-effect waves-light red btn-small m4">{{"Eliminar"
                   |
@@ -82,16 +83,17 @@
                 </a>
               </td>
             </div>
-            <div class="col s2 ">
+            <div class="col s1 ">
               <td >
                 <a (click)="mostrarImagen(usuario.id)" href="javascript: void(0);">
-                  <button class="waves-effect btn-small red lighten-1 white-text  " type="submit">
-                    {{"Actualizar imagen" | translate}}
+                  <!-- <button class="waves-effect btn-small red lighten-1 white-text  " type="submit">
+                    {{"Actualizar imagen" | translate}} -->
                     <i class="material-icons right">image</i>
-                  </button>
+                  <!-- </button> -->
                 </a>
               </td>
             </div>
+          </div>
           </tr>
         </ng-container>
       </tbody>

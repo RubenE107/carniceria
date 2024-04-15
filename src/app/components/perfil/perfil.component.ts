@@ -12,28 +12,28 @@ declare var $:any;;
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-  usuarios :Usuario [] = [];
-  usuario!: Usuario;
-  actualizaUsuario!:Usuario;
+  usuario!: Usuario ;
+  actualizaUsuario:Usuario = new Usuario();
   contra1 : string = '';
   contra2 :string ='';
   newContra: string = '';
-  flag=0;
+  flag=0
   constructor(private usuarioService: UsuarioService, private router: Router, private translate: TranslateService) {
     this.list()
-    console.log(localStorage.getItem("id_rol"))
+    //console.log(localStorage.getItem("id_rol"))
    }
 
   ngOnInit(): void {
-    
+    this.list();
   }
 
   list(){
     this.usuarioService.listOne(localStorage.getItem("id")).subscribe((resUsuario:any)=>{
       
-      this.usuarios.push(resUsuario);
-      this.flag=1
-      console.log(this.usuarios)
+      //this.usuarios.push(resUsuario)
+      this.usuario = resUsuario
+      this.flag=1;
+      //console.log(this.usuarios)
     },
     err => console.log(err)
     );
@@ -51,7 +51,7 @@ export class PerfilComponent implements OnInit {
   }
   cambiaUsuario(){
     this.usuarioService.actualizar(this.actualizaUsuario).subscribe((resUsuario:any)=>{
-      this.usuarios[0] = this.actualizaUsuario;
+      this.usuario = this.actualizaUsuario;
       $('#modalActualiza').modal('close');
     },
     err => console.log(err)
@@ -70,7 +70,7 @@ export class PerfilComponent implements OnInit {
       cancelButtonText: this.translate.instant('Cancelar')
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuarioService.eliminarUsuario(this.usuarios[0].id).subscribe(
+        this.usuarioService.eliminarUsuario(this.usuario.id).subscribe(
           (resusuario: any) => {
             localStorage.removeItem("id");
             localStorage.removeItem("id_rol");

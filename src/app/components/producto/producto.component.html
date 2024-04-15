@@ -78,7 +78,9 @@
               <div class="card">
                 <div class="card-image contenedor" style="position: relative;">
                   <!-- <img  src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg" class="imagen1" alt="Imagen{{producto.nombre}}" style="width: 100%;" /> -->
-                  <img src="{{liga}}/{{producto.id}}.jpg" alt="{{liga}}/{{producto.id}}.jpg">
+                  <img *ngIf="producto.fotito === 1" width="64" src="{{liga}}/{{producto.id}}.jpg"
+                    alt="{{liga}}/{{producto.id}}.jpg">
+                  <img *ngIf="producto.fotito === 0" width="64" src="{{liga}}/0.jpg" alt="{{liga}}/0.jpg">
                   <img *ngIf="producto.oferta==true" src="../../../assets/img/oferta3.png" class="imagen2"
                     alt="oferta.png" style="position: absolute; top: 0; left: 0; width: 50%; z-index: 1;" />
                 </div>
@@ -89,9 +91,10 @@
                     <span class="card-title">{{producto.nombre}}</span>
                     <p><strong>{{"Animal de origen:" | translate}}</strong> {{producto.animal}}</p>
                     <p><strong>{{"Precio por Kg:" | translate}}</strong> ${{producto.precio}}</p>
-                    <p><strong>{{"Cantidad disponible:" | translate}} </strong> {{producto.cantidad}} {{"Kg" | translate}}</p>
+                    <p><strong>{{"Cantidad disponible:" | translate}} </strong> {{producto.cantidad}} {{"Kg" |
+                      translate}}</p>
                     <p>{{producto.descripcion}}</p>
-                    
+
                     <div class="row " *ngIf="producto.cantidad>0">
                       <br>
                       <div class="col s12 center">
@@ -126,9 +129,9 @@
                         </a>
                       </div>
                       <br>
-                      <br>  
-                      <div class="col s12 center" >
-                        <a (click)="mostrarImagen(producto.id)" href="javascript: void(0);" >
+                      <br>
+                      <div class="col s12 center">
+                        <a (click)="mostrarImagen(producto.id)" href="javascript: void(0);">
                           <button class="waves-effect btn-small red lighten-1 white-text  " type="submit">
                             {{"Actualizar imagen" | translate}}
                             <i class="material-icons right">image</i>
@@ -191,7 +194,7 @@
         <div class="row">
           <div class="col s6 center">
             <a (click)="guardaModifica()">
-              <button class="waves-effect btn-large red lighten-1 white-text" type="submit">
+              <button class=" modal-action modal-close waves-effect btn-large red lighten-1 white-text" type="submit">
                 {{"Modificar" | translate}}
                 <i class="material-icons right">send</i>
               </button>
@@ -333,9 +336,9 @@
         <div class="input-field col s12">
 
           <div align="center">
-            <img *ngIf="producto.fotito == 1" width="64" src="{{liga}}/{{producto.id}}.jpg"
+            <img *ngIf="producto.fotito === 1" width="64" src="{{liga}}/{{producto.id}}.jpg"
               alt="{{liga}}/{{producto.id}}.jpg">
-            <img *ngIf="producto.fotito == 0" width="64" src="{{liga}}/0.jpg" alt="{{liga}}/0.jpg">
+            <img *ngIf="producto.fotito === 0" width="64" src="{{liga}}/0.jpg" alt="{{liga}}/0.jpg">
           </div>
         </div>
 
@@ -347,7 +350,8 @@
       </div>
       <div class="row">
         <div class="col s6 center">
-          <a class="waves-effect btn-large brown lighten-3 black-text modal-close" (click)="ActualizaImagen()">{{"Enviar" | translate}}</a>
+          <a class="waves-effect btn-large brown lighten-3 black-text modal-close"
+            (click)="ActualizaImagen()">{{"Enviar" | translate}}</a>
         </div>
         <div class="col s6 center">
           <a class="modal-action modal-close waves-effect btn-large brown lighten-3

@@ -13,13 +13,17 @@ list() {
 listOne(id: any){
   return this.http.get(`${environment.API_URI}/productos/listOne/${id}`);
 }
-crear(nombre: any, animal: any, precio:any, cantidad: any,descripcion:any){
+crear(producto: any){
   const nuevo ={
-    "nombre":nombre,
-    "animal":animal,
-    "precio":precio,
-    "cantidad":cantidad,
-    "descripcion":descripcion    
+    "nombre":producto.nombre,
+    "animal":producto.animal,
+    "precio":producto.precio,
+    "cantidad":producto.cantidad,
+    "descripcion":producto.descripcion,
+    "fotito":producto.fotito,
+    "name": producto.name,
+    "animal_eng": producto.animal_eng,
+    "description" : producto.description
   }
   return this.http.post(`${environment.API_URI}/productos/create`,nuevo);
 }
@@ -29,7 +33,11 @@ actualizar(producto: any){
     "animal":producto.animal,
     "precio":producto.precio,
     "cantidad":producto.cantidad,
-    "descripcion":producto.descripcion    
+    "descripcion":producto.descripcion,
+    "fotito":producto.fotito,
+    "name": producto.name,
+    "animal_eng": producto.animal_eng,
+    "description" : producto.description
   }
   return this.http.put(`${environment.API_URI}/productos/update/${producto.id}`,nuevo);
 

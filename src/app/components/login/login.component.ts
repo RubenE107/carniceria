@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
   logueo() {
 
     this.usuarioService.existe(this.usuariologin.correo, this.usuariologin.contrasena).subscribe((resusuario: any) => {
-      if (resusuario.id != -1) {
+      if (resusuario.id > -1) {
         if (resusuario.id_rol === 3) {
 
           this.router.navigateByUrl('home/venta')
@@ -62,11 +62,18 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('id', resusuario.id);
         localStorage.setItem('id_rol', resusuario.id_rol);
 
-      } else {
-        console.log("Error, usuario o contrasena no valida");
+      } else if (resusuario.id == -1) {
+        console.log("Error, contraseña no valida");
         Swal.fire({
           title: this.translate.instant("Credenciales incorrectas"),
-          text: this.translate.instant("El correo y/o la contraseña ingresados son incorrectos.\nInténtelo nuevamente."),
+          text: this.translate.instant("La contraseña ingresada es incorrecta.\nInténtelo nuevamente."),
+          icon: "error"
+        })
+      } else {
+        console.log("Error, el usuario no existe")
+        Swal.fire({
+          title: this.translate.instant("Correo no registrado"),
+          text: this.translate.instant("El correo ingresado no existe en la plataforma.\nInténtelo nuevamente."),
           icon: "error"
         })
       }

@@ -53,7 +53,9 @@ actualizar(usuario: any){
 eliminarUsuario(id : any){ 
   return this.http.delete(`${environment.API_URI}/users/delete/${id}`);
 }
-
+ValidarCorreo( correo: any){
+  return this.http.post(`${environment.API_URI}/users/validarCorreo`, {"correo":correo});
+}
 actualizarContrasenha(correo:any, contra:any)
 {
   return this.http.put(`${environment.API_URI}/users/nuevaContra`, {"correo":correo, "contra":contra});

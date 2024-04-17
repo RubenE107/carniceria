@@ -79,15 +79,27 @@ export class LoginComponent implements OnInit {
     $("#modalNuevoUsuario").modal("open");
   }
   guardarNuevoUsuario() {
-    this.usuarioService.crear(this.usuarioNuevo.nombre, this.usuarioNuevo.correo,
-      this.usuarioNuevo.telefono, this.usuarioNuevo.contrasena).subscribe((resusuario: any) => {
-        console.log("Se hizo la consulta");
-        Swal.fire(this.translate.instant("Se ha agregado un nuevo usuario.\nPor favor, inicia sesión."));
-      },
-        err => console.error(err)
-      );
+    this.usuarioService.ValidarCorreo(this.usuarioNuevo.correo).subscribe((resusuario: any) => {
 
-    $('#modalNuevoUsuario').modal('close');
+      if (resusuario.correo_existe == 1) {
+        Swal.fire(this.translate.instant("Este correo ya existe por favor agrega uno nuevo\n"));
+        console.log("el correo ya existe")
+      }else{
+        this.usuarioService.crear(this.usuarioNuevo.nombre, this.usuarioNuevo.correo,
+          this.usuarioNuevo.telefono, this.usuarioNuevo.contrasena).subscribe((resusuario: any) => {
+            console.log("Se hizo la consulta");
+            $('#modalNuevoUsuario').modal('close');
+            Swal.fire(this.translate.instant("Se ha agregado un nuevo usuario.\nPor favor, inicia sesión."));
+          },
+            err => console.error(err)
+          );
+    
+      }
+    },
+      err => console.error(err)
+    );
+
+    
   }
   Modalrestablecer() {
     $('#modalRestablecerContrasena').modal({ dismissible: false });

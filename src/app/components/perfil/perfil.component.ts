@@ -61,12 +61,24 @@ export class PerfilComponent implements OnInit {
     $("#modalActualiza").modal("open");
   }
   cambiaUsuario() {
-    this.usuarioService.actualizar(this.actualizaUsuario).subscribe((resUsuario: any) => {
-      this.usuario = this.actualizaUsuario;
-      $('#modalActualiza').modal('close');
+    this.usuarioService.ValidarCorreo(this.actualizaUsuario.correo).subscribe((resusuario: any) => {
+
+      if (resusuario.correo_existe ==1 && this.usuario.correo != this.actualizaUsuario.correo) {
+        Swal.fire(this.translate.instant("Este correo ya existe por favor agrega uno nuevo\n"));
+      }else{
+        this.usuarioService.actualizar(this.actualizaUsuario).subscribe((resUsuario: any) => {
+          this.usuario = this.actualizaUsuario;
+          $('#modalActualiza').modal('close');
+        },
+          err => console.log(err)
+        );
+    
+      }
     },
-      err => console.log(err)
+      err => console.error(err)
     );
+
+   
 
   }
   eliminar() {

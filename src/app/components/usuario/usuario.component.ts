@@ -18,6 +18,7 @@ declare var $:any;
 export class UsuarioComponent implements OnInit{
   usuarios: Usuario[] = [];
   usuario!: Usuario;
+  actualizaUsuario : Usuario = new Usuario();
   busqueda!: string;
   usuarioNuevo = new Usuario();
   roles: Rol[] =[];
@@ -75,6 +76,7 @@ export class UsuarioComponent implements OnInit{
     
     this.usuarioService.listOne(id).subscribe((resUsuario:any)=>{
       this.usuario = resUsuario;
+      this.actualizaUsuario.correo = resUsuario.correo;
       $('#modalModificaUsuario').modal();
       $("#modalModificaUsuario").modal("open");
       console.log(this.usuario);
@@ -84,14 +86,26 @@ export class UsuarioComponent implements OnInit{
   }
   
   guardarActualizarUsuario(){
-    this.usuarioService.actualizar(this.usuario).subscribe((resusuario: any) =>
-    {
-      console.log(this.usuario);
-      $('#modalModificaUsuario').modal('close');
-      this.list();
+    this.usuarioService.ValidarCorreo(this.usuario.correo).subscribe((resusuario: any) => {
+      console.log(this.actualizaUsuario.correo);
+      console.log(this.usuario.correo);
+
+      
+      if (resusuario.correo_existe ==1 && this.usuario.correo != this.actualizaUsuario.correo) {
+        Swal.fire(this.translate.instant("Este correo ya existe por favor agrega uno nuevo\n"));
+      }else{
+        this.usuarioService.actualizar(this.usuario).subscribe((resUsuario: any) => {
+          $('#modalModificaUsuario').modal('close');
+        },
+          err => console.log(err)
+        );
+    
+      }
     },
-    err => console.error(err)
+      err => console.error(err)
     );
+
+    
   }
   eliminarUsuario(id: any) {
     console.log('Click en eliminar usuario');

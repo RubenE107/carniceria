@@ -163,25 +163,40 @@
       <h2 class="center">{{"Modificación del Producto" | translate}}</h2>
       <form id="modificaForm">
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col s6">
             <i class="material-icons prefix">assignment</i>
             <input [(ngModel)]="producto.nombre" type="text" id="nombre" name="nombre" required>
-            <label for="nombre" class="active">{{"Nombre" | translate}}</label>
+            <label for="nombre" class="active">{{"Nombre en español" | translate}}</label>
           </div>
-          <div class="input-field col s12">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">assignment</i>
+            <input [(ngModel)]="producto.name" type="text" id="nombre" name="nombre" required>
+            <label for="nombre" class="active">{{"Nombre en inglés" | translate}}</label>
+          </div>
+          <div class="input-field col s6">
             <i class="material-icons prefix">pets</i>
             <input [(ngModel)]="producto.animal" type="text" id="animal" name="animal" required>
-            <label for="animal" class="active">{{"Animal" | translate}}</label>
+            <label for="animal" class="active">Animal {{"en español" | translate}}</label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">pets</i>
+            <input [(ngModel)]="producto.animal_eng" type="text" id="animal_eng" name="animal_eng" required>
+            <label for="animal" class="active">Animal {{"en inglés" | translate}}</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">attach_money</i>
             <input [(ngModel)]="producto.precio" type="number" id="precio" name="precio" required>
             <label for="precio" class="active">{{"Precio" | translate}}</label>
           </div>
-          <div class="input-field col s12">
+          <div class="input-field col s6">
             <i class="material-icons prefix">comment</i>
             <input [(ngModel)]="producto.descripcion" type="text" id="descripcion" name="descripcion" required>
-            <label for="descripcion" class="active">{{"Descripción" | translate}}</label>
+            <label for="descripcion" class="active">{{"Descripción" | translate}} {{"en español" | translate}} </label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">comment</i>
+            <input [(ngModel)]="producto.description" type="text" id="description" name="description" required>
+            <label for="descripcion" class="active">{{"Descripción" | translate}} {{"en inglés" | translate}}</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">money</i>
@@ -254,25 +269,40 @@
       <h2 class="center">{{"Nuevo Producto" | translate}}</h2>
       <form id="NuevoForm">
         <div class="row">
-          <div class="input-field col s12">
+          <div class="input-field col s6">
             <i class="material-icons prefix">assignment</i>
             <input [(ngModel)]="producto.nombre" type="text" id="nombre" name="nombre" required>
-            <label for="nombre" class="active">{{"Nombre" | translate}}</label>
+            <label for="nombre" class="active">{{"Nombre en español" | translate}}</label>
           </div>
-          <div class="input-field col s12">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">assignment</i>
+            <input [(ngModel)]="producto.name" type="text" id="nombre" name="nombre" required>
+            <label for="nombre" class="active">{{"Nombre en inglés" | translate}}</label>
+          </div>
+          <div class="input-field col s6">
             <i class="material-icons prefix">pets</i>
             <input [(ngModel)]="producto.animal" type="text" id="animal" name="animal" required>
-            <label for="animal" class="active">{{"Animal" | translate}}</label>
+            <label for="animal" class="active">Animal {{"en español" | translate}}</label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">pets</i>
+            <input [(ngModel)]="producto.animal_eng" type="text" id="animal" name="animal" required>
+            <label for="animal" class="active">Animal {{"en inglés" | translate}}</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">attach_money</i>
             <input [(ngModel)]="producto.precio" type="number" id="precio" name="precio" required>
             <label for="precio" class="active">{{"Precio" | translate}}</label>
           </div>
-          <div class="input-field col s12">
+          <div class="input-field col s6">
             <i class="material-icons prefix">comment</i>
             <input [(ngModel)]="producto.descripcion" type="text" id="descripcion" name="descripcion" required>
-            <label for="descripcion" class="active">{{"Descripción" | translate}}</label>
+            <label for="descripcion" class="active">{{"Descripción" | translate}} {{"en español" | translate}} </label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">comment</i>
+            <input [(ngModel)]="producto.description" type="text" id="descripcion" name="descripcion" required>
+            <label for="descripcion" class="active">{{"Descripción" | translate}} {{"en inglés" | translate}}</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix">money</i>

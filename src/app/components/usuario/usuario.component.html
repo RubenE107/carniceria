@@ -28,16 +28,16 @@
             <td></td>
           </div>
           <div class="col s2">
-            <td>{{"Nombre" | translate}}</td>
+            <th>{{"Nombre" | translate}}</th>
           </div>
           <div class="col s2">
-            <td>{{"Correo" | translate}}</td>
-          </div>
-          <div class="col s2">
-            <td>{{"Teléfono" | translate}}</td>
+            <th>{{"Correo" | translate}}</th>
           </div>
           <div class="col s1">
-            <td>{{"Rol" | translate}}</td>
+            <th>{{"Teléfono" | translate}}</th>
+          </div>
+          <div class="col s1.5">
+            <th>{{"Rol" | translate}}</th>
           </div>
           <div class="col s1.5">
             <td></td>
@@ -73,10 +73,10 @@
             <div class="col s2">
               <td>{{ usuario.correo }}</td>
             </div>
-            <div class="col s2">
+            <div class="col s1">
               <td>{{usuario.telefono}}</td>
             </div>
-            <div class="col s1">
+            <div class="col s1.5">
               <td>{{usuario.rol}}</td>
             </div>
             <div>
@@ -98,7 +98,7 @@
                   </a>
                 </td>
               </div>
-              <div class="col s1 ">
+              <div class="col s1">
                 <td>
                   <a (click)="mostrarImagen(usuario.id)" href="javascript:void(0);"
                     class="waves-effect waves-light btn-small">

@@ -28,6 +28,11 @@ export class NavigationComponent implements OnInit {
     else {
       localStorage.setItem("idioma" ,"2")
     }
+
+    // No dejar acceder si no ha iniciado sesión
+    if (localStorage.getItem("id") == null) {
+      this.router.navigateByUrl("/login");
+    }
   }
 
   ngOnInit(): void {

@@ -35,14 +35,14 @@ export class ReestablecerComponent implements OnInit {
 
       if (localStorage.getItem("idioma") != null) {
         if (localStorage.getItem("idioma") == "1") {
-          translate.use("en");
+          translate.use("es");
         }
         else if (localStorage.getItem("idioma") == "2") {
-          translate.use("es");
+          translate.use("en");
         }
       }
       else {
-        localStorage.setItem("idioma" ,"2")
+        localStorage.setItem("idioma" ,"1")
       }
    }
 

@@ -26,7 +26,7 @@ export class NavigationComponent implements OnInit {
       }
     }
     else {
-      localStorage.setItem("idioma" ,"2")
+      localStorage.setItem("idioma" ,"1")
     }
 
     // No dejar acceder si no ha iniciado sesión

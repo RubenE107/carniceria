@@ -21,6 +21,7 @@ import { OfertasComponent } from './components/ofertas/ofertas.component';
 import { OfertaCarritoComponent } from './components/oferta-carrito/oferta-carrito.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { CambioIdiomaService } from './services/cambio-idioma.service';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -57,7 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  providers: [],
+  providers: [CambioIdiomaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -88,12 +88,15 @@
                 <div class="card-content">
                   <div class="row ">
 
-                    <span class="card-title">{{producto.nombre}}</span>
-                    <p><strong>{{"Animal de origen:" | translate}}</strong> {{producto.animal}}</p>
+                    <span *ngIf="idioma == 1" class="card-title">{{producto.nombre}}</span>
+                    <span *ngIf="idioma == 2" class="card-title">{{producto.name}}</span>
+                    <p *ngIf="idioma == 1"><strong>{{"Animal de origen:" | translate}}</strong> {{producto.animal}}</p>
+                    <p *ngIf="idioma == 2"><strong>{{"Animal de origen:" | translate}}</strong> {{producto.animal_eng}}</p>
                     <p><strong>{{"Precio por Kg:" | translate}}</strong> ${{producto.precio}}</p>
                     <p><strong>{{"Cantidad disponible:" | translate}} </strong> {{producto.cantidad}} {{"Kg" |
                       translate}}</p>
-                    <p>{{producto.descripcion}}</p>
+                    <p *ngIf="idioma == 1">{{producto.descripcion}}</p>
+                    <p *ngIf="idioma == 2">{{producto.description}}</p>
 
                     <div class="row " *ngIf="producto.cantidad>0">
                       <br>

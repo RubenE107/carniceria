@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { CambioIdiomaService } from 'src/app/services/cambio-idioma.service';
 import Swal from 'sweetalert2';
 declare var $: any;
 
@@ -13,15 +14,15 @@ export class NavigationComponent implements OnInit {
   aux: any;
   currentPage: any = this.router.url.split('/')[2]; // Variable para mantener la página activa
 
-  constructor(private router: Router, private translate: TranslateService) {
+  constructor(private router: Router, private translate: TranslateService, private cambioIdiomaService:CambioIdiomaService) {
     this.aux = localStorage.getItem("id_rol");
 
     if (localStorage.getItem("idioma") != null) {
       if (localStorage.getItem("idioma") == "1") {
-        translate.use("en");
+        translate.use("es");
       }
       else if (localStorage.getItem("idioma") == "2") {
-        translate.use("es");
+        translate.use("en");
       }
     }
     else {
@@ -129,12 +130,21 @@ export class NavigationComponent implements OnInit {
 
   setIdioma(idioma: any) {
     if (idioma == 1) {
-      this.translate.use("en");
+      this.translate.use("es");
+      this.enviarMensajeIdioma(1);
       localStorage.setItem("idioma", "1");
     }
     if (idioma == 2) {
-      this.translate.use("es");
+      this.translate.use("en");
+      this.enviarMensajeIdioma(2);
       localStorage.setItem("idioma", "2");
     }
   }
+  enviarMensajeIdioma(idioma:any)
+  {
+    this.cambioIdiomaService.sendMsg(idioma);
+  }
+
+
+
 }

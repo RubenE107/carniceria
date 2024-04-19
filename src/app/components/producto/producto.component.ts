@@ -9,6 +9,7 @@ import { OfertaService } from 'src/app/services/oferta.service';
 import { environment } from 'src/environments/environment';
 import { ImagenesService } from 'src/app/services/imagenes.service';
 import { TranslateService } from '@ngx-translate/core';
+import { CambioIdiomaService } from 'src/app/services/cambio-idioma.service';
 declare var $: any;
 @Component({
   selector: 'app-producto',
@@ -35,6 +36,7 @@ export class ProductoComponent implements OnInit {
 
   imgUsuario: any;
   fileToUpload: any;
+  idioma : any;
 
   rol: any = localStorage.getItem('id_rol')
 
@@ -42,10 +44,22 @@ export class ProductoComponent implements OnInit {
     $(document).ready(function () {
       $('select').formSelect();
     });
+    this.cambioIdiomaService.currentMsg$.subscribe(
+      (msg)=>
+      {
+        if(msg!="")
+        {
+          this.idioma = msg;
+        }
+        else
+          this.idioma = localStorage.getItem("idioma")
+      }
+    )
+
   }
 
   constructor(private imagenesService: ImagenesService, private productoService: ProductoService, private carritoService: CarritoService,
-    private ofertaService: OfertaService, private router: Router, private translate: TranslateService) {
+    private ofertaService: OfertaService, private router: Router, private translate: TranslateService, private cambioIdiomaService:CambioIdiomaService) {
     this.liga = environment.API_URI_IMAGENES + "/productos";
     this.imgUsuario = null;
     this.fileToUpload = null;

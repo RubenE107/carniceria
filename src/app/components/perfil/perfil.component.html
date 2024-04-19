@@ -2,19 +2,26 @@
     <div class="row">
 
         <div class="col s4">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <img class="col s12" src="{{liga}}" alt="{{liga}}">
         </div>
 
-        <div class="col s8" *ngIf="flag!=0">
-            <h2>{{"Información de Usuario" | translate}}</h2>
+        <div class="col s8" *ngIf="flag != 0">
+            <label style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; color: black;">
+                <h2>{{"Información de Usuario" | translate}}</h2>
+                <br>
+            </label>
 
             <div class="input-field">
                 <i class="material-icons prefix">account_circle</i>
                 <input [(ngModel)]="usuario.nombre" type="text" id="nombre" disabled>
-
                 <label for="nombre" class="active">{{"Nombre" | translate}}</label>
             </div>
-
 
             <div class="input-field">
                 <i class="material-icons prefix">email</i>
@@ -31,43 +38,30 @@
 
             <div class="row">
                 <div class="col s4 center">
-                    <a (click)="modificarUsuario(usuario.id)">
-                        <button class="waves-effect btn-large  lighten-1 white-text modal-close" type="submit">
-                            {{"Actualizar datos" | translate}}
-                            <i class="material-icons right">send</i>
-                        </button>
+                    <a (click)="modificarUsuario(usuario.id)" class="waves-effect btn-large  lighten-1 white-text modal-close">
+                        <i class="material-icons left">send</i>
+                        <span style="font-size: 13px;">{{"Actualizar datos" | translate}}</span>
                     </a>
                 </div>
-                <!-- <div class="col s4 center">
-                <a (click)="modificarContra()">
-                    <button class="waves-effect btn-large  lighten-1 white-text modal-close" type="submit">
-                        modificar Contraseña
-                        <i class="material-icons right">edit</i>
-                    </button>
-                </a>
-            </div> -->
 
                 <div class="col s4 center">
-                    <button class="modal-action modal-close waves-effect btn-large red  white-text" type="submit"
-                        (click)="eliminar()">{{"Eliminar" | translate}}
-                        <i class="material-icons right">delete</i>
+                    <button (click)="eliminar()" class="modal-action modal-close waves-effect btn-large red  white-text">
+                        <i class="material-icons left">delete</i>
+                        {{"Eliminar" | translate}}
                     </button>
                 </div>
 
                 <div class="col s4 center">
-                    <a (click)="mostrarImagen()" href="javascript: void(0);">
-                        <button class="modal-action modal-close waves-effect btn-large blue  white-text" type="submit">
-                            {{"Actualizar imagen" | translate}}
-                            <i class="material-icons right">image</i>
-                        </button>
+                    <a (click)="mostrarImagen()" href="javascript:void(0);" class="modal-action modal-close waves-effect btn-large blue white-text">
+                        <i class="material-icons left">image</i>
+                        <span style="font-size: 13px;">{{"Actualizar imagen" | translate}}</span>
                     </a>
                 </div>
+                
             </div>
-
         </div>
 
     </div>
-
 </div>
 
 

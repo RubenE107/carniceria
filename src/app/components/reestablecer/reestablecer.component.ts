@@ -69,11 +69,11 @@ export class ReestablecerComponent implements OnInit {
 
   setIdioma(idioma: any) {
     if (idioma == 1) {
-      this.translate.use("en");
+      this.translate.use("es");
       localStorage.setItem("idioma", "1");
     }
     if (idioma == 2) {
-      this.translate.use("es");
+      this.translate.use("en");
       localStorage.setItem("idioma", "2");
     }
   }

@@ -76,9 +76,18 @@
             <div class="col s1">
               <td>{{usuario.telefono}}</td>
             </div>
-            <div class="col s1.5">
+            <div *ngIf="idioma==1" class="col s1.5">
               <td>{{usuario.rol}}</td>
             </div>
+            <div *ngIf="idioma==2" class="col s1.5">
+              <td>
+                <ng-container *ngFor="let rol of roles">
+                  <span *ngIf="rol.id == usuario.id_rol">
+                      {{ rol.name }}
+                  </span>
+              </ng-container>
+              </td>
+          </div>
             <div>
               <div class="col s1.5">
                 <td id="actualizar">
@@ -209,11 +218,18 @@
             <label for="telefono" class="active">{{"Teléfono (10 dígitos)" | translate}}</label>
           </div>
 
-          <div class=" col s11 offset-s1">
+          <div *ngIf="idioma==1" class=" col s11 offset-s1">
             <label class="active">{{"Rol" | translate}}</label>
             <select [(ngModel)]="usuario.id_rol" id="rol" name="rol" class="browser-default waves-block s12">
               <option value="" disabled selected>{{"Escoge un rol" | translate}}</option>
               <option *ngFor="let rol of roles" value="{{rol.id}}">{{ rol.nombre }}</option>
+            </select>
+          </div>
+          <div *ngIf="idioma==2" class=" col s11 offset-s1">
+            <label class="active">{{"Rol" | translate}}</label>
+            <select [(ngModel)]="usuario.id_rol" id="rol" name="rol" class="browser-default waves-block s12">
+              <option value="" disabled selected>{{"Escoge un rol" | translate}}</option>
+              <option *ngFor="let rol of roles" value="{{rol.id}}">{{ rol.name }}</option>
             </select>
           </div>
 

@@ -44,11 +44,18 @@
       <div>
         <h5 class="center">{{"Filtrar por animal" | translate}}</h5>
       </div>
-      <div>
+      <div *ngIf="idioma==1" >
         <select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
           (change)="listAnimal()">
           <option value="" selected disabled>{{"Escoge un animal" | translate}}</option>
-          <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}</option>
+          <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal}}</option>
+        </select>
+      </div>
+      <div *ngIf="idioma==2" >
+        <select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
+          (change)="listAnimal()">
+          <option value="" selected disabled>{{"Escoge un animal" | translate}}</option>
+          <option *ngFor="let animal of animalAux" value="{{animal.animal}}">{{animal.Animal_eng}}</option>
         </select>
       </div>
     </div>

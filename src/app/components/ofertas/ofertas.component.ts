@@ -9,6 +9,7 @@ import { CorreoService } from 'src/app/services/correo.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { CambioIdiomaService } from 'src/app/services/cambio-idioma.service';
 
 declare var $: any;
 @Component({
@@ -30,7 +31,7 @@ export class OfertasComponent implements OnInit {
   AGRE_VER_oferta = true;
   nombre = '';
   descuento=0;
-
+  idioma: any;
   fecha_inicio = new Date().toISOString().substring(0, 10);
   fecha_final = new Date().toISOString().substring(0, 10);
 
@@ -42,7 +43,8 @@ export class OfertasComponent implements OnInit {
     private ProductoOferta: ProductoOfertaService,
     private correoService: CorreoService,
     private usuarioService: UsuarioService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cambioIdiomaService:CambioIdiomaService
   ) {
     this.liga = environment.API_URI_IMAGENES + "/productos";
 
@@ -58,6 +60,17 @@ export class OfertasComponent implements OnInit {
       $('.modal').modal();
     });
     this.listAll_Ofertas_Producto()
+    this.cambioIdiomaService.currentMsg$.subscribe(
+      (msg)=>
+      {
+        if(msg!="")
+        {
+          this.idioma = msg;
+        }
+        else
+          this.idioma = localStorage.getItem("idioma")
+      }
+    )
 
 }
 
@@ -183,9 +196,9 @@ aplicarMismoDE(){
   AgregaOferta(producto_id: any) {
     //console.log("se ha seleccionado un producto");
     //console.log(producto_id);
-    console.log(this.ofertas);
+    //console.log(this.ofertas);
     let ofertaEncontrada = this.ofertas.some(oferta => oferta.id_producto === producto_id);
-    console.log(ofertaEncontrada);
+    //console.log(ofertaEncontrada);
 
 
 

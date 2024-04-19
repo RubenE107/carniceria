@@ -8,6 +8,7 @@ import { RolService } from 'src/app/services/rol.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { ImagenesService } from 'src/app/services/imagenes.service';
+import { CambioIdiomaService } from 'src/app/services/cambio-idioma.service';
 
 declare var $:any;
 @Component({
@@ -28,7 +29,7 @@ export class UsuarioComponent implements OnInit{
 
   imgUsuario: any;
   fileToUpload: any;
-
+  idioma : any;
   liga: string = ""
 
   ngOnInit(): void {
@@ -41,9 +42,20 @@ export class UsuarioComponent implements OnInit{
     $(document).ready(function(){
       $('select').formSelect();
     });
+     this.cambioIdiomaService.currentMsg$.subscribe(
+      (msg)=>
+      {
+        if(msg!="")
+        {
+          this.idioma = msg;
+        }
+        else
+          this.idioma = localStorage.getItem("idioma")
+      }
+    )
   }
 
-  constructor(private usuarioService: UsuarioService,private rolService:RolService, private router: Router, private translate: TranslateService, private imagenesService:ImagenesService) {
+  constructor(private cambioIdiomaService:CambioIdiomaService,private usuarioService: UsuarioService,private rolService:RolService, private router: Router, private translate: TranslateService, private imagenesService:ImagenesService) {
     if(localStorage.getItem("id_rol")!='3')
       router.navigateByUrl("home/producto")
     this.liga = environment.API_URI_IMAGENES + "/usuarios";
@@ -83,6 +95,7 @@ export class UsuarioComponent implements OnInit{
     },
     err => console.log(err)
     );
+    
   }
   
   guardarActualizarUsuario(){
@@ -104,7 +117,12 @@ export class UsuarioComponent implements OnInit{
     },
       err => console.error(err)
     );
-
+    this.usuarios = [];
+    this.usuarioService.list().subscribe((resUsuarios:any)=>{
+      this.usuarios = resUsuarios;
+    },
+    err => console.log(err)
+    );
     
   }
   eliminarUsuario(id: any) {

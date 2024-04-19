@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
 import Swal from 'sweetalert2';
 import { Oferta } from 'src/app/models/Oferta';
+import { AnimalAux} from 'src/app/models/Animalaux';
 import { OfertaService } from 'src/app/services/oferta.service';
 import { environment } from 'src/environments/environment';
 import { ImagenesService } from 'src/app/services/imagenes.service';
@@ -21,6 +22,7 @@ export class ProductoComponent implements OnInit {
   producto!: Producto;
   animales: Animal[] = [];
   aux = ""
+  animalAux: AnimalAux[] = Array(3).fill(null).map(() => new AnimalAux());
   preciomin!: number;
   preciomax!: number
   ofertas: Oferta[] = [];
@@ -67,6 +69,12 @@ export class ProductoComponent implements OnInit {
     this.reiniciaVariables();
     this.list()
     this.getAnimal()
+    this.animalAux[0].animal = "Cerdo"
+    this.animalAux[0].Animal_eng="Pork"
+    this.animalAux[1].animal = "Vaca"
+    this.animalAux[1].Animal_eng="Cow"
+    this.animalAux[2].animal = "Buey"
+    this.animalAux[2].Animal_eng="Ox"
   }
 
   mostrarImagen(id_producto: any) {

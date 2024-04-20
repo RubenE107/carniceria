@@ -35,7 +35,7 @@ export class OfertasComponent implements OnInit {
   fecha_inicio = new Date().toISOString().substring(0, 10);
   fecha_final = new Date().toISOString().substring(0, 10);
 
-  aux = '';
+  aux : number =-1;
   liga : string =""
   constructor(
     private productoService: ProductoService,
@@ -79,7 +79,7 @@ export class OfertasComponent implements OnInit {
 aplicarMismoDE(){
   var elemento = <HTMLInputElement> document.getElementById("descuentoTodos");
   this.qOcupado = elemento.checked
-  console.log("Cambió, ahora es: ", this.qOcupado)
+  //console.log("Cambió, ahora es: ", this.qOcupado)
   
   if(this.qOcupado){
   let i:number;
@@ -93,11 +93,11 @@ aplicarMismoDE(){
   AplicarOferta() {
     let textOf :string[] = [];
     let ides: number[] =[]
-    console.log("aplicando oferta a:",this.A_oferta);
+    //console.log("aplicando oferta a:",this.A_oferta);
     this.A_oferta.forEach(oferta => {
       this.ProductoOferta.create(oferta.id_producto,1, oferta.precio_orig, oferta.porc_descuento).subscribe((resOferta)=>
       {
-        console.log("Eso devolvió: ", resOferta);
+        //console.log("Eso devolvió: ", resOferta);
         textOf.push("Increible descuento: " + oferta.nombre_producto + " está a " + oferta.porc_descuento + "% de descuento\n");
         ides.push(oferta.id_producto)
       });
@@ -122,7 +122,7 @@ aplicarMismoDE(){
       { data: `¡¡Te damos la más cordial bienvenida !!`, alternative: true }
       ]
       };
-      console.log(message);*/
+      //console.log(message);*/
       this.usuarioService.list().subscribe((resusuario: any) => {
         var correo: any = [];
         resusuario.forEach((usuario: any) => {
@@ -194,11 +194,11 @@ aplicarMismoDE(){
   }
   
   AgregaOferta(producto_id: any) {
-    //console.log("se ha seleccionado un producto");
-    //console.log(producto_id);
-    //console.log(this.ofertas);
+    ////console.log("se ha seleccionado un producto");
+    ////console.log(producto_id);
+    ////console.log(this.ofertas);
     let ofertaEncontrada = this.ofertas.some(oferta => oferta.id_producto === producto_id);
-    //console.log(ofertaEncontrada);
+    ////console.log(ofertaEncontrada);
 
 
 
@@ -206,7 +206,7 @@ aplicarMismoDE(){
       this.listaProductos.push(producto_id);
     }
     if(!ofertaEncontrada){
-    //console.log("lista de id productos:",this.listaProductos);
+    ////console.log("lista de id productos:",this.listaProductos);
     this.productoService.listOne(producto_id).subscribe(
       (resusuario: any) => {
         var Encotrado = false;
@@ -227,13 +227,13 @@ aplicarMismoDE(){
           Encotrado = false;
         } else {
           while (i < this.A_oferta.length && !Encotrado) {
-            // console.log(this.A_oferta[i].id);
-            // console.log("¿==?");
-            // console.log(resusuario.id);
+            // //console.log(this.A_oferta[i].id);
+            // //console.log("¿==?");
+            // //console.log(resusuario.id);
             if (this.A_oferta[i].id_producto == resusuario.id) {
               Encotrado = true;
             }
-            //console.log(i);
+            ////console.log(i);
             i++;
           }
         }
@@ -246,8 +246,8 @@ aplicarMismoDE(){
 
           this.A_oferta.push(auxOferta);
         }
-        //console.log(resusuario);
-        console.log('producto a modificar=', this.A_oferta);
+        ////console.log(resusuario);
+        //console.log('producto a modificar=', this.A_oferta);
       },
       (err) => console.error(err)
     );
@@ -264,25 +264,27 @@ aplicarMismoDE(){
     this.productoService.getAnimal().subscribe(
       (resusuario: any) => {
         this.animales = resusuario;
-        //console.log(resusuario);
-        console.log(this.animales);
+        ////console.log(resusuario);
+        
+        //console.log(this.animales);
       },
       (err) => console.error(err)
     );
   }
   listAnimal() {
-    this.p = 1;
-    this.productoService.listAnimal(this.aux).subscribe(
+    this.p = 1
+    this.productoService.listAnimal(this.animales[this.aux].nombre_animal  ).subscribe(
       (resusuario: any) => {
         this.productos = resusuario;
-        //console.log(resusuario);
-        console.log(this.productos);
+
+        ////console.log(resusuario);
+        //console.log(this.productos);
       },
       (err) => console.error(err)
     );
   }
   eliminaFiltros() {
-    this.aux = '';
+    this.aux = -1;
     this.listProductos();
   }
   limitarDescuento(id:any) {
@@ -319,17 +321,18 @@ aplicarMismoDE(){
       (resusuario: any) => {
         this.ofertas = resusuario;
         
-        console.log("ofertas:",this.ofertas);
+        //console.log("ofertas:",this.ofertas);
       },
       (err) => console.error(err)
     );
   
   }
 }
-
 class Animal {
-  animal: string;
+  nombre_animal: string;
+  animal_name: string;
   constructor() {
-    this.animal = '';
+    this.nombre_animal = ''
+    this.animal_name = ''
   }
 }

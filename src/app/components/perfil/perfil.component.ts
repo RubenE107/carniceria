@@ -29,7 +29,6 @@ export class PerfilComponent implements OnInit {
   imgUsuario: any;
   fileToUpload: any;
   constructor(private usuarioService: UsuarioService, private router: Router, private translate: TranslateService, private imagenesService: ImagenesService) {
-
     this.list()
     this.imagen()
   }
@@ -138,7 +137,7 @@ export class PerfilComponent implements OnInit {
       else
         this.liga = environment.API_URI_IMAGENES + "/usuarios/" + user.id + ".jpg"
 
-      console.log(this.liga)
+      // console.log(this.liga)
     })
   }
 
@@ -172,6 +171,7 @@ export class PerfilComponent implements OnInit {
           this.guardaModifica()
           this.imgUsuario = blob;
           // Actualizar la variable 'liga' después de cargar la imagen
+          this.liga = ""
           this.imagen();
 
         },

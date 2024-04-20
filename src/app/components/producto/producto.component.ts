@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductoService } from './../../services/producto.service';
 import { Producto } from 'src/app/models/Producto';
-import { Router } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito.service';
 import Swal from 'sweetalert2';
 import { Oferta } from 'src/app/models/Oferta';
@@ -21,8 +20,7 @@ export class ProductoComponent implements OnInit {
   productos: Producto[] = [];
   producto!: Producto;
   animales: Animal[] = [];
-  aux = ""
-  animalAux: AnimalAux[] = Array(3).fill(null).map(() => new AnimalAux());
+  aux: number = -1
   preciomin!: number;
   preciomax!: number
   ofertas: Oferta[] = [];
@@ -60,8 +58,12 @@ export class ProductoComponent implements OnInit {
 
   }
 
-  constructor(private imagenesService: ImagenesService, private productoService: ProductoService, private carritoService: CarritoService,
-    private ofertaService: OfertaService, private router: Router, private translate: TranslateService, private cambioIdiomaService:CambioIdiomaService) {
+  constructor(private imagenesService: ImagenesService, 
+    private productoService: ProductoService, 
+    private carritoService: CarritoService,
+    private ofertaService: OfertaService, 
+    private translate: TranslateService, 
+    private cambioIdiomaService:CambioIdiomaService) {
     this.liga = environment.API_URI_IMAGENES + "/productos";
     this.imgUsuario = null;
     this.fileToUpload = null;
@@ -69,12 +71,7 @@ export class ProductoComponent implements OnInit {
     this.reiniciaVariables();
     this.list()
     this.getAnimal()
-    this.animalAux[0].animal = "Cerdo"
-    this.animalAux[0].Animal_eng="Pork"
-    this.animalAux[1].animal = "Vaca"
-    this.animalAux[1].Animal_eng="Cow"
-    this.animalAux[2].animal = "Buey"
-    this.animalAux[2].Animal_eng="Ox"
+
   }
 
   mostrarImagen(id_producto: any) {
@@ -235,7 +232,7 @@ export class ProductoComponent implements OnInit {
 
   }
   reiniciaVariables() {
-    this.aux = "";
+    this.aux = -1;
     this.preciomin = 0;
     this.preciomax = 500
 
@@ -270,8 +267,7 @@ export class ProductoComponent implements OnInit {
   getAnimal() {
     this.productoService.getAnimal().subscribe(
       (resusuario: any) => {
-        this.animales = resusuario;
-        //console.log(resusuario);
+        this.animales = resusuario;        
         console.log(this.animales);
       },
       (err) => console.error(err)
@@ -291,7 +287,7 @@ export class ProductoComponent implements OnInit {
   }
   listAnimal() {
     this.p = 1
-    this.productoService.listAnimal(this.aux).subscribe(
+    this.productoService.listAnimal(this.animales[this.aux].nombre_animal ).subscribe(
       (resusuario: any) => {
         this.productos = resusuario;
         this.VerificaOferta()
@@ -309,9 +305,11 @@ export class ProductoComponent implements OnInit {
 }
 
 class Animal {
-  animal: string;
+  nombre_animal: string;
+  animal_name: string;
   constructor() {
-    this.animal = ''
+    this.nombre_animal = ''
+    this.animal_name = ''
   }
 }
 

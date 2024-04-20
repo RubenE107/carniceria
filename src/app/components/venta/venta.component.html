@@ -15,11 +15,19 @@
             <div>
                 <h5 class="center">{{"Filtrar por productos" | translate}}</h5>
             </div>
-            <div class="input-field col s12">
+            <div *ngIf="idioma=='1'" class="input-field col s12">
                 <select [(ngModel)]="aux" id="producto" name="producto" class="browser-default "
                     (change)="listProducto()">
-                    <option value="" disabled selected>{{"Escoge un producto" | translate}}</option>
-                    <option *ngFor="let producto of productos" value="{{producto.id}}">{{ producto.nombre }}</option>
+                    <option value="-1" disabled selected>{{"Escoge un producto" | translate}}</option>
+                    <option *ngFor="let producto of productos; let i = index" value="{{producto.id}}">{{ producto.nombre_producto }}</option>
+                </select>
+
+            </div>
+            <div *ngIf="idioma=='2'" class="input-field col s12">
+                <select [(ngModel)]="aux" id="producto" name="producto" class="browser-default "
+                    (change)="listProducto()">
+                    <option value="-1" disabled selected>{{"Escoge un producto" | translate}}</option>
+                    <option *ngFor="let producto of productos; let i = index" value="{{producto.id}}">{{ producto.name_producto }}</option>
                 </select>
 
             </div>
@@ -104,8 +112,8 @@
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content">
-                                    <span class="card-title">{{ venta.nombre }}</span>
-                                    <p>{{"Cantidad de producto:" | translate}} {{ venta.cantidad }} {{"Kg" | translate}}</p>
+                                    <span *ngIf="idioma == '1'" class="card-title">{{venta.nombre}}</span>
+                                    <span *ngIf="idioma == '2'" class="card-title">{{venta.name}}</span>                                    <p>{{"Cantidad de producto:" | translate}} {{ venta.cantidad }} {{"Kg" | translate}}</p>
                                     <p><strong>{{"Precio:" | translate}} ${{ venta.monto }}</strong></p>
                                     <p><strong>{{"Fecha:" | translate}} {{ venta.fecha }}</strong></p>
                                 

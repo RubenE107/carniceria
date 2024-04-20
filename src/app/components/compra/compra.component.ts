@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Compra } from 'src/app/models/compra';
+import { CambioIdiomaService } from 'src/app/services/cambio-idioma.service';
 import { VentaService } from 'src/app/services/venta.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,7 +15,8 @@ export class CompraComponent implements OnInit {
   p = 1;
   pageSize = 5
   liga : string =""
-  constructor(private ventasServices: VentaService) { 
+  idioma : any = '1'
+  constructor(private ventasServices: VentaService,private cambioIdiomaService:CambioIdiomaService) { 
     this.liga = environment.API_URI_IMAGENES + "/productos";
     
   }
@@ -28,6 +30,18 @@ export class CompraComponent implements OnInit {
       },
       (err) => console.error(err)
     );
+    this.cambioIdiomaService.currentMsg$.subscribe(
+      (msg)=>
+      {
+        if(msg!="")
+        {
+          this.idioma = msg;
+        }
+        else
+          this.idioma = localStorage.getItem("idioma")
+      }
+    )
   }
+  
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Carrito } from 'src/app/models/Carrito';
+import { CambioIdiomaService } from 'src/app/services/cambio-idioma.service';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { OfertaService } from 'src/app/services/oferta.service';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -25,18 +26,28 @@ export class CarritoComponent implements OnInit {
   tCarrAct = 0;
 
   liga : string =""
-
+  idioma :any = '1'
   constructor(
     private carritoService: CarritoService,
     private productoService: ProductoService,
     private ventaService: VentaService,
     private router: Router,
     private ofertaService: OfertaService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cambioIdiomaService:CambioIdiomaService
   ) {
     this.liga = environment.API_URI_IMAGENES + "/productos";
-
-    //console.log(localStorage.getItem('id'))
+    this.cambioIdiomaService.currentMsg$.subscribe(
+      (msg)=>
+      {
+        if(msg!="")
+        {
+          this.idioma = msg;
+        }
+        else
+          this.idioma = localStorage.getItem("idioma")
+      }
+    )    //console.log(localStorage.getItem('id'))
     let fecha = new Date();
     // console.log(fecha.getDate());
     // console.log(fecha.getDay());

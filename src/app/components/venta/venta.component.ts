@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Venta } from 'src/app/models/Venta';
+import { CambioIdiomaService } from 'src/app/services/cambio-idioma.service';
 import { ProductoService } from 'src/app/services/producto.service';
 import { VentaService } from 'src/app/services/venta.service';
 import { environment } from 'src/environments/environment';
@@ -17,7 +18,7 @@ export class VentaComponent implements OnInit {
   ventas: Venta[] = []
   venta !: Venta
   productos: Pro[] = []
-  aux = ""
+  aux : number =-1
   compramin = 0
   compramax = 500
   Ventatotal = -1
@@ -26,8 +27,12 @@ export class VentaComponent implements OnInit {
   pageSize = 5
 
   liga : string =""
-
-  constructor(private ventasServices: VentaService, private productoService: ProductoService, private router: Router, private translate: TranslateService) {
+  idioma:any = '1'
+  constructor(private ventasServices: VentaService, 
+    private productoService: ProductoService, 
+    private router: Router, 
+    private translate: TranslateService,
+    private cambioIdiomaService:CambioIdiomaService) {
     if (localStorage.getItem("id_rol") != '3')
       router.navigateByUrl("home/producto")
     this.liga = environment.API_URI_IMAGENES + "/productos";
@@ -51,7 +56,17 @@ export class VentaComponent implements OnInit {
     this.venta = new Venta();
     this.venta.fecha = new Date().toJSON().substring(0,10);
     this.list();
-
+    this.cambioIdiomaService.currentMsg$.subscribe(
+      (msg)=>
+      {
+        if(msg!="")
+        {
+          this.idioma = msg;
+        }
+        else
+          this.idioma = localStorage.getItem("idioma")
+      }
+    )
   }
   list() {
     this.ventasServices.list().subscribe(
@@ -149,7 +164,7 @@ export class VentaComponent implements OnInit {
     );
   }
   reiniciaVariables() {
-    this.aux = ""
+    this.aux = -1
     this.compramin = 0
     this.compramax = 500
     this.Ventatotal = -1
@@ -163,9 +178,11 @@ export class VentaComponent implements OnInit {
 
 class Pro {
   id: number;
-  nombre: string;
+  nombre_producto: string;
+  name_producto: string;
   constructor() {
     this.id = -1;
-    this.nombre = ''
+    this.nombre_producto = ''
+    this.name_producto = ''
   }
 }

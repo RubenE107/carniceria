@@ -6,6 +6,7 @@ export class Venta{
     fecha: string;
     cantidad: number;
     nombre:string;
+    name:string;
     constructor() {
         this.id = 0;
         this.id_usuario= 0;
@@ -13,6 +14,7 @@ export class Venta{
         this.monto= 0;
         this.fecha = '';
         this.nombre = '';
+        this.name = '';
         this.cantidad = 0
     }
 }

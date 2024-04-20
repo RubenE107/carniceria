@@ -12,7 +12,8 @@
               </div>
               <div class="card-stacked">
                 <div class="card-content">
-                  <span class="card-title">{{car.nombre}}</span>
+                  <span *ngIf="idioma=='2'" class="card-title">{{car.name}}</span>
+                  <span *ngIf="idioma=='1'" class="card-title">{{car.nombre}}</span>
                   <p><strong>{{"Precio por unidad:" | translate}} ${{car.precio}}</strong></p>
                   <p><strong>{{"Subtotal:" | translate}} ${{car.precio}}</strong></p>
                   <p><strong>{{"Cantidad:" | translate}} {{car.cantidad}} {{"Kg" | translate}}</strong></p>

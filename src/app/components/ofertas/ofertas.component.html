@@ -42,7 +42,9 @@
 
                         </a>
                     </td>
-                    <td >{{producto.nombre_producto}}</td>
+                    <td *ngIf="idioma == '1'">{{producto.nombre_producto}}</td>
+                    <td *ngIf="idioma == '2'">{{producto.product_name}}</td>
+
                     <td>{{producto.precio_orig}}</td>
                     <td>
                         {{producto.porc_descuento}}
@@ -77,10 +79,19 @@
                     <div>
                         <h5 class="center" style="font-size: large;">{{"Filtrar por animal" | translate}}</h5>
                     </div>
-                    <div><select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
+                    <div *ngIf="idioma=='1'">
+                        <select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
                             (change)="listAnimal()">
-                            <option value="" selected disabled>{{"Escoge un animal" | translate}}</option>
-                            <option *ngFor="let animal of animales" value="{{animal.animal}}">{{ animal.animal }}
+                            <option value="-1" selected disabled>{{"Escoge un animal" | translate}}</option>
+                            <option *ngFor="let animal of animales; let i = index" value="{{i}}">
+                                {{animal.nombre_animal}}</option>
+                        </select>
+                    </div>
+                    <div *ngIf="idioma=='2'">
+                        <select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
+                            (change)="listAnimal()">
+                            <option value="-1" selected disabled>{{"Escoge un animal" | translate}}</option>
+                            <option *ngFor="let animal of animales; let i = index" value="{{i}}">{{animal.animal_name}}
                             </option>
                         </select>
                     </div>
@@ -105,14 +116,14 @@
                     }; let i = index" style=" padding-left: 5%; padding-right: 5%;">
                         <div class="card horizontal" (click)="AgregaOferta(producto.id)">
                             <div class="card-image col s3 " style="padding: 2%;">
-                                <!-- <img src="../../../assets/1_Imagenes/{{producto.nombre}}.jpg"
-                                    alt="Imagen{{producto.nombre}}"> -->
+
                                 <img src="{{liga}}/{{producto.id}}.jpg" alt="{{liga}}/{{producto.id}}.jpg">
 
                             </div>
                             <div class="card-stacked">
                                 <div class="card-content">
-                                    <span class="card-title">{{producto.nombre}}</span>
+                                    <span *ngIf="idioma == '1'" class="card-title">{{producto.nombre}}</span>
+                                    <span *ngIf="idioma == '2'" class="card-title">{{producto.name}}</span>
                                     <p><strong>{{"Precio por unidad:" | translate}} ${{producto.precio}}</strong></p>
                                 </div>
                             </div>

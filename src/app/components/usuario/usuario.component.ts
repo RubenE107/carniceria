@@ -26,7 +26,7 @@ export class UsuarioComponent implements OnInit{
   p=1
   pageSize = 7
 
-
+  time= new Date().getTime();
   imgUsuario: any;
   fileToUpload: any;
   idioma : any;
@@ -209,6 +209,8 @@ export class UsuarioComponent implements OnInit{
 
 
   ActualizaImagen() {
+    this.time = new Date().getTime();
+    console.log(this.time);
     let imgPromise = this.getFileBlob(this.fileToUpload);
     imgPromise.then(blob => {
       console.log("convirtiendo imagen")
@@ -220,10 +222,12 @@ export class UsuarioComponent implements OnInit{
           this.imgUsuario = blob;
           // Actualizar la variable 'liga' después de cargar la imagen
           this.liga = environment.API_URI_IMAGENES + "/usuarios";
-
+          this.time = new Date().getTime();
+          
         },
         err => console.error(err));
     });
+    
   }
 
   guardaModifica() {

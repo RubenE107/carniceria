@@ -60,7 +60,7 @@
           <tr>
             <div class="col s1">
               <td>
-                <img width="64" height="64" *ngIf="usuario.img!=0" src="{{liga}}/{{usuario.id}}.jpg">
+                <img width="64" height="64" *ngIf="usuario.img!=0" src="{{liga}}/{{usuario.id}}.jpg?time={{time}}">
                 <img width="64" height="64" *ngIf="usuario.img==0 && usuario.id_rol==1" src="{{liga}}/cliente.jpg">
                 <img width="64" height="64" *ngIf="usuario.img==0 && usuario.id_rol==2" src="{{liga}}/empleado.jpg">
                 <img width="64" height="64" *ngIf="usuario.img==0 && usuario.id_rol==3" src="{{liga}}/admin.jpg">

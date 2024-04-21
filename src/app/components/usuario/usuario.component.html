@@ -271,7 +271,9 @@
           <div align="center">
             <img *ngIf="usuario.img === 1" width="64" src="{{liga}}/{{usuario.id}}.jpg"
               alt="{{liga}}/{{usuario.id}}.jpg">
-            <img *ngIf="usuario.img === 0" width="64" src="{{liga}}/0.jpg" alt="{{liga}}/0.jpg">
+            <img *ngIf="usuario.img === 0 && usuario.id_rol===1" width="64" src="{{liga}}/cliente.jpg" alt="{{liga}}/cliente.jpg">
+            <img *ngIf="usuario.img === 0 && usuario.id_rol===2" width="64" src="{{liga}}/empleado.jpg" alt="{{liga}}/empleado.jpg">
+            <img *ngIf="usuario.img === 0 && usuario.id_rol===3" width="64" src="{{liga}}/admin.jpg" alt="{{liga}}/admin.jpg">
           </div>
         </div>
 

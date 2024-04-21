@@ -35,7 +35,7 @@ export class UsuarioComponent implements OnInit{
   ngOnInit(): void {
     this.rolService.list().subscribe((resRoles:any)=>{
       this.roles = resRoles;
-      console.log(this.roles);
+      //console.log(this.roles);
     },
     err => console.log(err)
     );
@@ -69,7 +69,6 @@ export class UsuarioComponent implements OnInit{
   list(){
     this.usuarioService.list().subscribe((resUsuarios:any)=>{
       this.usuarios = resUsuarios;
-      console.log(this.usuarios);
     },
     err => console.log(err)
     );
@@ -78,7 +77,7 @@ export class UsuarioComponent implements OnInit{
     if(this.busqueda!=''){
       this.usuarioService.searchByName(this.busqueda).subscribe((resUsuarios:any)=>{
         this.usuarios = resUsuarios;
-      console.log(this.usuarios);
+      //console.log(this.usuarios);
     },
     err => console.log(err)
     );
@@ -89,9 +88,10 @@ export class UsuarioComponent implements OnInit{
     this.usuarioService.listOne(id).subscribe((resUsuario:any)=>{
       this.usuario = resUsuario;
       this.actualizaUsuario.correo = resUsuario.correo;
+
       $('#modalModificaUsuario').modal();
       $("#modalModificaUsuario").modal("open");
-      console.log(this.usuario);
+      //console.log(this.usuario);
     },
     err => console.log(err)
     );
@@ -99,11 +99,13 @@ export class UsuarioComponent implements OnInit{
   }
   
   guardarActualizarUsuario(){
+   
+    // Elimina el usuario de la lista de usuarios
+    this.usuarios = this.usuarios.filter(usuario => usuario.id !==this.usuario.id);
+    console.log(this.usuarios);
     this.usuarioService.ValidarCorreo(this.usuario.correo).subscribe((resusuario: any) => {
-      console.log(this.actualizaUsuario.correo);
-      console.log(this.usuario.correo);
-
-      
+     
+     
       if (resusuario.correo_existe ==1 && this.usuario.correo != this.actualizaUsuario.correo) {
         Swal.fire(this.translate.instant("Este correo ya existe por favor agrega uno nuevo\n"));
       }else{
@@ -112,22 +114,21 @@ export class UsuarioComponent implements OnInit{
         },
           err => console.log(err)
         );
-    
+        
       }
     },
       err => console.error(err)
     );
-    this.usuarios = [];
-    this.usuarioService.list().subscribe((resUsuarios:any)=>{
-      this.usuarios = resUsuarios;
+    this.usuarioService.listOne(this.usuario.id).subscribe((resUsuario:any)=>{
+      this.usuario = resUsuario;
     },
     err => console.log(err)
     );
-    
+    this.usuarios.push(this.usuario);   
   }
   eliminarUsuario(id: any) {
-    console.log('Click en eliminar usuario');
-    console.log('Identificador del usuario: ', id);
+    //console.log('Click en eliminar usuario');
+    //console.log('Identificador del usuario: ', id);
     Swal.fire({
       title: this.translate.instant('¿Estás seguro, bro?'),
       text: this.translate.instant('¡No es posible revertir esta acción!'),
@@ -141,7 +142,7 @@ export class UsuarioComponent implements OnInit{
       if (result.isConfirmed) {
         this.usuarioService.eliminarUsuario(id).subscribe(
           (resusuario: any) => {
-            console.log('resusuario: ', resusuario);
+            //console.log('resusuario: ', resusuario);
             if (Number(localStorage.getItem("id")) == this.usuario.id)
             {
               
@@ -151,7 +152,7 @@ export class UsuarioComponent implements OnInit{
               (resusuario: any) => {
                 this.usuarios = resusuario;
                 //console.log(resusuario);
-                console.log(this.usuarios);
+                //console.log(this.usuarios);
                 this.usuario= new Usuario();
               },
               (err) => console.error(err)

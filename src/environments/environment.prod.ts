@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  API_URI: "http://http://localhost:3000/api",
-  API_URI_CORREO: "http://http://localhost:3001//api",
+  API_URI: "https://dtapi.axlserial.me/api/",
+  API_URI_CORREO: "https://dtmail.axlserial.me/",
+  API_URI_IMAGENES: "https://dtimagenes.axlserial.me"
 };

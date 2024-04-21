@@ -135,7 +135,7 @@ export class PerfilComponent implements OnInit {
           this.liga = environment.API_URI_IMAGENES + "/usuarios/admin.jpg"
         }
       else
-        this.liga = environment.API_URI_IMAGENES + "/usuarios/" + user.id + ".jpg"
+        this.liga = environment.API_URI_IMAGENES + "/usuarios/" + user.id + ".jpg?"+ new Date().getTime();
 
       // console.log(this.liga)
     })

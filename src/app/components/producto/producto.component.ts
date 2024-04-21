@@ -104,7 +104,7 @@ export class ProductoComponent implements OnInit {
           this.imgUsuario = blob;
           // Actualizar la variable 'liga' después de cargar la imagen
           this.liga = environment.API_URI_IMAGENES + "/productos/";
-          this.time = new Date().getTime();
+          this.time = new Date().getTime();//Para que se actualice la imagen
 
         },
         err => console.error(err));

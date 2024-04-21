@@ -24,7 +24,7 @@ export class ProductoComponent implements OnInit {
   preciomin!: number;
   preciomax!: number
   ofertas: Oferta[] = [];
-
+  time= new Date().getTime();
   p = 1
   pageSize = 8
 
@@ -104,6 +104,7 @@ export class ProductoComponent implements OnInit {
           this.imgUsuario = blob;
           // Actualizar la variable 'liga' después de cargar la imagen
           this.liga = environment.API_URI_IMAGENES + "/productos/";
+          this.time = new Date().getTime();
 
         },
         err => console.error(err));

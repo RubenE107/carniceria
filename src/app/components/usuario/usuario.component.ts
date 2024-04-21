@@ -209,8 +209,6 @@ export class UsuarioComponent implements OnInit{
 
 
   ActualizaImagen() {
-    this.time = new Date().getTime();
-    console.log(this.time);
     let imgPromise = this.getFileBlob(this.fileToUpload);
     imgPromise.then(blob => {
       console.log("convirtiendo imagen")

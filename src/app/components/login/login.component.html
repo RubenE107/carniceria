@@ -6,9 +6,10 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="row">
+                            <!-- Como no exportamos la clase, se usa un servicio para obtener el idioma y cambiar la imagen-->
                             <div class="card-image col s6">
-                                <img src="../../../assets/1_Imagenes/6_Logo.png" class="logo-img">
-                            </div>
+                                <img [src]="cambiaImagenIdioma()" class="logo-img" alt="Logo" />    
+                              </div>
         
                             <form class="col s6">
                                 <h2 class="center-align" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">{{"Iniciar Sesión" | translate}}</h2>

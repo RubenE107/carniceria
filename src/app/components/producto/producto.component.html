@@ -90,8 +90,11 @@
                   <img *ngIf="producto.fotito === 1" width="64" src="{{liga}}/{{producto.id}}.jpg?{{time}}"
                     alt="{{liga}}/{{producto.id}}.jpg">
                   <img *ngIf="producto.fotito === 0" width="64" src="{{liga}}/0.jpg" alt="{{liga}}/0.jpg">
-                  <img *ngIf="producto.oferta==true" src="../../../assets/img/oferta3.png" class="imagen2"
-                    alt="oferta.png" style="position: absolute; top: 0; left: 0; width: 50%; z-index: 1;" />
+                  <img *ngIf="producto.oferta"
+                    [src]="idioma == 1 ? '../../../assets/img/oferta1.png' : '../../../assets/img/oferta2.png' "
+                    class="imagen2" alt="oferta.png"
+                    style="position: absolute; top: 0; left: 0; width: 50%; z-index: 1;" 
+                  />
                 </div>
 
                 <div class="card-content">

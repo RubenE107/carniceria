@@ -45,6 +45,17 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     $(".dropdown-trigger").dropdown();
   }
+
+  //Servicio para cambiar la imagen del logo según el idioma seleccionado
+  cambiaImagenIdioma() {
+    const language = localStorage.getItem('idioma');
+    if (language === '1') {
+      return '../../../assets/1_Imagenes/1_LogoESP.png';
+    } else {
+      return '../../../assets/1_Imagenes/2_LogoENG.png';
+    }
+  }
+
   logueo() {
 
     this.usuarioService.existe(this.usuariologin.correo, this.usuariologin.contrasena).subscribe((resusuario: any) => {

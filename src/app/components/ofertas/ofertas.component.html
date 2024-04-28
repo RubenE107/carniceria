@@ -134,9 +134,13 @@
                 </ul>
             </div>
             <div class="color_ajustar">
-                <div class="row center-align">
+                <div *ngIf="idioma == 1" class="row center-align">
                     <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
                         nextLabel="Siguiente"></pagination-controls>
+                </div>
+                <div *ngIf="idioma == 2" class="row center-align">
+                    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Previous"
+                        nextLabel="Next"></pagination-controls>
                 </div>
             </div>
         </div>
@@ -226,9 +230,13 @@ aplicar el mismom descuento a todos los productos
                 </div>
             </div>
             <div>
-                <div class="row center-align ">
+                <div *ngIf="idioma == 1" class="row center-align ">
                     <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Anterior"
                         nextLabel="Siguiente"></pagination-controls>
+                </div>
+                <div *ngIf="idioma == 2" class="row center-align ">
+                    <pagination-controls class="my-pagination" (pageChange)="p = ($event)" previousLabel="Previous"
+                        nextLabel="Next"></pagination-controls>
                 </div>
             </div>
         </div>

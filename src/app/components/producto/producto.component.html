@@ -41,25 +41,29 @@
     </div>
 
     <div class="row col s12 card " id="FiltroAnimal">
-      <div>
-        <h5 class="center">{{"Filtrar por animal" | translate}}</h5>
-      </div>
-
+      
       <div  *ngIf="idioma=='1'">
+        <div>
+          <h5 class="center">Filtrar por animal</h5>
+        </div>
         <select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
           (change)="listAnimal()">
-          <option value="-1" selected disabled>{{"Escoge un animal" | translate}}</option>
+          <option value="-1" selected disabled>Escoge un animal</option>
           <option  *ngFor="let animal of animales; let i = index" value="{{i}}">{{animal.nombre_animal}}</option>
         </select>
       </div>
       <div  *ngIf="idioma=='2'">
+        <div>
+          <h5 class="center">Filter by animal</h5>
+        </div>
         <select [(ngModel)]="aux" id="animal" name="animal" class="browser-default waves-red s12 "
           (change)="listAnimal()">
-          <option value="-1" selected disabled>{{"Escoge un animal" | translate}}</option>
+          <option value="-1" selected disabled>Choose an animal</option>
           <option *ngFor="let animal of animales; let i = index" value="{{i}}">{{animal.animal_name}}</option>
         </select>
       </div>
       <br>
+
     </div>
 
     <div class="row" *ngIf="rol !=1">
@@ -102,14 +106,13 @@
 
                     <span *ngIf="idioma == 1" class="card-title">{{producto.nombre}}</span>
                     <span *ngIf="idioma == 2" class="card-title">{{producto.name}}</span>
-                    <p *ngIf="idioma == 1"><strong>{{"Animal de origen:" | translate}}</strong> {{producto.animal}}</p>
-                    <p *ngIf="idioma == 2"><strong>{{"Animal de origen:" | translate}}</strong> {{producto.animal_eng}}</p>
+                    <p *ngIf="idioma == 1"><strong>Animal de origen:</strong> {{producto.animal}}</p>
+                    <p *ngIf="idioma == 2"><strong>Animal of origin:</strong> {{producto.animal_eng}}</p>
                     <p><strong>{{"Precio por Kg:" | translate}}</strong> ${{producto.precio}}</p>
                     <p><strong>{{"Cantidad disponible:" | translate}} </strong> {{producto.cantidad}} {{"Kg" |
                       translate}}</p>
                     <p *ngIf="idioma == 1">{{producto.descripcion}}</p>
                     <p *ngIf="idioma == 2">{{producto.description}}</p>
-
                     <div class="row " *ngIf="producto.cantidad>0">
                       <br>
                       <div class="col s12 center">
@@ -123,9 +126,7 @@
                     </div>
                     <h5 *ngIf="producto.cantidad==0" class="black-text font-size xlarge center">
                       <p>{{"Agotado" | translate}}</p>
-
                     </h5>
-
                     <div class="row col s12" *ngIf="rol!=1">
                       <div class="col s6 center">
                         <a (click)="modificaProducto(producto.id)">

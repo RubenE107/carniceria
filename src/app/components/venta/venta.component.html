@@ -65,8 +65,11 @@
             </div>
             <div class="input-field col s12 ">
                 <label class="active">{{"Fecha" | translate}}</label>
+                <!--input [(ngModel)]="venta.fecha" type="text" id="fechaVenta" #fechaD
+                    (change)="actualizarFecha(fechaD.value)" class="datepicker" [value]="venta.fecha" -->
+
                 <input [(ngModel)]="venta.fecha" type="text" id="fechaVenta" #fechaD
-                    (change)="actualizarFecha(fechaD.value)" class="datepicker" [value]="venta.fecha">
+                    (click)="actualizarFecha(fechaD.value)" class="datepicker" [value]="venta.fecha" >
             </div>
             <div class=" row col s12 center">
                 <a (click)="filtrarFechaYear()">

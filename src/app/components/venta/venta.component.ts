@@ -26,6 +26,7 @@ export class VentaComponent implements OnInit {
   p=1
   pageSize = 5
 
+
   liga : string =""
   idioma:any = '1'
   constructor(private ventasServices: VentaService, 
@@ -36,15 +37,12 @@ export class VentaComponent implements OnInit {
     if (localStorage.getItem("id_rol") != '3')
       router.navigateByUrl("home/producto")
     this.liga = environment.API_URI_IMAGENES + "/productos";
-
   }
   ngOnInit(): void {
     $(document).ready(function () {
       $('select').formSelect();
     });
-    $(document).ready(function(){
-      $('.datepicker').datepicker();
-    });
+    
     this.productoService.getNombresProductos().subscribe(
       (resusuario: any) => {
         this.productos = resusuario;
@@ -65,6 +63,28 @@ export class VentaComponent implements OnInit {
         }
         else
           this.idioma = localStorage.getItem("idioma")
+          if(this.idioma == 1)
+            {
+              $(document).ready(function(){
+                $('.datepicker').datepicker({i18n:{
+                  months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                  monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                  weekdays: ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+                  weekdaysShort: ["Dom","Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                  weekdaysAbbrev: ["D","L", "M", "M", "J", "V", "S"]}}).open();
+              });
+            }
+              if(this.idioma == 2)
+              {
+                $(document).ready(function(){
+                  $('.datepicker').datepicker({i18n:{
+                    months: ["January", "February", "March", "April", "May", "Jun", "July", "August", "September", "October", "November", "Dicember"],
+                    monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
+                    weekdays: ["Sunday","Monday", "Tuesday", "Wenesday", "Thursday", "Friday", "Saturday"],
+                    weekdaysShort: ["Sun","Mon", "Tue", "Wen", "Thu", "Fri", "Sat"],
+                    weekdaysAbbrev: ["S","M", "T", "W", "T", "F", "S"]}}).open();
+                });
+              }
       }
     )
   }
@@ -79,6 +99,12 @@ export class VentaComponent implements OnInit {
   }
   actualizarFecha(date?: any) {
     console.log(date)
+
+    
+    if (date) {
+      this.venta.fecha = date;
+    }
+
     if (date) {
       this.venta.fecha = date;
     }

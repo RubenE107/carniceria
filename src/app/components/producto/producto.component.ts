@@ -4,7 +4,7 @@ import { Producto } from 'src/app/models/Producto';
 import { CarritoService } from 'src/app/services/carrito.service';
 import Swal from 'sweetalert2';
 import { Oferta } from 'src/app/models/Oferta';
-import { AnimalAux} from 'src/app/models/Animalaux';
+import { AnimalAux } from 'src/app/models/Animalaux';
 import { OfertaService } from 'src/app/services/oferta.service';
 import { environment } from 'src/environments/environment';
 import { ImagenesService } from 'src/app/services/imagenes.service';
@@ -24,7 +24,7 @@ export class ProductoComponent implements OnInit {
   preciomin!: number;
   preciomax!: number
   ofertas: Oferta[] = [];
-  time= new Date().getTime();
+  time = new Date().getTime();
   p = 1
   pageSize = 8
 
@@ -36,7 +36,7 @@ export class ProductoComponent implements OnInit {
 
   imgUsuario: any;
   fileToUpload: any;
-  idioma : any;
+  idioma: any;
 
   rol: any = localStorage.getItem('id_rol')
 
@@ -45,10 +45,8 @@ export class ProductoComponent implements OnInit {
       $('select').formSelect();
     });
     this.cambioIdiomaService.currentMsg$.subscribe(
-      (msg)=>
-      {
-        if(msg!="")
-        {
+      (msg) => {
+        if (msg != "") {
           this.idioma = msg;
         }
         else
@@ -58,12 +56,12 @@ export class ProductoComponent implements OnInit {
 
   }
 
-  constructor(private imagenesService: ImagenesService, 
-    private productoService: ProductoService, 
+  constructor(private imagenesService: ImagenesService,
+    private productoService: ProductoService,
     private carritoService: CarritoService,
-    private ofertaService: OfertaService, 
-    private translate: TranslateService, 
-    private cambioIdiomaService:CambioIdiomaService) {
+    private ofertaService: OfertaService,
+    private translate: TranslateService,
+    private cambioIdiomaService: CambioIdiomaService) {
     this.liga = environment.API_URI_IMAGENES + "/productos";
     this.imgUsuario = null;
     this.fileToUpload = null;
@@ -99,7 +97,7 @@ export class ProductoComponent implements OnInit {
       console.log(this.liga);
       this.imagenesService.guardarImagen(this.producto.id, "productos", blob).subscribe(
         (res: any) => {
-          if(this.fileToUpload!=null) this.producto.fotito=1
+          if (this.fileToUpload != null) this.producto.fotito = 1
           this.guardaModifica()
           this.imgUsuario = blob;
           // Actualizar la variable 'liga' después de cargar la imagen
@@ -136,17 +134,17 @@ export class ProductoComponent implements OnInit {
   }
   guardaNuevoProducto() {
     console.log(this.fileToUpload)
-    if(this.fileToUpload!=null) this.producto.fotito=1;    
+    if (this.fileToUpload != null) this.producto.fotito = 1;
     this.productoService.crear(this.producto).subscribe((resusuario: any) => {
-        $('#modalNuevoProducto').modal('close');
-        console.log(resusuario.insertId);
-        this.producto.id=resusuario.insertId;
-        this.ActualizaImagen()
-        this.list();
+      $('#modalNuevoProducto').modal('close');
+      console.log(resusuario.insertId);
+      this.producto.id = resusuario.insertId;
+      this.ActualizaImagen()
+      this.list();
 
-      },
-        err => console.error(err)
-      );
+    },
+      err => console.error(err)
+    );
 
     this.list();
   }
@@ -268,7 +266,7 @@ export class ProductoComponent implements OnInit {
   getAnimal() {
     this.productoService.getAnimal().subscribe(
       (resusuario: any) => {
-        this.animales = resusuario;        
+        this.animales = resusuario;
         console.log(this.animales);
       },
       (err) => console.error(err)
@@ -288,16 +286,24 @@ export class ProductoComponent implements OnInit {
   }
   listAnimal() {
     this.p = 1
-    this.productoService.listAnimal(this.animales[this.aux].nombre_animal ).subscribe(
-      (resusuario: any) => {
-        this.productos = resusuario;
-        this.VerificaOferta()
 
-        //console.log(resusuario);
-        console.log(this.productos);
-      },
-      (err) => console.error(err)
-    );
+    if (this.aux == -1)
+    {
+      this.eliminaFiltros();
+    }
+    else
+    {
+      this.productoService.listAnimal(this.animales[this.aux].nombre_animal).subscribe(
+        (resusuario: any) => {
+          this.productos = resusuario;
+          this.VerificaOferta()
+          
+          //console.log(resusuario);
+          console.log(this.productos);
+        },
+        (err) => console.error(err)
+      );
+    }
   }
   cerrErr() {
     $('#modalError').modal('close');

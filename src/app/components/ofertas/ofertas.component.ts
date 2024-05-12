@@ -273,15 +273,22 @@ aplicarMismoDE(){
   }
   listAnimal() {
     this.p = 1
-    this.productoService.listAnimal(this.animales[this.aux].nombre_animal  ).subscribe(
-      (resusuario: any) => {
-        this.productos = resusuario;
-
-        ////console.log(resusuario);
-        //console.log(this.productos);
-      },
-      (err) => console.error(err)
-    );
+    if (this.aux == -1)
+    {
+      this.eliminaFiltros();
+    }
+    else
+    {
+      this.productoService.listAnimal(this.animales[this.aux].nombre_animal  ).subscribe(
+        (resusuario: any) => {
+          this.productos = resusuario;
+          
+          ////console.log(resusuario);
+          //console.log(this.productos);
+        },
+        (err) => console.error(err)
+      );
+    }
   }
   eliminaFiltros() {
     this.aux = -1;

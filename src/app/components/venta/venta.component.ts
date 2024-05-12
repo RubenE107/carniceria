@@ -18,22 +18,22 @@ export class VentaComponent implements OnInit {
   ventas: Venta[] = []
   venta !: Venta
   productos: Pro[] = []
-  aux : number =-1
+  aux: number = -1
   compramin = 0
   compramax = 500
   Ventatotal = -1
   GananciaTotal = -1
-  p=1
+  p = 1
   pageSize = 5
 
 
-  liga : string =""
-  idioma:any = '1'
-  constructor(private ventasServices: VentaService, 
-    private productoService: ProductoService, 
-    private router: Router, 
+  liga: string = ""
+  idioma: any = '1'
+  constructor(private ventasServices: VentaService,
+    private productoService: ProductoService,
+    private router: Router,
     private translate: TranslateService,
-    private cambioIdiomaService:CambioIdiomaService) {
+    private cambioIdiomaService: CambioIdiomaService) {
     if (localStorage.getItem("id_rol") != '3')
       router.navigateByUrl("home/producto")
     this.liga = environment.API_URI_IMAGENES + "/productos";
@@ -42,7 +42,7 @@ export class VentaComponent implements OnInit {
     $(document).ready(function () {
       $('select').formSelect();
     });
-    
+
     this.productoService.getNombresProductos().subscribe(
       (resusuario: any) => {
         this.productos = resusuario;
@@ -52,39 +52,41 @@ export class VentaComponent implements OnInit {
       (err) => console.error(err)
     );
     this.venta = new Venta();
-    this.venta.fecha = new Date().toJSON().substring(0,10);
+    this.venta.fecha = new Date().toJSON().substring(0, 10);
     this.list();
     this.cambioIdiomaService.currentMsg$.subscribe(
-      (msg)=>
-      {
-        if(msg!="")
-        {
+      (msg) => {
+        if (msg != "") {
           this.idioma = msg;
         }
         else
           this.idioma = localStorage.getItem("idioma")
-          if(this.idioma == 1)
-            {
-              $(document).ready(function(){
-                $('.datepicker').datepicker({i18n:{
-                  months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-                  monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-                  weekdays: ["Domingo","Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-                  weekdaysShort: ["Dom","Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-                  weekdaysAbbrev: ["D","L", "M", "M", "J", "V", "S"]}}).open();
-              });
-            }
-              if(this.idioma == 2)
-              {
-                $(document).ready(function(){
-                  $('.datepicker').datepicker({i18n:{
-                    months: ["January", "February", "March", "April", "May", "Jun", "July", "August", "September", "October", "November", "Dicember"],
-                    monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
-                    weekdays: ["Sunday","Monday", "Tuesday", "Wenesday", "Thursday", "Friday", "Saturday"],
-                    weekdaysShort: ["Sun","Mon", "Tue", "Wen", "Thu", "Fri", "Sat"],
-                    weekdaysAbbrev: ["S","M", "T", "W", "T", "F", "S"]}}).open();
-                });
+        if (this.idioma == 1) {
+          $(document).ready(function () {
+            $('.datepicker').datepicker({
+              i18n: {
+                months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                weekdays: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+                weekdaysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                weekdaysAbbrev: ["D", "L", "M", "M", "J", "V", "S"]
               }
+            }).open();
+          });
+        }
+        if (this.idioma == 2) {
+          $(document).ready(function () {
+            $('.datepicker').datepicker({
+              i18n: {
+                months: ["January", "February", "March", "April", "May", "Jun", "July", "August", "September", "October", "November", "Dicember"],
+                monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
+                weekdays: ["Sunday", "Monday", "Tuesday", "Wenesday", "Thursday", "Friday", "Saturday"],
+                weekdaysShort: ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"],
+                weekdaysAbbrev: ["S", "M", "T", "W", "T", "F", "S"]
+              }
+            }).open();
+          });
+        }
       }
     )
   }
@@ -100,7 +102,7 @@ export class VentaComponent implements OnInit {
   actualizarFecha(date?: any) {
     console.log(date)
 
-    
+
     if (date) {
       this.venta.fecha = date;
     }
@@ -109,9 +111,9 @@ export class VentaComponent implements OnInit {
       this.venta.fecha = date;
     }
   }
-  filtrarFechaYear(){
-    console.log(this.venta.fecha.substring(0,4))
-    this.ventasServices.filtraYear(this.venta.fecha.substring(0,4)).subscribe(
+  filtrarFechaYear() {
+    console.log(this.venta.fecha.substring(0, 4))
+    this.ventasServices.filtraYear(this.venta.fecha.substring(0, 4)).subscribe(
       (resusuario: any) => {
         this.ventas = resusuario;
         //console.log(resusuario);
@@ -121,62 +123,70 @@ export class VentaComponent implements OnInit {
       (err) => console.error(err)
     );
   }
-  filtrarFechaYearMonth(){
-    console.log(this.venta.fecha.substring(5,7))
-    this.ventasServices.filtraYearMonth(this.venta.fecha.substring(0,4),this.venta.fecha.substring(5,7)).subscribe(
+  filtrarFechaYearMonth() {
+    console.log(this.venta.fecha.substring(5, 7))
+    this.ventasServices.filtraYearMonth(this.venta.fecha.substring(0, 4), this.venta.fecha.substring(5, 7)).subscribe(
       (resusuario: any) => {
         this.ventas = resusuario;
         //console.log(resusuario);
         console.log(resusuario);
 
       },
-      (err) =>{
+      (err) => {
         console.error(err)
         Swal.fire({
           icon: "error",
           title: this.translate.instant("Oops..."),
           text: this.translate.instant("¡No tienes ventas de productos en este año y mes!"),
         });
-      } 
+      }
     );
   }
 
   listProducto() {
     this.p = 1
     this.Ventatotal = -1;
-    this.ventasServices.VentasProducto(this.aux).subscribe(
-      (resusuario: any) => {
-        this.ventas = resusuario;
-        console.log(resusuario);
 
-        this.ventasServices.totalVentaProducto(this.aux).subscribe(
-          (resusuario: any) => {
-            this.Ventatotal = resusuario.total;
-            //console.log(resusuario);
-            console.log(resusuario);
+    if (this.aux == -1)
+    {
+      this.eliminaFiltros();
+    }
+    else
+    {
+      this.ventasServices.VentasProducto(this.aux).subscribe(
+        (resusuario: any) => {
+          this.ventas = resusuario;
+          console.log(resusuario);
 
-          },
-          (err) => console.error(err)
-        );
-        this.ventasServices.gananciaVentaProducto(this.aux).subscribe(
-          (resusuario: any) => {
-            this.GananciaTotal = resusuario.gananciaTotal;
-            //console.log(resusuario);
-            console.log(resusuario);
+          this.ventasServices.totalVentaProducto(this.aux).subscribe(
+            (resusuario: any) => {
+              this.Ventatotal = resusuario.total;
+              //console.log(resusuario);
+              console.log(resusuario);
 
-          },
-          (err) => console.error(err)
-        );
-      },
-      (err) => {
-        console.error(err)
-        Swal.fire({
-          icon: "error",
-          title: this.translate.instant("Oops..."),
-          text: this.translate.instant("¡No hay ventas de este producto!\nIntenta con otro producto.")
-        });
-      }
-    );
+            },
+            (err) => console.error(err)
+          );
+          this.ventasServices.gananciaVentaProducto(this.aux).subscribe(
+            (resusuario: any) => {
+              this.GananciaTotal = resusuario.gananciaTotal;
+              //console.log(resusuario);
+              console.log(resusuario);
+
+            },
+            (err) => console.error(err)
+          );
+        },
+        (err) => {
+          console.error(err)
+          Swal.fire({
+            icon: "error",
+            title: this.translate.instant("Oops..."),
+            text: this.translate.instant("¡No hay ventas de este producto!\nIntenta con otro producto.")
+          });
+        }
+      );
+    }
   }
   filtraPrecio() {
     this.ventasServices.filtraprecio(this.compramin, this.compramax).subscribe(

@@ -18,7 +18,7 @@
             <div *ngIf="idioma=='1'" class="input-field col s12">
                 <select [(ngModel)]="aux" id="producto" name="producto" class="browser-default "
                     (change)="listProducto()">
-                    <option value="-1" disabled selected>{{"Escoge un producto" | translate}}</option>
+                    <option value="-1" selected>{{"Todos los productos" | translate}}</option>
                     <option *ngFor="let producto of productos; let i = index" value="{{producto.id}}">{{ producto.nombre_producto }}</option>
                 </select>
 
@@ -26,7 +26,7 @@
             <div *ngIf="idioma=='2'" class="input-field col s12">
                 <select [(ngModel)]="aux" id="producto" name="producto" class="browser-default "
                     (change)="listProducto()">
-                    <option value="-1" disabled selected>{{"Escoge un producto" | translate}}</option>
+                    <option value="-1" selected>{{"Todos los productos" | translate}}</option>
                     <option *ngFor="let producto of productos; let i = index" value="{{producto.id}}">{{ producto.name_producto }}</option>
                 </select>
 

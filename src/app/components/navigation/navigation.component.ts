@@ -12,6 +12,7 @@ declare var $: any;
 })
 export class NavigationComponent implements OnInit {
   aux: any;
+  idioma:any;
   currentPage: any = this.router.url.split('/')[2]; // Variable para mantener la página activa
 
   constructor(private router: Router, private translate: TranslateService, private cambioIdiomaService:CambioIdiomaService) {
@@ -148,6 +149,16 @@ export class NavigationComponent implements OnInit {
   enviarMensajeIdioma(idioma:any)
   {
     this.cambioIdiomaService.sendMsg(idioma);
+  }  
+  
+  obtenerBandera() {
+    const idioma = localStorage.getItem('idioma');
+    return idioma === '1' ? 'mx.png' : 'usa.png';
+  }
+  
+  obtenerIdioma() {
+    const idioma = localStorage.getItem('idioma');
+    return idioma === '1' ? 'Español' : 'English';
   }
 
 

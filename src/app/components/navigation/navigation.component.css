@@ -46,3 +46,12 @@
 #dropdown_lang.dropdown-content.idioma-nav li a:hover {
   color: #000000; /* Cambiar color del texto al pasar el cursor */
 }
+
+.language-item a {
+  display: flex;
+  align-items: center; /* Alinea verticalmente */
+}
+
+.language-item img {
+  margin-right: 10px; /* Espacio entre la imagen y el texto */
+}

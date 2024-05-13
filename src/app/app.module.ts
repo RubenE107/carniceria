@@ -18,7 +18,6 @@ import { CompraComponent } from './components/compra/compra.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReestablecerComponent } from './components/reestablecer/reestablecer.component';
 import { OfertasComponent } from './components/ofertas/ofertas.component';
-import { OfertaCarritoComponent } from './components/oferta-carrito/oferta-carrito.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { CambioIdiomaService } from './services/cambio-idioma.service';
@@ -41,7 +40,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CompraComponent,
     ReestablecerComponent,
     OfertasComponent,
-    OfertaCarritoComponent,
   ],
   imports: [
     BrowserModule,

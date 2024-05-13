@@ -10,7 +10,6 @@ import { VentaComponent } from './components/venta/venta.component';
 import { CompraComponent } from './components/compra/compra.component';
 import { ReestablecerComponent } from './components/reestablecer/reestablecer.component';
 import { OfertasComponent } from './components/ofertas/ofertas.component';
-import { OfertaCarritoComponent } from './components/oferta-carrito/oferta-carrito.component';
 const routes: Routes = [
 {
   path: "",
@@ -49,10 +48,7 @@ const routes: Routes = [
       path:'oferta',
       component: OfertasComponent
     },
-    {
-      path:'ofertaCarro/:id',
-      component:OfertaCarritoComponent
-    }
+
 
   ]
 }

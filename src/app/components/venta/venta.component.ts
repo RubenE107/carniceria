@@ -69,7 +69,10 @@ export class VentaComponent implements OnInit {
                 monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
                 weekdays: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
                 weekdaysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-                weekdaysAbbrev: ["D", "L", "M", "M", "J", "V", "S"]
+                weekdaysAbbrev: ["D", "L", "M", "M", "J", "V", "S"],
+                cancel:"Cancelar",
+                clear: "Limpiar",
+                done: "Hecho",
               }
             }).open();
           });
@@ -82,7 +85,10 @@ export class VentaComponent implements OnInit {
                 monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
                 weekdays: ["Sunday", "Monday", "Tuesday", "Wenesday", "Thursday", "Friday", "Saturday"],
                 weekdaysShort: ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"],
-                weekdaysAbbrev: ["S", "M", "T", "W", "T", "F", "S"]
+                weekdaysAbbrev: ["S", "M", "T", "W", "T", "F", "S"],
+                cancel:"Cancel",
+                clear: "Clear",
+                done: "Ok",
               }
             }).open();
           });
